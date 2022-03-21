@@ -2,27 +2,27 @@ const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
-exports.gameScraper = (urls) => {
+exports.game365Scraper = (urls) => {
   const games = [];
 
   urls.map((url, index) => {
     const platform =
       index === 0 ? "Xbox SeriesX" : index === 1 ? "Nintendo switch" : "PS5";
 
-    const urlRoot = "https://www.game.co.uk/en/games/";
+    const urlRoot = "https://www.365games.co.uk/";
 
     axios
       .get(urlRoot + url)
       .then((html) => {
         const $ = cheerio.load(html.data);
-        $(".product").each((i, e) => {
-          const price = $(e).find(".value").text()?.split("£")[1];
+        $(".product_box").each((i, e) => {
+          const price = $(e).find(".price").text();
           if (price === "" || null || undefined) return;
           // early exit if no price to compare
 
-          const title = $(e).find("h2").text();
+          const title = $(e).find("a").text();
           const url = $(e).find("a").attr("href");
-          const imgUrl = $(e).find("img").attr("data-src").slice(2);
+          const imgUrl = $(e).find("img").attr("data-src");
 
           games.push({
             title,
@@ -34,7 +34,8 @@ exports.gameScraper = (urls) => {
         });
       })
       .then(() => {
-        fs.writeFile(`gameScrape.json`, JSON.stringify(games));
+        fs.writeFile(`game365Scrape.json`, JSON.stringify(games));
+        return fs.readFile;
       })
       .catch((err) => {
         console.log(err);
