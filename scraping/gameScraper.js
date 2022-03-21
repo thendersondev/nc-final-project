@@ -21,7 +21,7 @@ exports.gameScraper = async (urls) => {
         const $ = cheerio.load(html.data);
         $(".product").each((i, e) => {
           const price = $(e).find(".value").text()?.split("£")[1];
-          if (price === "" || null || undefined) return;
+          if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
 
           const title = $(e).find("h2").text();

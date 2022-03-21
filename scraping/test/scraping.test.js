@@ -13,18 +13,17 @@ describe("gameScraper", () => {
       assert.typeOf(entry, "object");
     });
   });
-
   it("each object in the array has keys of title, imgUrl, url, price, platform", async () => {
     const file = JSON.parse(
       await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
     );
 
     file.forEach((entry) => {
-      assert(entry.title !== null);
-      assert(entry.url !== null);
-      assert(entry.imgUrl !== null);
-      assert(entry.platform !== null);
-      assert(entry.price !== null);
+      assert.property(entry, "title");
+      assert.property(entry, "url");
+      assert.property(entry, "imgUrl");
+      assert.property(entry, "price");
+      assert.property(entry, "platform");
     });
   });
   it("each platform key only has values of PS5, Xbox seriesX, or Nintendo Switch", async () => {
