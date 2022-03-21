@@ -1,17 +1,18 @@
 const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
+const { resolve } = require("path");
 
 exports.gameScraper = (urls) => {
   const games = [];
 
-  urls.map((url, index) => {
+  return urls.map((url, index) => {
     const platform =
       index === 0 ? "Xbox SeriesX" : index === 1 ? "Nintendo switch" : "PS5";
 
     const urlRoot = "https://www.game.co.uk/en/games/";
 
-    axios
+    return axios
       .get(urlRoot + url)
       .then((html) => {
         const $ = cheerio.load(html.data);
@@ -32,8 +33,7 @@ exports.gameScraper = (urls) => {
             platform,
           });
         });
-      })
-      .then(() => {
+
         fs.writeFile(`gameScrape.json`, JSON.stringify(games));
       })
       .catch((err) => {

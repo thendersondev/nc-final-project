@@ -5,13 +5,13 @@ const cheerio = require("cheerio");
 exports.game365Scraper = (urls) => {
   const games = [];
 
-  urls.map((url, index) => {
+  return urls.map((url, index) => {
     const platform =
       index === 0 ? "Xbox SeriesX" : index === 1 ? "Nintendo switch" : "PS5";
 
     const urlRoot = "https://www.365games.co.uk/";
 
-    axios
+    return axios
       .get(urlRoot + url)
       .then((html) => {
         const $ = cheerio.load(html.data);
@@ -31,11 +31,10 @@ exports.game365Scraper = (urls) => {
             url,
             platform,
           });
-
         });
       })
       .then(() => {
-        fs.writeFile(`game365Scrape.json`, JSON.stringify(games));
+        return fs.writeFile(`game365Scrape.json`, JSON.stringify(games));
       })
       .catch((err) => {
         console.log(err);
