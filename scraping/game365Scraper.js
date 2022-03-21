@@ -19,11 +19,31 @@ exports.game365Scraper = (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product_box").each((i, e) => {
-          const price = $(e).find(".price").text();
-          if (price === "" || null || undefined) return;
+          const price = $(e).find(".price").text()?.split("£")[1];
+          if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
 
-          const title = $(e).find("a").text();
+          const unfixedTitle = $(e).find("a").text().split(" ");
+
+          let title = [];
+
+          for (let i = 0; i < unfixedTitle.length; i++) {
+            if (
+              unfixedTitle[i].toLowerCase() === "xbox" ||
+              unfixedTitle[i].toLowerCase() === "ps5" ||
+              unfixedTitle[i].toLowerCase() === "nintendo"
+            ) {
+              break;
+            } else {
+              title.push(unfixedTitle[i]);
+            }
+          }
+
+          title = title.join(" ");
+          if (title === "") {
+            title = "Sports game";
+          }
+
           const url = $(e).find("a").attr("href");
           const imgUrl = $(e).find("img").attr("data-src");
 

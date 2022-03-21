@@ -20,13 +20,17 @@ exports.gameScraper = async (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product").each((i, e) => {
-          const price = $(e).find(".value").text()?.split("£")[1];
+          const price = $(e)
+            .find(".value")
+            .text()
+            ?.split("£")[1]
+            ?.split("\n")[0];
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
 
           const title = $(e).find("h2").text();
           const url = $(e).find("a").attr("href");
-          const imgUrl = $(e).find("img").attr("data-src").slice(2);
+          const imgUrl = "https:" + $(e).find("img").attr("data-src");
 
           games.push({
             title,
