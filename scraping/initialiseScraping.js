@@ -1,4 +1,4 @@
-const scraper = require("./scrapers");
+const scraper = require("./gameScraper");
 
 scraper.gameScraper([
   "xbox-series/?attributeName1=Platform&contentOnly=&inStockOnly=true&listerOnly=true&attributeValue1=4294941101&sortBy=MOST_POPULAR_DESC&pageSize=96",

@@ -3,7 +3,7 @@ const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
 exports.gameScraper = (urls) => {
-  const games = {};
+  const games = [];
 
   urls.map((url, index) => {
     const platform =
@@ -16,7 +16,7 @@ exports.gameScraper = (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product").each((i, e) => {
-          const price = $(e).find(".value").text();
+          const price = $(e).find(".value").text()?.split("£")[1];
           if (price === "" || null || undefined) return;
           // early exit if no price to compare
 
@@ -24,27 +24,13 @@ exports.gameScraper = (urls) => {
           const url = $(e).find("a").attr("href");
           const imgUrl = $(e).find("img").attr("data-src").slice(2);
 
-          if (games.hasOwnProperty(title)) {
-            games[title].url.push(url);
-            games[title].price.push(price);
-            games[title].imgUrl.push(imgUrl);
-            games[title].platform = {
-              "Xbox SeriesX": index === 0,
-              "Nitendo switch": index === 1,
-              PS5: index === 2,
-            };
-          } else {
-            games[title] = {
-              url: [url],
-              price: [price],
-              imgUrl: [imgUrl],
-              platform: {
-                "Xbox SeriesX": index === 0,
-                "Nitendo switch": index === 1,
-                PS5: index === 2,
-              },
-            };
-          }
+          games.push({
+            title,
+            imgUrl,
+            price,
+            url,
+            platform,
+          });
         });
       })
       .then(() => {
