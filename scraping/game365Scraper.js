@@ -31,11 +31,11 @@ exports.game365Scraper = (urls) => {
             url,
             platform,
           });
+
         });
       })
       .then(() => {
         fs.writeFile(`game365Scrape.json`, JSON.stringify(games));
-        return fs.readFile;
       })
       .catch((err) => {
         console.log(err);
