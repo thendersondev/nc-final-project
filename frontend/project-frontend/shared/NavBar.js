@@ -43,7 +43,7 @@ export default function NavBar({ navigation }) {
         options={{
           tabBarLabel: "Login",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="Games" color={color} size={26} />
+            <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
       />

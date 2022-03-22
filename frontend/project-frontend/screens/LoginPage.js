@@ -6,16 +6,23 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  
 } from "../firebase";
+import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
+  const user = auth.currentUser;
+  console.log(user)
+
+
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -23,6 +30,7 @@ const LoginPage = () => {
         const user = userCredentials.user;
         console.log("account created");
         alert("Account Created!");
+        navigation.navigate("Home")
       })
       .catch((err) => {
         alert(err.message);
@@ -34,7 +42,7 @@ const LoginPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert("Logged in");
-        console.log(userCredentials)
+        console.log(userCredentials);
       })
       .catch((err) => {
         alert(err.message);
@@ -43,12 +51,14 @@ const LoginPage = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={
-      Platform.select({
-         ios: () => -300,
-         android: () => -300
-      })()
-    }>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.select({
+        ios: () => -300,
+        android: () => -300,
+      })()}
+    >
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
