@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors')({origin: true});
 const { getItems, getItemsByShop } = require('./controllers/controller_items')
 const { getUsers, getUser, postUser, deleteUser, patchUser } = require('./controllers/controller_users')
+const { getTrades, postTrade, getTrade, patchTrade, deleteTrade } = require('./controllers/controller_trades')
 const getApi = require('./app')
 
 app.use(cors);
@@ -21,12 +22,12 @@ app.get('/users/:user', getUser)
 app.patch('/users/:user', patchUser)
 app.delete('/users/:user', deleteUser)
 
-// app.get('/trades', getTrades)
-// app.post('/trades', postTrade)
+app.get('/trades', getTrades)
+app.post('/trades', postTrade)
 
-// app.get('/trades/:trade_id', getTrade)
-// app.patch('/trades/:trade_id', patchTrade)
-// app.delete('/trades/:trade_id', deleteTrade)
+app.get('/trades/:trade_id', getTrade)
+app.patch('/trades/:trade_id', patchTrade)
+app.delete('/trades/:trade_id', deleteTrade)
 
 
 

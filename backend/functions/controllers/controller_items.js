@@ -11,7 +11,7 @@ function getItemsByShop(req,res,next) {
 }
 
 function getItems(req,res,next) {
-    fetchItems(req.params.shop_no).then((data)=>{
+    fetchItems().then((data)=>{
         res.status(200).send({'items': data })
     })
     .catch(next)
