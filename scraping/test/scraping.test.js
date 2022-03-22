@@ -133,9 +133,13 @@ describe("game365Scraper data uniformity testing", () => {
     );
 
     file.forEach((entry) => {
-      assert.isFalse(entry.title.includes("Xbox"));
-      assert.isFalse(entry.title.includes("Nintendo Switch"));
-      assert.isFalse(entry.title.includes("PS5"));
+      if (entry.title.startsWith("Nintendo")) {
+        //titles starting with Nintendo are an exception e.g 'Nintendo Sports Game'.
+      } else {
+        assert.isFalse(entry.title.includes("Xbox"));
+        assert.isFalse(entry.title.includes("Nintendo Switch"));
+        assert.isFalse(entry.title.includes("PS5"));
+      }
     });
   });
   it("checks title only contains alphanumeric characters.", async () => {
