@@ -44,6 +44,16 @@ exports.game365Scraper = (urls) => {
             title = "Sports game";
           }
 
+          const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
+
+          for (let i = 0; i < titleCheck.length; i++) {
+            if (titleCheck[i][0] === "é") {
+              title = title.replace(titleCheck[i][0], "e");
+            } else {
+              title = title.replace(titleCheck[i][0], "");
+            }
+          }
+
           const url = $(e).find("a").attr("href");
           const imgUrl = $(e).find("img").attr("data-src");
 
