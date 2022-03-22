@@ -11,7 +11,6 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  
 } from "../firebase";
 import { useNavigation } from "@react-navigation/core";
 
@@ -20,29 +19,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const user = auth.currentUser;
-  console.log(user)
 
-
-
-  const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("account created");
-        alert("Account Created!");
-        navigation.navigate("Home")
-      })
-      .catch((err) => {
-        alert(err.message);
-        console.log(err.message);
-      });
-  };
 
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert("Logged in");
-        console.log(userCredentials);
+        navigation.navigate("Home");
       })
       .catch((err) => {
         alert(err.message);
@@ -82,13 +65,6 @@ const LoginPage = () => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={handleLogIn}>
           <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

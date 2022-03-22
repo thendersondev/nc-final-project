@@ -3,6 +3,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomePage from "../screens/HomePage";
 import GamePage from "../screens/GamePage";
 import LoginPage from "../screens/LoginPage";
+import RegisterPage from "../screens/RegisterPage";
+
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -42,6 +44,16 @@ export default function NavBar({ navigation }) {
         component={LoginPage}
         options={{
           tabBarLabel: "Login",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Register"
+        component={RegisterPage}
+        options={{
+          tabBarLabel: "Register",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
