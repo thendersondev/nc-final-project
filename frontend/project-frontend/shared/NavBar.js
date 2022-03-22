@@ -2,6 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HomePage from "../screens/HomePage";
 import GamePage from "../screens/GamePage";
+import LoginPage from "../screens/LoginPage";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -33,6 +34,16 @@ export default function NavBar({ navigation }) {
               color={color}
               size={26}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Login"
+        component={LoginPage}
+        options={{
+          tabBarLabel: "Login",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="Games" color={color} size={26} />
           ),
         }}
       />

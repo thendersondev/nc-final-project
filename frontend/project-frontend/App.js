@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./screens/HomePage";
 import GamePage from "./screens/GamePage";
 import NavBar from "./shared/NavBar.js";
+import LoginPage from "./screens/LoginPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +12,12 @@ export default function App() {
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
       <NavigationContainer>
+        <Stack.Screen
+  
+          name="Login"
+          component={LoginPage}
+          options={{headerShown: false }}
+        />
         <Stack.Screen
           name="Home"
           component={HomePage}
