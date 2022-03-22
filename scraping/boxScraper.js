@@ -2,10 +2,10 @@ const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
-exports.boxScraper = async (urls) => {
+exports.boxScraper = (urls) => {
   const games = [];
 
-  urls.map((url) => {
+  urls.forEach((url) => {
     const platform = url.includes("xbox")
       ? "Xbox SeriesX"
       : url.includes("nintendo")
@@ -19,21 +19,20 @@ exports.boxScraper = async (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".p-list").each((i, e) => {
-          let price = $(e)
-            .find(".pq-price")
-            .text()
-            ?.split("£")[1]
-            ?.split("\n")[0];
+          let price = $(e).find(".pq-price").text();
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
           if (price.includes(",")) price = price.replace(",", "");
 
-          let unfixedTitle = $(e).find("h3").text().split(" ");
+          price = price.split("£")[1].split("\n")[0];
+
+          const unfixedTitle = $(e).find("h3").text().split(" ");
 
           let title = [];
 
           for (let i = 0; i < unfixedTitle.length; i++) {
             if (i === 0) {
+              // games starting with platform is an exception
               title.push(unfixedTitle[i]);
             } else if (
               unfixedTitle[i].toLowerCase() === "xbox" ||
@@ -48,6 +47,7 @@ exports.boxScraper = async (urls) => {
 
           title = title.join(" ");
 
+          // remove any non-alphanumeric/non-whitespace characters
           const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
 
           for (let i = 0; i < titleCheck.length; i++) {

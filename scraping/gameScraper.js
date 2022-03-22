@@ -2,10 +2,10 @@ const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
-exports.gameScraper = async (urls) => {
+exports.gameScraper = (urls) => {
   const games = [];
 
-  urls.map((url) => {
+  urls.forEach((url) => {
     const platform = url.includes("xbox")
       ? "Xbox SeriesX"
       : url.includes("nintendo")
@@ -19,16 +19,16 @@ exports.gameScraper = async (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product").each((i, e) => {
-          const price = $(e)
-            .find(".value")
-            .text()
-            ?.split("£")[1]
-            ?.split("\n")[0];
+          let price = $(e).find(".value").text();
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
+          if (price.includes(",")) price = price.replace(",", "");
+
+          price = price.split("£")[1].split("\n")[0];
 
           let title = $(e).find("h2").text();
 
+          // remove any non-alphanumeric/non-whitespace characters
           const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
 
           for (let i = 0; i < titleCheck.length; i++) {

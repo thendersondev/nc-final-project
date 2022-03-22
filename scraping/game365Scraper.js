@@ -5,7 +5,7 @@ const cheerio = require("cheerio");
 exports.game365Scraper = (urls) => {
   const games = [];
 
-  urls.map((url) => {
+  urls.forEach((url) => {
     const platform = url.includes("xbox")
       ? "Xbox SeriesX"
       : url.includes("nintendo")
@@ -19,9 +19,12 @@ exports.game365Scraper = (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product_box").each((i, e) => {
-          const price = $(e).find(".price").text()?.split("£")[1];
+          let price = $(e).find(".price").text();
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
+          if (price.includes(",")) price = price.replace(",", "");
+
+          price = price.split("£")[1].split("\n")[0];
 
           const unfixedTitle = $(e).find("a").text().split(" ");
 
@@ -29,6 +32,7 @@ exports.game365Scraper = (urls) => {
 
           for (let i = 0; i < unfixedTitle.length; i++) {
             if (i === 0) {
+              // games starting with platform is an exception
               title.push(unfixedTitle[i]);
             } else if (
               unfixedTitle[i].toLowerCase() === "xbox" ||
@@ -42,6 +46,8 @@ exports.game365Scraper = (urls) => {
           }
 
           title = title.join(" ");
+
+          // remove any non-alphanumeric/non-whitespace characters
           const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
 
           for (let i = 0; i < titleCheck.length; i++) {
