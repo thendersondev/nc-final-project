@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cheerio": "^1.0.0-rc.10",
+    "fs.promises": "^0.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "eslint": "^8.11.0",
+    "mocha": "^9.2.2"
+  },
+  "name": "nc-final-project",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha scraping/test/*.test.js",
+    "scrape": "node ./scraping/initialiseScraping.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thendo90/nc-final-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thendo90/nc-final-project/issues"
+  },
+  "homepage": "https://github.com/thendo90/nc-final-project#readme"
+}
