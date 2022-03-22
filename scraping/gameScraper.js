@@ -1,7 +1,6 @@
 const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
-const { resolve } = require("path");
 
 exports.gameScraper = async (urls) => {
   const games = [];

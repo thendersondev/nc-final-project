@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
-exports.game365Scraper = (urls) => {
+exports.boxScraper = async (urls) => {
   const games = [];
 
   urls.map((url) => {
@@ -12,18 +12,22 @@ exports.game365Scraper = (urls) => {
       ? "Nintendo Switch"
       : "PS5";
 
-    const urlRoot = "https://www.365games.co.uk/";
+    const urlRoot = "https://www.box.co.uk/";
 
     axios
       .get(urlRoot + url)
       .then((html) => {
         const $ = cheerio.load(html.data);
-        $(".product_box").each((i, e) => {
-          const price = $(e).find(".price").text()?.split("£")[1];
+        $(".p-list").each((i, e) => {
+          const price = $(e)
+            .find(".pq-price")
+            .text()
+            ?.split("£")[1]
+            ?.split("\n")[0];
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
 
-          const unfixedTitle = $(e).find("a").text().split(" ");
+          let unfixedTitle = $(e).find("h3").text().split(" ");
 
           let title = [];
 
@@ -42,6 +46,7 @@ exports.game365Scraper = (urls) => {
           }
 
           title = title.join(" ");
+
           const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
 
           for (let i = 0; i < titleCheck.length; i++) {
@@ -50,10 +55,15 @@ exports.game365Scraper = (urls) => {
             } else {
               title = title.replace(titleCheck[i][0], "");
             }
+
+            // if (i === titleCheck.length - 1) title = title.replace("  ", " ");
           }
 
           const url = $(e).find("a").attr("href");
-          const imgUrl = $(e).find("img").attr("data-src");
+          const imgUrl =
+            urlRoot + $(e).find(".p-list-image").find("img").attr("data-src");
+
+          console.log(imgUrl);
 
           games.push({
             title,
@@ -64,7 +74,7 @@ exports.game365Scraper = (urls) => {
           });
         });
         fs.writeFile(
-          `${__dirname}/scraped-data/game365Scrape.json`,
+          `${__dirname}/scraped-data/boxScrape.json`,
           JSON.stringify(games)
         );
       })

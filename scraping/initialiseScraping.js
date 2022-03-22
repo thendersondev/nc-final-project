@@ -1,5 +1,6 @@
 const { gameScraper } = require("./gameScraper");
 const { game365Scraper } = require("./game365Scraper");
+const { boxScraper } = require("./boxScraper.js");
 
 gameScraper([
   "xbox-series/?attributeName1=Platform&contentOnly=&inStockOnly=true&listerOnly=true&attributeValue1=4294941101&sortBy=MOST_POPULAR_DESC&pageSize=96",
@@ -8,3 +9,5 @@ gameScraper([
 ]);
 
 game365Scraper(["xbox-series-x-games", "nintendo-switch-games", "ps5-games"]);
+
+boxScraper(["xbox-games", "nintendo-switch-games", "ps5-games"]);
