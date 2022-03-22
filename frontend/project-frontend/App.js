@@ -1,22 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomePage from "./screens/HomePage";
+import GamePage from "./screens/GamePage";
+import NavBar from "./shared/NavBar.js";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>gamePare - buy. swap. shop.</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{ title: "Overview" }}
+        />
+        <Stack.Screen
+          name="Games"
+          component={GamePage}
+          options={{ title: "What do you want to buy?" }}
+        />
+        <NavBar />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
