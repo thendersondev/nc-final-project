@@ -34,6 +34,7 @@ const LoginPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert("Logged in");
+        console.log(userCredentials)
       })
       .catch((err) => {
         alert(err.message);
@@ -42,7 +43,12 @@ const LoginPage = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={
+      Platform.select({
+         ios: () => -300,
+         android: () => -300
+      })()
+    }>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -86,6 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 0,
   },
   inputContainer: {
     width: "80%",
