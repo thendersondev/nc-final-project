@@ -57,7 +57,7 @@ exports.game365Scraper = (urls) => {
               title = title.replace(titleCheck[i][0], "");
             }
             if (i === titleCheck.length - 1) {
-              title = title.replace("  ", " ");
+              title = title.replaceAll("  ", " ");
               if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
             }
           }

@@ -58,7 +58,7 @@ exports.boxScraper = (urls) => {
             }
 
             if (i === titleCheck.length - 1) {
-              title = title.replace("  ", " ");
+              title = title.replaceAll("  ", " ");
               if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
             }
           }
