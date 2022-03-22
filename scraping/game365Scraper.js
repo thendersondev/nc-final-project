@@ -56,7 +56,7 @@ exports.game365Scraper = (urls) => {
           });
         });
         fs.writeFile(
-          `${__dirname}/scrapedData/game365Scrape.json`,
+          `${__dirname}/scraped-data/game365Scrape.json`,
           JSON.stringify(games)
         );
       })

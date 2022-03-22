@@ -5,7 +5,7 @@ const fs = require("fs/promises");
 describe("gameScraper data uniformity testing", () => {
   it("writes a json file as an array of objects", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
 
     assert.typeOf(file, "array");
@@ -15,7 +15,7 @@ describe("gameScraper data uniformity testing", () => {
   });
   it("each object in the array has keys of title, imgUrl, url, price, platform", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
 
     file.forEach((entry) => {
@@ -28,7 +28,7 @@ describe("gameScraper data uniformity testing", () => {
   });
   it("each platform key only has values of PS5, Xbox seriesX, or Nintendo Switch", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
 
     file.forEach((entry) => {
@@ -39,7 +39,7 @@ describe("gameScraper data uniformity testing", () => {
   });
   it("each price key is a valid number", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
 
     file.forEach((entry) => {
@@ -51,7 +51,7 @@ describe("gameScraper data uniformity testing", () => {
   });
   it("each url / imgUrl is a valid url", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/gameScrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
 
     file.forEach((entry) => {
@@ -59,11 +59,16 @@ describe("gameScraper data uniformity testing", () => {
       assert(entry.imgUrl.startsWith("https://"));
     });
   });
+  it("", async () => {
+    const file = JSON.parse(
+      await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
+    );
+  });
 });
 describe("game365Scraper data uniformity testing", () => {
   it("writes a json file as an array of objects", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     assert.typeOf(file, "array");
@@ -73,7 +78,7 @@ describe("game365Scraper data uniformity testing", () => {
   });
   it("each object in the array has keys of title, imgUrl, url, price, platform", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     file.forEach((entry) => {
@@ -86,7 +91,7 @@ describe("game365Scraper data uniformity testing", () => {
   });
   it("each platform key only has values of PS5, Xbox seriesX, or Nintendo Switch", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     file.forEach((entry) => {
@@ -97,7 +102,7 @@ describe("game365Scraper data uniformity testing", () => {
   });
   it("each price key is a valid number", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     file.forEach((entry) => {
@@ -109,7 +114,7 @@ describe("game365Scraper data uniformity testing", () => {
   });
   it("each url / imgUrl is a valid url", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     file.forEach((entry) => {
@@ -119,7 +124,7 @@ describe("game365Scraper data uniformity testing", () => {
   });
   it("each title should not include platform", async () => {
     const file = JSON.parse(
-      await fs.readFile(`${__dirname}/../scrapedData/game365Scrape.json`)
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
     );
 
     file.forEach((entry) => {

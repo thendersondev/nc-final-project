@@ -41,7 +41,7 @@ exports.gameScraper = async (urls) => {
           });
         });
         fs.writeFile(
-          `${__dirname}/scrapedData/gameScrape.json`,
+          `${__dirname}/scraped-data/gameScrape.json`,
           JSON.stringify(games)
         );
       })
