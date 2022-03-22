@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const fs = require("fs/promises");
 const cheerio = require("cheerio");
 
-exports.game365Scraper = (urls) => {
+exports.boxScraper = (urls) => {
   const games = [];
 
   urls.forEach((url) => {
@@ -12,21 +12,21 @@ exports.game365Scraper = (urls) => {
       ? "Nintendo Switch"
       : "PS5";
 
-    const urlRoot = "https://www.365games.co.uk/";
+    const urlRoot = "https://www.box.co.uk/";
 
     axios
       .get(urlRoot + url)
       .then((html) => {
         const $ = cheerio.load(html.data);
-        $(".product_box").each((i, e) => {
-          let price = $(e).find(".price").text();
+        $(".p-list").each((i, e) => {
+          let price = $(e).find(".pq-price").text();
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
           if (price.includes(",")) price = price.replace(",", "");
 
           price = price.split("£")[1].split("\n")[0];
 
-          const unfixedTitle = $(e).find("a").text().split(" ");
+          const unfixedTitle = $(e).find("h3").text().split(" ");
 
           let title = [];
 
@@ -56,6 +56,7 @@ exports.game365Scraper = (urls) => {
             } else {
               title = title.replace(titleCheck[i][0], "");
             }
+
             if (i === titleCheck.length - 1) {
               title = title.replaceAll("  ", " ");
               if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
@@ -63,7 +64,8 @@ exports.game365Scraper = (urls) => {
           }
 
           const url = $(e).find("a").attr("href");
-          const imgUrl = $(e).find("img").attr("data-src");
+          const imgUrl =
+            urlRoot + $(e).find(".p-list-image").find("img").attr("data-src");
 
           games.push({
             title,
@@ -74,7 +76,7 @@ exports.game365Scraper = (urls) => {
           });
         });
         fs.writeFile(
-          `${__dirname}/scraped-data/game365Scrape.json`,
+          `${__dirname}/scraped-data/boxScrape.json`,
           JSON.stringify(games)
         );
       })
