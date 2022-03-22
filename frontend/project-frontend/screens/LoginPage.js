@@ -7,10 +7,39 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "../firebase";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("account created");
+        alert("Account Created!");
+      })
+      .catch((err) => {
+        alert(err.message);
+        console.log(err.message);
+      });
+  };
+
+  const handleLogIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        alert("Logged in");
+      })
+      .catch((err) => {
+        alert(err.message);
+        console.log(err.message);
+      });
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -35,12 +64,12 @@ const LoginPage = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={handleLogIn}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>

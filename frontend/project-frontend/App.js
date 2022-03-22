@@ -8,6 +8,8 @@ import LoginPage from "./screens/LoginPage";
 
 const Stack = createNativeStackNavigator();
 
+
+
 export default function App() {
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
