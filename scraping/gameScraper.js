@@ -5,9 +5,12 @@ const cheerio = require("cheerio");
 exports.gameScraper = (urls) => {
   const games = [];
 
-  urls.map((url, index) => {
-    const platform =
-      index === 0 ? "Xbox SeriesX" : index === 1 ? "Nintendo switch" : "PS5";
+  urls.forEach((url) => {
+    const platform = url.includes("xbox")
+      ? "Xbox SeriesX"
+      : url.includes("nintendo")
+      ? "Nintendo Switch"
+      : "PS5";
 
     const urlRoot = "https://www.game.co.uk/en/games/";
 
@@ -16,13 +19,32 @@ exports.gameScraper = (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".product").each((i, e) => {
-          const price = $(e).find(".value").text()?.split("£")[1];
-          if (price === "" || null || undefined) return;
+          let price = $(e).find(".value").text();
+          if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
+          if (price.includes(",")) price = price.replace(",", "");
 
-          const title = $(e).find("h2").text();
+          price = price.split("£")[1].split("\n")[0];
+
+          let title = $(e).find("h2").text();
+
+          // remove any non-alphanumeric/non-whitespace characters
+          const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
+
+          for (let i = 0; i < titleCheck.length; i++) {
+            if (titleCheck[i][0] === "é") {
+              title = title.replace(titleCheck[i][0], "e");
+            } else {
+              title = title.replace(titleCheck[i][0], "");
+            }
+            if (i === titleCheck.length - 1) {
+              title = title.replaceAll("  ", " ");
+              if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
+            }
+          }
+
           const url = $(e).find("a").attr("href");
-          const imgUrl = $(e).find("img").attr("data-src").slice(2);
+          const imgUrl = "https:" + $(e).find("img").attr("data-src");
 
           games.push({
             title,
@@ -32,9 +54,10 @@ exports.gameScraper = (urls) => {
             platform,
           });
         });
-      })
-      .then(() => {
-        fs.writeFile(`gameScrape.json`, JSON.stringify(games));
+        fs.writeFile(
+          `${__dirname}/scraped-data/gameScrape.json`,
+          JSON.stringify(games)
+        );
       })
       .catch((err) => {
         console.log(err);
