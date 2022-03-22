@@ -37,6 +37,10 @@ exports.gameScraper = async (urls) => {
             } else {
               title = title.replace(titleCheck[i][0], "");
             }
+            if (i === titleCheck.length - 1) {
+              title = title.replace("  ", " ");
+              if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
+            }
           }
 
           const url = $(e).find("a").attr("href");

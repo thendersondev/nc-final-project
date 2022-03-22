@@ -19,13 +19,14 @@ exports.boxScraper = async (urls) => {
       .then((html) => {
         const $ = cheerio.load(html.data);
         $(".p-list").each((i, e) => {
-          const price = $(e)
+          let price = $(e)
             .find(".pq-price")
             .text()
             ?.split("£")[1]
             ?.split("\n")[0];
           if (price === "" || price === null || price === undefined) return;
           // early exit if no price to compare
+          if (price.includes(",")) price = price.replace(",", "");
 
           let unfixedTitle = $(e).find("h3").text().split(" ");
 
@@ -56,14 +57,15 @@ exports.boxScraper = async (urls) => {
               title = title.replace(titleCheck[i][0], "");
             }
 
-            // if (i === titleCheck.length - 1) title = title.replace("  ", " ");
+            if (i === titleCheck.length - 1) {
+              title = title.replace("  ", " ");
+              if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
+            }
           }
 
           const url = $(e).find("a").attr("href");
           const imgUrl =
             urlRoot + $(e).find(".p-list-image").find("img").attr("data-src");
-
-          console.log(imgUrl);
 
           games.push({
             title,
