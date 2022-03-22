@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "./screens/HomePage";
 import CompareGamesPage from "./screens/CompareGamesPage";
 import NavBar from "./shared/NavBar.js";
+import LoginPage from "./screens/LoginPage";
 import MyDrawer from "./shared/Drawer";
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,12 @@ export default function App() {
             name="CompareGames"
             component={CompareGamesPage}
             options={{ title: "Compare Games" }}
+          />
+          // add register
+          <Stack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
