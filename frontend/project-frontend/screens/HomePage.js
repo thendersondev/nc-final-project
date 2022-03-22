@@ -4,10 +4,11 @@ import { StatusBar } from "expo-status-bar";
 import { auth } from "../firebase";
 
 export default function HomePage({ navigation }) {
+  console.log(navigation);
   return (
     <View style={styles.container}>
       <Text>gamePare - buy. swap. shop</Text>
-      <Button
+      {/* <Button
         title="Go to games"
         onPress={() => navigation.navigate("Games")}
       />
@@ -15,6 +16,7 @@ export default function HomePage({ navigation }) {
         Current User :{" "}
         {auth.currentUser ? auth.currentUser?.email : "Not Signed In"}
       </Text>
+      /> */}
       <StatusBar style="auto" />
     </View>
   );
