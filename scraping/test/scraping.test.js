@@ -138,4 +138,13 @@ describe("game365Scraper data uniformity testing", () => {
       assert.isFalse(entry.title.includes("PS5"));
     });
   });
+  it("checks title only contains alphanumeric characters.", async () => {
+    const file = JSON.parse(
+      await fs.readFile(`${__dirname}/../scraped-data/game365Scrape.json`)
+    );
+    const regex = /^[\s\w]*$/;
+    file.forEach((entry) => {
+      expect(regex.test(entry.title)).to.be.true;
+    });
+  });
 });
