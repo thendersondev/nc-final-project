@@ -59,12 +59,17 @@ describe("gameScraper data uniformity testing", () => {
       assert(entry.imgUrl.startsWith("https://"));
     });
   });
-  it("", async () => {
+  it("checks title only contains alphanumeric characters.", async () => {
     const file = JSON.parse(
       await fs.readFile(`${__dirname}/../scraped-data/gameScrape.json`)
     );
+    const regex = /^[\s\w]*$/;
+    file.forEach((entry) => {
+      expect(regex.test(entry.title)).to.be.true;
+    });
   });
 });
+
 describe("game365Scraper data uniformity testing", () => {
   it("writes a json file as an array of objects", async () => {
     const file = JSON.parse(
