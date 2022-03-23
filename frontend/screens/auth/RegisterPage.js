@@ -11,7 +11,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../../firebase";
+} from "../../../backend/firebase";
 import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {
@@ -19,7 +19,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const user = auth.currentUser;
-  console.log(user);
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
