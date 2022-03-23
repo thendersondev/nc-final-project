@@ -1,5 +1,10 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from "firebase/firestore";
+const { initializeApp, getApp, getApps } = require('firebase/app');
+const { getFirestore } = require("firebase/firestore");
+const {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+  } = require("firebase/auth")
 
 
 const firebaseConfig = {
@@ -11,6 +16,15 @@ const firebaseConfig = {
     appId: "1:401909170033:web:b552dea99b483fb4c5c0d0"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+module.exports = {
+    db,
+    auth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+  };

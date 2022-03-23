@@ -2,6 +2,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
+    "firebase": "^9.6.9",
     "fs.promises": "^0.1.2"
   },
   "devDependencies": {
