@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     borderColor: "#694fad",
-    width: "100%",
+    left: 5,
   },
   image: {
     width: 110,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   cardLeft: {
-
+    flexDirection: "row",
   },
   cardRight: {
     flexDirection: "row",
