@@ -11,7 +11,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../../firebase";
+} from "../../../backend/firebase";
 import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {
@@ -28,7 +28,6 @@ const LoginPage = () => {
       })
       .catch((err) => {
         alert(err.message);
-        console.log(err.message);
       });
   };
 
