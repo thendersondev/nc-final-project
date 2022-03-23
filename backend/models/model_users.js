@@ -1,3 +1,4 @@
+
 const { db } = require("../firebase");
 const {
   updateDoc,
@@ -40,6 +41,7 @@ async function addUser(name, user) {
   return { [newDoc.id]: newRef.data() };
 }
 
+
 async function changeUser(id, name = null, user = null) {
   if (!name && !user) return { test: false };
   const userId = doc(db, "users", id);
@@ -56,6 +58,7 @@ async function removeUser(user) {
   const userId = doc(db, "users", user);
   await deleteDoc(userId);
   return { removed: userId.id };
+
 }
 
 module.exports = {
@@ -63,5 +66,7 @@ module.exports = {
   fetchUser,
   addUser,
   changeUser,
+
   removeUser,
 };
+
