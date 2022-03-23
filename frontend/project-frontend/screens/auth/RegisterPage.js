@@ -11,7 +11,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../firebase";
+} from "../../firebase";
 import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {
@@ -35,7 +35,6 @@ const LoginPage = () => {
       })
       .catch((err) => {
         alert(`Oops something went wrong! ${err.message}`);
-       
       });
   };
 
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "#694fad",
     borderWidth: 2,
   },
   buttonText: {
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#694fad",
     fontWeight: "700",
     fontSize: 16,
   },
