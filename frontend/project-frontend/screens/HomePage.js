@@ -1,10 +1,10 @@
-import { Text, View, Button } from "react-native";
-import styles from "../styles/HomeStyles";
-import { StatusBar } from "expo-status-bar";
-import { auth } from "../firebase";
+import { Text, View, Button } from 'react-native';
+import styles from '../styles/HomeStyles';
+import { StatusBar } from 'expo-status-bar';
+import { auth } from '../firebase';
+import NavBar from '../navigation/NavBar';
 
 export default function HomePage({ navigation }) {
-  console.log(navigation);
   return (
     <View style={styles.container}>
       <Text>gamePare - buy. swap. shop</Text>

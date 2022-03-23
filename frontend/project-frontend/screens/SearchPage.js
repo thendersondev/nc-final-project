@@ -6,16 +6,16 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Button,
-} from "react-native";
-import styles from "../styles/CompareGamesStyles";
-import { StatusBar } from "expo-status-bar";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+} from 'react-native';
+import styles from '../styles/CompareGamesStyles';
+import { StatusBar } from 'expo-status-bar';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function SearchPage({ navigation }) {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
-        <Text>You be searching</Text>
+        <Text>I see you be searching</Text>
         <TextInput
           style={searchStyles.input}
           placeholder="what you looking for bro?"
@@ -34,6 +34,6 @@ const searchStyles = StyleSheet.create({
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
-    borderColor: "#694fad",
+    borderColor: '#694fad',
   },
 });
