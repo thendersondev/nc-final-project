@@ -11,7 +11,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../firebase";
+} from "../../firebase";
 import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {
@@ -19,7 +19,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const user = auth.currentUser;
-
 
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -66,6 +65,7 @@ const LoginPage = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogIn}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <Text style={styles.forgottenPassword}>Forgotten password?</Text>
       </View>
     </KeyboardAvoidingView>
   );
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#694fad",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -115,8 +115,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#694fad",
     fontWeight: "700",
     fontSize: 16,
+  },
+  forgottenPassword: {
+    padding: 10,
   },
 });

@@ -1,8 +1,8 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HomePage from "../screens/HomePage";
-import LoginPage from "../screens/LoginPage";
-import RegisterPage from "../screens/RegisterPage";
+import LoginPage from "../screens/auth/LoginPage";
+import RegisterPage from "../screens/auth/RegisterPage";
 import CompareGamesPage from "../screens/CompareGamesPage";
 import TradePage from "../screens/TradePage";
 import SearchPage from "../screens/SearchPage";
@@ -77,26 +77,26 @@ export default function NavBar() {
             ),
           }}
         />
-    <Tab.Screen
-        name="Login"
-        component={LoginPage}
-        options={{
-          tabBarLabel: "Login",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Register"
-        component={RegisterPage}
-        options={{
-          tabBarLabel: "Register",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
-        }}
-      />
+        {/* <Tab.Screen
+          name="Login"
+          component={LoginPage}
+          options={{
+            tabBarLabel: "Login",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Register"
+          component={RegisterPage}
+          options={{
+            tabBarLabel: "Register",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            ),
+          }}
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

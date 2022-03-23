@@ -11,13 +11,16 @@ import { Colors } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { View, Styles } from "react-native";
 import Basket from "../screens/Basket";
-4;
+import LoginPage from "../screens/auth/LoginPage.js";
+import RegisterPage from "../screens/auth/RegisterPage.js";
+
 const Drawer = createDrawerNavigator();
 
 export default function MyDrawer(props) {
   return (
     <NavigationContainer>
       <Drawer.Navigator
+        initialRouteName="HomePage"
         screenOptions={{
           headerTintColor: Colors.purple800,
           drawerIcon: ({ focused }) => (
@@ -46,6 +49,9 @@ export default function MyDrawer(props) {
           }}
         />
         <Drawer.Screen name="Account" component={Account} />
+        <Drawer.Screen name="Log In" component={LoginPage} />
+        <Drawer.Screen name="Register" component={RegisterPage} />
+
         {/* <Drawer.Screen name="Article" component={Article} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
