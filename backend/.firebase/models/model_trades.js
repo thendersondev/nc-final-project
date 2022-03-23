@@ -1,4 +1,4 @@
-const db = require("../../firebase");
+const {db} = require("../../firebase");
 const { updateDoc, doc, collection, getDocs, getDoc, addDoc ,collectionGroup, deleteDoc } = require("firebase/firestore"); 
 
 const allColl = collectionGroup(db, "trades")

@@ -1,4 +1,4 @@
-const db = require("../../firebase");
+const {db} = require("../../firebase");
 const { collectionGroup, doc ,collection, getDocs, getDoc } = require("firebase/firestore"); 
 
 const docRef = doc(db, "users", "t1sKcLakK5MncSizlxEv");
