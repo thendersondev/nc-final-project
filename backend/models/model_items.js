@@ -72,8 +72,6 @@ async function fetchItems() {
 fetchItems().then((data)=>console.log(data))
 
 async function fetchItemsQuery() {
-  const beans = await fetchItems()
-  return beans
 }
 
 module.exports = {
