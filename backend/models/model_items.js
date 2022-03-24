@@ -77,4 +77,5 @@ async function fetchItemsQuery() {
 module.exports = {
   fetchItems,
   fetchItemsByShop
+  
 };
