@@ -11,7 +11,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../../../backend/firebase";
+} from "../../firebase.js";
 import { useNavigation } from "@react-navigation/core";
 
 const LoginPage = () => {

@@ -39,7 +39,31 @@ exports.gameScraper = (urls) => {
             }
             if (i === titleCheck.length - 1) {
               title = title.replaceAll("  ", " ");
+
               if (title.endsWith(" ")) title = title.slice(0, title.length - 1);
+            }
+          }
+
+          // remove any games that are an edition to simplify comparisons
+          if (title.toLowerCase().includes("edition")) {
+            return;
+          }
+
+          // remove certain phrases / words to clean-up titles
+          const format = [
+            "for",
+            "with GAME Exclusive",
+            "GAME Exclusive",
+            "GAME Excl",
+            "GAME Exc",
+            "Exclusive",
+            "DDC AOC ",
+            "DisneyPixar ",
+          ];
+
+          for (let i = 0; i < format.length; i++) {
+            if (title.includes(format[i])) {
+              title = title.replace(format[i], "");
             }
           }
 

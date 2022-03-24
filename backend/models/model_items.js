@@ -1,3 +1,4 @@
+
 const { db } = require("../firebase");
 const {
   collectionGroup,
@@ -10,9 +11,11 @@ const {
 const docRef = doc(db, "users", "t1sKcLakK5MncSizlxEv");
 const allColl = collectionGroup(db, "items");
 
+
 const shopRef = {
   1: "365",
   2: "box",
+
   3: "game",
 };
 
@@ -28,6 +31,7 @@ async function fetchItemsByShop(shop_id) {
 
 async function fetchItems() {
   const gamesList = {};
+
   const returnOne = await fetchItemsByShop(1);
   const returnTwo = await fetchItemsByShop(2);
   const returnThr = await fetchItemsByShop(3);
@@ -35,6 +39,7 @@ async function fetchItems() {
     1: returnOne,
     2: returnTwo,
     3: returnThr,
+
   };
   for (const list in itemList) {
     shopRef[list];
@@ -50,10 +55,12 @@ async function fetchItems() {
         };
       } else {
         gamesList[gameEntry.title].price[shopRef[list]] = gameEntry.price;
+
       }
     }
   }
   for (const game in gamesList) {
+
     const priceArray = [];
     if (!gamesList[game].price.box) gamesList[game].price.box = "199.99";
     if (!gamesList[game].price.game) gamesList[game].price.game = "199.99";
@@ -67,6 +74,7 @@ async function fetchItems() {
     }
   }
   return gamesList;
+
 }
 
 fetchItems().then((data)=>console.log(data))
@@ -79,3 +87,4 @@ module.exports = {
   fetchItemsByShop,
 
 };
+
