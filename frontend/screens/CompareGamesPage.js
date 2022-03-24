@@ -51,7 +51,7 @@ export default function CompareGamesPage({ navigation }) {
         renderItem={GameCard}
         keyExtractor={(item) => item.title}
       />
-      <Text>Hello</Text>
+      
       <StatusBar style="auto" />
     </View>
   );

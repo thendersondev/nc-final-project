@@ -14,12 +14,15 @@ const GameCard = ({ item }) => {
       <View style={styles.cardRight}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Shop1</Text>
+          <Text style={styles.text}>{item.price}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Shop2</Text>
+          <Text style={styles.text}>{item.price}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Shop3</Text>
+          <Text style={styles.text}>{item.price}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -35,12 +38,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     borderColor: "#694fad",
-    left: 5,
+   // borderStartColor:"red",
+   // borderWidth:1,
+    
+
   },
   image: {
     width: 110,
     height: 110,
-    marginLeft:0
+    left: 5,
   },
 
   cardLeft: {
