@@ -1,12 +1,12 @@
-import { Text, View, Button } from "react-native";
-import styles from "../styles/HomeStyles";
-import { StatusBar } from "expo-status-bar";
-import "firebase/auth";
-import firebase from "firebase/app";
-import { auth } from "../firebase";
-import NavBar from "../navigation/NavBar";
-import { fetchItems, fetchItemsByShop } from "../models/model_items";
-import { useEffect, useState } from "react";
+import { Text, View, Button } from 'react-native';
+import styles from '../styles/HomeStyles';
+import { StatusBar } from 'expo-status-bar';
+import 'firebase/auth';
+import firebase from 'firebase/app';
+import { auth } from '../firebase';
+import NavBar from '../navigation/NavBar';
+import { fetchItems, fetchItemsByShop } from '../models/model_items';
+import { useEffect, useState } from 'react';
 
 export default function HomePage({ navigation }) {
   const [games, setGames] = useState([]);
@@ -22,7 +22,7 @@ export default function HomePage({ navigation }) {
   if (loading)
     return (
       <View style={styles.container}>
-        <Text>. . . L O A D I N G . . .</Text>
+        <Text> . . . T O M L O V E S P Y T H O N . . . </Text>
         <StatusBar style="auto" />
       </View>
     );
