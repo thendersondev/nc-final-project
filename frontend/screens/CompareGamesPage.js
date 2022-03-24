@@ -1,10 +1,10 @@
-import { Text, View, Button, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import styles from '../styles/CompareGamesStyles';
 import { StatusBar } from 'expo-status-bar';
 import { GameCard } from '../Components/GameCard';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function CompareGamesPage({ navigation }) {
+export default function CompareGamesPage() {
   const mockArray = [
     {
       title: 'Kirby and the Forgotten Land',

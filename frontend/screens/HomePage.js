@@ -2,9 +2,6 @@ import { Text, View, Button } from 'react-native';
 import styles from '../styles/HomeStyles';
 import { StatusBar } from 'expo-status-bar';
 import 'firebase/auth';
-import firebase from 'firebase/app';
-import { auth } from '../firebase';
-import NavBar from '../navigation/NavBar';
 import { fetchItems, fetchItemsByShop } from '../models/model_items';
 import { useEffect, useState } from 'react';
 
