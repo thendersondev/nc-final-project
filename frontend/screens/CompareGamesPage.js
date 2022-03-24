@@ -1,4 +1,4 @@
-import { Text, View, Button, FlatList } from "react-native";
+import { Text, View, Button, FlatList, TouchableOpacity } from "react-native";
 import styles from "../styles/CompareGamesStyles";
 import { StatusBar } from "expo-status-bar";
 import { GameCard } from "../Components/GameCard";
@@ -1452,6 +1452,21 @@ export default function CompareGamesPage({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.pageTitle}>Compare game prices here!</Text>
+
+      <View style={styles.catagoriesContainer}>
+        <Text style={styles.sortBy}>Sort By:</Text>
+        <View style={styles.catagoryButtonsGroup}>
+          <TouchableOpacity style={styles.catagoryButton}>
+            <Text style={styles.catagoryButtonText}>Xbox</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.catagoryButton}>
+            <Text style={styles.catagoryButtonText}>PS5</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.catagoryButton}>
+            <Text style={styles.catagoryButtonText}>Nintendo</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <FlatList data={mockArray} renderItem={GameCard} keyExtractor={uuidv4} />
 

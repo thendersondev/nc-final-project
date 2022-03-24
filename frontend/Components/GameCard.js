@@ -19,15 +19,15 @@ const GameCard = ({ item }) => {
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Box</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
         </View>
       </View>
