@@ -1,5 +1,8 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+
 const GameCard = ({ item }) => {
+
+ 
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
