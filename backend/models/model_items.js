@@ -55,6 +55,9 @@ async function fetchItems() {
   }
   for (const game in gamesList) {
     const priceArray = [];
+    if (!gamesList[game].price.box) gamesList[game].price.box = "199.99";
+    if (!gamesList[game].price.game) gamesList[game].price.game = "199.99";
+    if (!gamesList[game].price[365]) gamesList[game].price[365] = "199.99";
     gamesList[game].bestPrice = Number.POSITIVE_INFINITY;
     for (const pricing in gamesList[game].price) {
       if (gamesList[game].price[pricing] <= gamesList[game].bestPrice) {
@@ -66,7 +69,15 @@ async function fetchItems() {
   return gamesList;
 }
 
+fetchItems().then((data)=>console.log(data))
+
+async function fetchItemsQuery() {
+  const beans = await fetchItems()
+  return beans
+}
+
 module.exports = {
   fetchItems,
   fetchItemsByShop,
+  fetchItemsQuery
 };
