@@ -16,6 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha **/scraping/test/*.test.js",
+    "test_be": "mocha **/test/*.test.js --exit",
     "scrape": "node ./backend/scraping/initialiseScraping.js",
     "fireup": "node ./backend/upload_data/to_firebase_ALL.js"
   },
