@@ -47,6 +47,23 @@ exports.game365Scraper = (urls) => {
 
           title = title.join(" ");
 
+          // remove any games that are an edition to simplify comparisons
+          if (title.toLowerCase().includes("edition")) {
+            return;
+          }
+
+          // remove certain phrases / words to clean-up titles
+          const format = [
+            "for",
+            "with GAME Exclusive",
+            "GAME Exclusive",
+            "GAME Excl",
+            "GAME Exc",
+            "Exclusive",
+            "DDC AOC ",
+            "DisneyPixar ",
+          ];
+
           // remove any non-alphanumeric/non-whitespace characters
           const titleCheck = [...title.matchAll(/[^a-zA-Z\d\s]/g)];
 
