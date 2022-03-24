@@ -15,10 +15,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-
     "test": "mocha scraping/test/*.test.js",
-    "scrape": "node ./scraping/initialiseScraping.js"
-
+    "scrape": "node ./backend/scraping/initialiseScraping.js"
   },
   "repository": {
     "type": "git",
