@@ -1,13 +1,37 @@
-import { Text, View, Button } from 'react-native';
-import styles from '../styles/HomeStyles';
-import { StatusBar } from 'expo-status-bar';
-import { auth } from '../firebase';
-import NavBar from '../navigation/NavBar';
+import { Text, View, Button } from "react-native";
+import styles from "../styles/HomeStyles";
+import { StatusBar } from "expo-status-bar";
+import "firebase/auth";
+import firebase from "firebase/app";
+import { auth } from "../firebase";
+import NavBar from "../navigation/NavBar";
+import { fetchItems, fetchItemsByShop } from "../models/model_items";
+import { useEffect, useState } from "react";
 
 export default function HomePage({ navigation }) {
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchItems().then((items) => {
+      console.log(items);
+      setGames(items);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading)
+    return (
+      <View style={styles.container}>
+        <Text>. . . L O A D I N G . . .</Text>
+        <StatusBar style="auto" />
+      </View>
+    );
   return (
     <View style={styles.container}>
       <Text>gamePare - buy. swap. shop</Text>
+      {Object.keys(games).map((game) => {
+        return <Text>{game}</Text>;
+      })}
       {/* <Button
         title="Go to games"
         onPress={() => navigation.navigate("Games")}
