@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 0,
   },
+  pageTitle: {
+    fontWeight: "700",
+    fontSize: 20,
+    color: "#694FAD",
+  },
 });
 
 export default styles;

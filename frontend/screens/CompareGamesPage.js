@@ -1451,7 +1451,7 @@ export default function CompareGamesPage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Compare game prices here!</Text>
+      <Text style={styles.pageTitle}>Compare game prices here!</Text>
 
       <FlatList data={mockArray} renderItem={GameCard} keyExtractor={uuidv4} />
 

@@ -12,22 +12,29 @@ const GameCard = ({ item }) => {
       </View>
 
       <View style={styles.cardRight}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Shop1</Text>
-          <Text style={styles.text}>{item.price}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Shop2</Text>
-          <Text style={styles.text}>{item.price}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Shop3</Text>
-          <Text style={styles.text}>{item.price}</Text>
-        </TouchableOpacity>
+        <View style={styles.cardRightTop}>
+          <Text style={styles.gameTitle}>{item.title}</Text>
+        </View>
+
+        <View style={styles.cardRightBottom}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Game</Text>
+            <Text style={styles.text}>{item.price}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Game365</Text>
+            <Text style={styles.text}>{item.price}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Box</Text>
+            <Text style={styles.text}>{item.price}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   surroundingView: {
     flex: 1,
@@ -38,8 +45,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     borderColor: "#694fad",
-    // borderStartColor:"red",
-    // borderWidth:1,
   },
   image: {
     width: 110,
@@ -51,6 +56,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   cardRight: {
+    flexDirection: "column",
+  },
+  cardRightTop: {
+    flexShrink: 1,
+  },
+  cardRightBottom: {
     flexDirection: "row",
   },
   button: {
@@ -64,7 +75,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    color: "white",
+    color: "#F0EDF6",
+    fontWeight: "500",
+    fontSize: 16,
+  },
+  gameTitle: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 16,
+    paddingBottom: 10,
+    flexShrink: 1,
   },
 });
 
