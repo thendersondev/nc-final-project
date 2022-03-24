@@ -15,23 +15,25 @@ const collRef = collection(db, "users");
 const allColl = collectionGroup(db, "users");
 
 async function fetchUsers() {
-  let count = 1;
   const readValues = {};
   const querySnapshot = await getDocs(allColl);
   querySnapshot.forEach((doc) => {
     readValues[doc.id] = doc.data();
-    count++;
   });
   return readValues;
 }
 
 async function fetchUser(user) {
+  if (user.length !== 20) return { error: "Bad user ID" }
   const userId = doc(db, "users", user);
   const querySnapshot = await getDoc(userId);
+  if (!querySnapshot.data()) return { error: "No such user!" }
   return { [userId.id]: querySnapshot.data() };
 }
 
-async function addUser(name, user) {
+async function addUser(newUser) {
+  const {name, user} = newUser
+  if (!name || !user) return { error: "Bad submission" };
   const newDoc = await addDoc(collection(db, "users"), {
     name: name,
     user: user,
@@ -40,10 +42,13 @@ async function addUser(name, user) {
   return { [newDoc.id]: newRef.data() };
 }
 
-async function changeUser(id, name = null, user = null) {
-  if (!name && !user) return { test: false };
+async function changeUser(id, newUser) {
+  const name = (!newUser.name ? null : newUser.name)
+  const user = (!newUser.user ? null : newUser.user)
+  if (!name && !user) return { error: "Bad submission" };
   const userId = doc(db, "users", id);
   const querySnapshot = await getDoc(userId);
+  if (!querySnapshot.data()) return { error: "No such user!" }
   const newData = {
     user: user ? user : querySnapshot.data().user,
     name: name ? name : querySnapshot.data().name,
