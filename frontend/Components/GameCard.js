@@ -6,7 +6,7 @@ const GameCard = ({ item }) => {
         <Image
           style={styles.image}
           source={{
-            uri: `https://${item.imgUrl}`,
+            uri: `${item.imgUrl}`,
           }}
         ></Image>
       </View>
@@ -38,10 +38,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     borderColor: "#694fad",
-   // borderStartColor:"red",
-   // borderWidth:1,
-    
-
+    // borderStartColor:"red",
+    // borderWidth:1,
   },
   image: {
     width: 110,
@@ -54,7 +52,6 @@ const styles = StyleSheet.create({
   },
   cardRight: {
     flexDirection: "row",
-   
   },
   button: {
     backgroundColor: "#694fad",
@@ -64,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 10,
     height: 50,
-    padding:10,
+    padding: 10,
   },
   text: {
     color: "white",
