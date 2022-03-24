@@ -1,8 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const GameCard = ({ item }) => {
-
- 
+const GameCard = ({ item, index, separators }) => {
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -17,6 +15,7 @@ const GameCard = ({ item }) => {
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
           <Text style={styles.gameTitle}>{item.title}</Text>
+          <Text style={styles.gamePlatform}>({item.platform})</Text>
         </View>
 
         <View style={styles.cardRightBottom}>
@@ -86,6 +85,13 @@ const styles = StyleSheet.create({
     color: "#694FAD",
     fontWeight: "700",
     fontSize: 16,
+    paddingBottom: 10,
+    flexShrink: 1,
+  },
+  gamePlatform: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 12,
     paddingBottom: 10,
     flexShrink: 1,
   },
