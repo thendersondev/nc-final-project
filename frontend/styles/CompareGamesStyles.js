@@ -1,16 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 0,
   },
   pageTitle: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 20,
-    color: "#694FAD",
+    color: '#694FAD',
   },
   catagoriesContainer: {
     flexDirection: "row",
