@@ -13,17 +13,25 @@ const {
 const allColl = collectionGroup(db, "trades");
 
 async function fetchTrades() {
-  let count = 1;
   const readValues = {};
   const querySnapshot = await getDocs(allColl);
   querySnapshot.forEach((doc) => {
     readValues[doc.id] = doc.data();
-    count++;
   });
   return readValues;
 }
 
-async function addTrade(user, item, location, price) {
+async function fetchTrade(trade) {
+  if (trade.length !== 20) return { error: "Bad user ID" }
+  const tradeId = doc(db, "trades", trade);
+  const querySnapshot = await getDoc(tradeId);
+  if (!querySnapshot.data()) return { error: "No such trade!" }
+  return { [tradeId.id]: querySnapshot.data() };
+}
+
+async function addTrade(newTrade) {
+  const {user, item, location, price} = newTrade
+  if (!item || !user || !location || !price) return { error: "Bad submission" };
   const newDoc = await addDoc(collection(db, "trades"), {
     item: item,
     user: user,
@@ -34,21 +42,13 @@ async function addTrade(user, item, location, price) {
   return { [newDoc.id]: newRef.data() };
 }
 
-async function fetchTrade(trade) {
-  const tradeId = doc(db, "trades", trade);
-  const querySnapshot = await getDoc(tradeId);
-  return { [tradeId.id]: querySnapshot.data() };
-}
-
-async function changeTrade(
-  trade,
-  user = null,
-  item = null,
-  price = null,
-  location = null
-) {
-  if (!user && !item && !price && !location) return { test: false };
-  const tradeId = doc(db, "trades", trade);
+async function changeTrade(id, newTrade) {
+  const item = (!newTrade.item ? null : newTrade.item)
+  const user = (!newTrade.user ? null : newTrade.user)
+  const price = (!newTrade.price ? null : newTrade.price)
+  const location = (!newTrade.location ? null : newTrade.location)
+  if (!user && !item && !price && !location) return { error: "Bad submission" };
+  const tradeId = doc(db, "trades", id);
   const querySnapshot = await getDoc(tradeId);
   const newData = {
     user: user ? user : querySnapshot.data().user,
@@ -57,7 +57,7 @@ async function changeTrade(
     price: price ? price : querySnapshot.data().price,
   };
   await updateDoc(tradeId, newData);
-  return { [trade]: newData };
+  return { [id]: newData };
 }
 
 async function removeTrade(trade) {
