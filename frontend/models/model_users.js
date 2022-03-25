@@ -1,4 +1,3 @@
-
 const { db } = require("../firebase");
 const {
   updateDoc,
@@ -11,13 +10,11 @@ const {
   deleteDoc,
 } = require("firebase/firestore");
 
-const docRef = doc(db, "users", "t1sKcLakK5MncSizlxEv");
-const collRef = collection(db, "users");
-const allColl = collectionGroup(db, "users");
+const userColl = collectionGroup(db, "users");
 
 async function fetchUsers() {
   const readValues = {};
-  const querySnapshot = await getDocs(allColl);
+  const querySnapshot = await getDocs(userColl);
   querySnapshot.forEach((doc) => {
     readValues[doc.id] = doc.data();
   });
@@ -70,7 +67,6 @@ module.exports = {
   fetchUser,
   addUser,
   changeUser,
-
   removeUser,
 };
 
