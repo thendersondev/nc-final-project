@@ -34,7 +34,7 @@ export default function HomePage(props) {
     },
   ];
   const [featured, setFeatured] = useState(fakeRandom);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   /* QUOTA EXCEEDED BUT THIS IS WHAT WE WANT
@@ -42,11 +42,6 @@ export default function HomePage(props) {
   //   fetchItemsByShop(randomiser).then((items) => {
   //   setFeatured([Object.values(items).slice(0, 3)]);
   //   }); */
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-  }, []);
 
   if (loading)
     return (
