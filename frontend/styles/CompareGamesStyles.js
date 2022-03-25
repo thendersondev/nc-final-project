@@ -12,6 +12,37 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#694FAD",
   },
+  catagoriesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+  },
+  catagoryButtonsGroup: {
+    flexDirection: "row",
+  },
+  catagoryButton: {
+    backgroundColor: "#694fad",
+    padding: 15,
+    marginHorizontal: 5,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  catagoryButtonText: {
+    color: "#FFFFFF",
+  },
+  sortBy: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 16,
+    marginHorizontal: 5,
+  },
+  searchBar: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginTop: 5,
+  },
 });
 
 export default styles;

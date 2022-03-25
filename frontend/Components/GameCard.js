@@ -1,5 +1,9 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-const GameCard = ({ item }) => {
+
+const GameCard = ({ item }, query, search) => {
+  if (!query.includes(item.platform)) return;
+  if (!item.title.includes(search) && search) return;
+
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -19,15 +23,16 @@ const GameCard = ({ item }) => {
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game</Text>
-            <Text style={styles.text}>{item.price}</Text>
+
+            <Text style={styles.text}>£{item.price.game}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price[365]}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Box</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price.box}</Text>
           </TouchableOpacity>
         </View>
       </View>

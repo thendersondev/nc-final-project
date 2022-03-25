@@ -21,8 +21,14 @@ async function fetchItemsByShop(shop_id) {
   const readValues = {};
   const querySnapshot = await getDocs(collRef);
   querySnapshot.forEach((doc) => {
+<<<<<<< Updated upstream:backend/models/model_items.js
     readValues[doc.id] = doc.data();
   });
+=======
+    readValues.push(doc.data());
+  });
+
+>>>>>>> Stashed changes:frontend/models/model_items.js
   return readValues;
 }
 
@@ -44,6 +50,7 @@ async function fetchItems() {
         gamesList[gameEntry.title] = {
           title: gameEntry.title,
           platform: gameEntry.platform,
+          imgUrl: gameEntry.imgUrl,
           price: {
             [shopRef[list]]: gameEntry.price,
           },
