@@ -301,6 +301,7 @@ export default function CompareGamesPage({ navigation }) {
   };
   const mockArray = Object.values(mockObject);
 
+
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
   const [data, setData] = useState(null);
