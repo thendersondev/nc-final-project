@@ -1,5 +1,8 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-const GameCard = ({ item }) => {
+
+const GameCard = ({ item }, query) => {
+  if (!query.includes(item.platform)) return;
+
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -14,20 +17,21 @@ const GameCard = ({ item }) => {
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
           <Text style={styles.gameTitle}>{item.title}</Text>
+          <Text style={styles.gamePlatform}>({item.platform})</Text>
         </View>
 
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Box</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>£{item.price}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -83,6 +87,13 @@ const styles = StyleSheet.create({
     color: "#694FAD",
     fontWeight: "700",
     fontSize: 16,
+    paddingBottom: 10,
+    flexShrink: 1,
+  },
+  gamePlatform: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 12,
     paddingBottom: 10,
     flexShrink: 1,
   },

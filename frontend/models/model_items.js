@@ -19,16 +19,17 @@ const shopRef = {
 
 async function fetchItemsByShop(shop_id) {
   const collRef = collection(db, `items/shops/${shopRef[shop_id]}`);
-  const readValues = {};
+  const readValues = [];
   const querySnapshot = await getDocs(collRef);
   querySnapshot.forEach((doc) => {
-    readValues[doc.id] = doc.data();
-  });
+      readValues.push(doc.data());
+      });
+ 
   return readValues;
 }
 
 async function fetchItems() {
-  const gamesList = {};
+  const gamesList = [];
 
   const returnOne = await fetchItemsByShop(1);
   const returnTwo = await fetchItemsByShop(2);
