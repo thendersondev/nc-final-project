@@ -1,17 +1,9 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Button,
-} from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import styles from '../styles/CompareGamesStyles';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-export default function SearchPage({ navigation }) {
+export default function SearchPage() {
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>

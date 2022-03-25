@@ -61,7 +61,7 @@ export default function NavBar() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="SearchPage"
         component={SearchPage}
         options={{
@@ -75,7 +75,7 @@ export default function NavBar() {
             />
           ),
         }}
-      />
+      /> */}
       {/* <Tab.Screen
           name="Login"
           component={LoginPage}

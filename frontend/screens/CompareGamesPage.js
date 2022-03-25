@@ -1,241 +1,309 @@
-import { Text, View, Button, FlatList, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
+import { Text, View, Button, FlatList } from "react-native";
 import styles from "../styles/CompareGamesStyles";
 import { StatusBar } from "expo-status-bar";
 import { GameCard } from "../Components/GameCard";
 import { v4 as uuidv4 } from "uuid";
-import { fetchItems } from "../models/model_items";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useState, useEffect } from "react";
+
+import { TextInput } from "react-native-gesture-handler";
 
 export default function CompareGamesPage({ navigation }) {
-  const mockArray = [
-    {
-      title: "Pokemon Shining Pearl",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4737312&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "34.99",
-      url: "https://www.box.co.uk/NINB62.UK.45ST-Pokémon-Shining-Pearl-Nintendo-Switch_3829005.html",
-      platform: "Nintendo Switch",
+  const mockObject = {
+    "Fortnite The Last Laugh Bundle": {
+      title: "Fortnite The Last Laugh Bundle",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/1/4/801468_gen_b.png",
+      price: { 365: "199.99", game: "17.99", box: "199.99" },
+      bestPrice: "17.99",
+      bestStore: "game",
     },
-    {
-      title: "Pokemon Brilliant Diamond",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4737005&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "42.99",
-      url: "https://www.box.co.uk/NINB61.UK.45ST-Pokémon-Brilliant-Diamond-Nintendo-Sw_3828594.html",
-      platform: "Nintendo Switch",
+    "Mortal Kombat 11 Ultimate": {
+      title: "Mortal Kombat 11 Ultimate",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/1/9/801916_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Nintendo Super Smash Bros Ultimate",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4471738&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "47.94",
-      url: "https://www.box.co.uk/Nintendo-Super-Smash-Bros.-Ultimate_2361155.html",
-      platform: "Nintendo Switch",
+    Ghostrunner: {
+      title: "Ghostrunner",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/6/3/806360_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Animal Crossing New Horizons for",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4481866&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "39.99",
-      url: "https://www.box.co.uk/Animal-Crossing-New-Horizons-for-Ninten_2832755.html",
-      platform: "Nintendo Switch",
+    "Farming Simulator 22": {
+      title: "Farming Simulator 22",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/6/4/806416_gen_b.png",
+      price: { 365: "199.99", game: "44.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Metroid Dread",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4735455&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "49.99",
-      url: "https://www.box.co.uk/10007300-Metroid-Dread-Nintendo-Switch_3825025.html",
-      platform: "Nintendo Switch",
+    "Forspoken GAME Exclusive": {
+      title: "Forspoken GAME Exclusive",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/1/1/6/811667_gen_b.png",
+      price: { 365: "199.99", game: "59.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Nintendo Switch RingFit Adventure",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4363612&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "64.99",
-      url: "https://www.box.co.uk/Nintendo-Switch-RingFit-Adventure_2750121.html",
-      platform: "Nintendo Switch",
+    Rustler: {
+      title: "Rustler",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/6/805683_gen_b.png",
+      price: { 365: "199.99", game: "9.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Mario Kart Live Home Circuit Luigi",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4509151&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "79.00",
-      url: "https://www.box.co.uk/Mario-Kart-Live-Home-Circuit-Luigi_3191045.html",
-      platform: "Nintendo Switch",
+    "Poker Club": {
+      title: "Poker Club",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/1/0/6/810658_gen_b.png",
+      price: { 365: "199.99", game: "9.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Monster Hunter Rise",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4551269&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "39.99",
-      url: "https://www.box.co.uk/Monster-Hunter-Rise-Nintendo-Switch_3574961.html",
-      platform: "Nintendo Switch",
+    "Death Stranding Directors Cut": {
+      title: "Death Stranding Directors Cut",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/7/7/807797_gen_b.png",
+      price: { 365: "199.99", game: "42.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Ubisoft Tom Clancys Rainbow Six Extraction",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4751112&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "39.99",
-      url: "https://www.box.co.uk/300112442-Ubisoft-Tom-Clancy's-Rainbow-Six-Extract_3825032.html",
+    "In Sound Mind Deluxe Edition": {
+      title: "In Sound Mind Deluxe Edition",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/1/805157_gen_b.png",
+      price: { 365: "199.99", game: "12.99", box: "199.99" },
+      bestPrice: "12.99",
+      bestStore: "game",
+    },
+    "MXGP 2020 The Official Motocross Videogame": {
+      title: "MXGP 2020 The Official Motocross Videogame",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/1/5/801514_gen_b.png",
+      price: { 365: "199.99", game: "17.99", box: "199.99" },
+      bestPrice: "17.99",
+      bestStore: "game",
+    },
+    "WWI Tannenberg Eastern Front": {
+      title: "WWI Tannenberg Eastern Front",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/1/1/1/811188_gen_b.png",
+      price: { 365: "199.99", game: "17.99", box: "199.99" },
+      bestPrice: "17.99",
+      bestStore: "game",
+    },
+    "Astria Ascending": {
+      title: "Astria Ascending",
+      platform: "PS5",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/9/3/809356_gen_b.png",
+      price: { 365: "199.99", game: "19.99", box: "199.99" },
+      bestPrice: "19.99",
+      bestStore: "game",
+    },
+    Kunai: {
+      title: "Kunai",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/9/9/4/799482_gen_b.png",
+      price: { 365: "199.99", game: "14.99", box: "199.99" },
+      bestPrice: "14.99",
+      bestStore: "game",
+    },
+    "Fitness Boxing 2 Rhythm Exercise": {
+      title: "Fitness Boxing 2 Rhythm Exercise",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/2/1/802168_gen_b.png",
+      price: { 365: "199.99", game: "32.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Summer In Mara": {
+      title: "Summer In Mara",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/8/1/3/4/813468_gen_b.png",
+      price: { 365: "199.99", game: "34.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Pokken Tournament DX Battle Pack": {
+      title: "Pokken Tournament DX Battle Pack",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/2/1/1/721174_gen_b.png",
+      price: { 365: "199.99", game: "13.49", box: "199.99" },
+      bestPrice: "13.49",
+      bestStore: "game",
+    },
+    "88 Heroes": {
+      title: "88 Heroes",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/2/3/802340_gen_b.png",
+      price: { 365: "199.99", game: "9.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Legend of Kay Anniversary Edition": {
+      title: "Legend of Kay Anniversary Edition",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/2/2/9/722963_gen_b.png",
+      price: { 365: "199.99", game: "12.99", box: "199.99" },
+      bestPrice: "12.99",
+      bestStore: "game",
+    },
+    "Ministry of Broadcast": {
+      title: "Ministry of Broadcast",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/6/8/4/768403_gen_b.png",
+      price: { 365: "199.99", game: "19.99", box: "199.99" },
+      bestPrice: "19.99",
+      bestStore: "game",
+    },
+    "Snipperclips Cut It Out Together Plus Pack": {
+      title: "Snipperclips Cut It Out Together Plus Pack",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/2/2/9/722987_gen_b.png",
+      price: { 365: "199.99", game: "8.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "DDC Super Smash Bros Ultimate Fighters Pass Vol 2": {
+      title: "DDC Super Smash Bros Ultimate Fighters Pass Vol 2",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/6/8/8/768827_gen_b.png",
+      price: { 365: "199.99", game: "26.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Theme Park Simulator Standard Edition": {
+      title: "Theme Park Simulator Standard Edition",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/1/5/801593_gen_b.png",
+      price: { 365: "199.99", game: "29.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Alpaca Ball AllStars": {
+      title: "Alpaca Ball AllStars",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/0/805063_gen_b.png",
+      price: { 365: "199.99", game: "29.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "The Wonderful 101 Remastered": {
+      title: "The Wonderful 101 Remastered",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/7/0/3/770382_gen_b.png",
+      price: { 365: "199.99", game: "19.99", box: "199.99" },
+      bestPrice: "19.99",
+      bestStore: "game",
+    },
+    Indivisible: {
+      title: "Indivisible",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/7/5/4/775447_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "RIOT Civil Unrest": {
+      title: "RIOT Civil Unrest",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/2/0/1/720161_gen_b.png",
+      price: { 365: "199.99", game: "14.99", box: "199.99" },
+      bestPrice: "14.99",
+      bestStore: "game",
+    },
+    "LEGO DisneyPixar The Incredibles Parr Family Vacation Onl": {
+      title: "LEGO DisneyPixar The Incredibles Parr Family Vacation Onl",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/2/6/2/726237_gen_b.png",
+      price: { 365: "199.99", game: "39.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Dead Cells The Prisoners Edition": {
+      title: "Dead Cells The Prisoners Edition",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/7/1/0/771025_gen_b.png",
+      price: { 365: "199.99", game: "99.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "SNK Heroines Tag Team Frenzy": {
+      title: "SNK Heroines Tag Team Frenzy",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/7/3/1/7/731733_gen_b.png",
+      price: { 365: "199.99", game: "12.99", box: "199.99" },
+      bestPrice: "12.99",
+      bestStore: "game",
+    },
+    "Metroid Prime 4": {
+      title: "Metroid Prime 4",
+      platform: "Nintendo Switch",
+      imgUrl: "https://img.game.co.uk/ml2/6/9/6/1/696148_gen_b.png",
+      price: { 365: "199.99", game: "59.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
+    },
+    "Unknown 9 Awakening": {
+      title: "Unknown 9 Awakening",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/5/805523_gen_b.png",
+      price: { 365: "199.99", game: "59.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Ubisoft Tom Clancys Rainbow Six Extraction Deluxe",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4751131&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "44.99",
-      url: "https://www.box.co.uk/300122235-Ubisoft-Tom-Clancy's-Rainbow-Six-Extract_3825048.html",
+    "Greak Memories Of Azur": {
+      title: "Greak Memories Of Azur",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/9/0/809040_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Battlefield 2042",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4795166&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "59.99",
-      url: "https://www.box.co.uk/5030931123870-Battlefield-2042-Xbox-Series-X_3943674.html",
+    "Unknown 9 Awakening": {
+      title: "Unknown 9 Awakening",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/5/805523_gen_b.png",
+      price: { 365: "199.99", game: "59.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Assassins Creed Valhalla",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4530810&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "50.65",
-      url: "https://www.box.co.uk/Assassin's-Creed-Valhalla-Xbox-One_2943941.html",
+    "Greak Memories Of Azur": {
+      title: "Greak Memories Of Azur",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/9/0/809040_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Ubisoft Just Dance 2022",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4751118&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "42.00",
-      url: "https://www.box.co.uk/300121745-Ubisoft-Just-Dance-2022-XBOX_3825044.html",
+    "Unknown 9 Awakening": {
+      title: "Unknown 9 Awakening",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/5/5/805523_gen_b.png",
+      price: { 365: "199.99", game: "59.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Watch Dogs Legion",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4498289&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "49.00",
-      url: "https://www.box.co.uk/Watch-Dogs-Legion-Xbox-One-Series-S_3007619.html",
+    "Greak Memories Of Azur": {
+      title: "Greak Memories Of Azur",
       platform: "Xbox SeriesX",
+      imgUrl: "https://img.game.co.uk/ml2/8/0/9/0/809040_gen_b.png",
+      price: { 365: "199.99", game: "24.99", box: "199.99" },
+      bestPrice: "199.99",
+      bestStore: "box",
     },
-    {
-      title: "Horizon Forbidden West",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4783261&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "69.99",
-      url: "https://www.box.co.uk/0711719720690-Horizon-Forbidden-West-PS5_3936742.html",
-      platform: "PS5",
-    },
-    {
-      title: "Assassins Creed Valhalla",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4530812&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "51.40",
-      url: "https://www.box.co.uk/Assassin's-Creed-Valhalla-PS5_3213274.html",
-      platform: "PS5",
-    },
-    {
-      title: "Marvels SpiderMan Miles Morales Ultimate Edition",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4512588&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "62.99",
-      url: "https://www.box.co.uk/Marvel's-Spider-Man-Miles-Morales-Ultim_3199773.html",
-      platform: "PS5",
-    },
-    {
-      title: "Marvels Guardians of the Galaxy",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4736630&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "59.99",
-      url: "https://www.box.co.uk/SQEA63.UK.24ST-Marvel's-Guardians-of-the-Galaxy-PS5_3828511.html",
-      platform: "PS5",
-    },
-    {
-      title: "Call Of Duty Vanguard",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4779492&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "69.99",
-      url: "https://www.box.co.uk/5030917295300-Call-Of-Duty-Vanguard-PS5_3934313.html",
-      platform: "PS5",
-    },
-    {
-      title: "Marvels SpiderMan Miles Morales",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4512503&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "44.55",
-      url: "https://www.box.co.uk/Marvel's-Spider-Man-Miles-Morales-PS5_3199724.html",
-      platform: "PS5",
-    },
-    {
-      title: "Saints Row Day One Edition",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4865723&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "59.99",
-      url: "https://www.box.co.uk/DESA49.UK.24DE-Saints-Row-Day-One-Edition-PS5_3943904.html",
-      platform: "PS5",
-    },
-    {
-      title: "Saints Row Notorious Edition",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4865622&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "84.99",
-      url: "https://www.box.co.uk/DESA49.UK.24LE-Saints-Row-Notorious-Edition-PS5_4107897.html",
-      platform: "PS5",
-    },
-    {
-      title: "Ratchet and Clank Rift Apart",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4729636&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "60.19",
-      url: "https://www.box.co.uk/Ratchet-and-Clank-Rift-Apart-PS5_3607924.html",
-      platform: "PS5",
-    },
-    {
-      title: "F1 2021",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4607231&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "34.99",
-      url: "https://www.box.co.uk/F1-2021-PS5_3633683.html",
-      platform: "PS5",
-    },
-    {
-      title: "Ubisoft Far Cry 6 Standard Edition",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4755916&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "54.99",
-      url: "https://www.box.co.uk/300117235-Ubisoft-Far-Cry-6-Standard-Edition-PS_3213279.html",
-      platform: "PS5",
-    },
-    {
-      title: "Watch Dogs Legion",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4530813&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "55.56",
-      url: "https://www.box.co.uk/Watch-Dogs-Legion-PS5_3213275.html",
-      platform: "PS5",
-    },
-    {
-      title: "Battlefield 2042",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4795168&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "59.99",
-      url: "https://www.box.co.uk/5035224123858-Battlefield-2042-PS5_3943670.html",
-      platform: "PS5",
-    },
-    {
-      title: "Ubisoft Just Dance 2022",
-      imgUrl:
-        "https://www.box.co.uk//image?id=4751123&quality=90&quality=90&maxwidth=200&maxHeight=140",
-      price: "42.00",
-      url: "https://www.box.co.uk/300121779-Ubisoft-Just-Dance-2022-PS5_3825046.html",
-      platform: "PS5",
-    },
-  ]
+  };
+  const mockArray = Object.values(mockObject);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
+  const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
   const [data, setData] = useState(null);
+  const [search, setSearch] = useState(null);
 
   // useEffect(() => {
   //   fetchItems().then((items) => {
@@ -251,28 +319,38 @@ export default function CompareGamesPage({ navigation }) {
   //     </View>
   //   );
   // } else {
+
   return (
     <View style={styles.container}>
       <Text style={styles.pageTitle}>Compare game prices here!</Text>
-
+      <View>
+        <TextInput
+          placeholder="Search Here..."
+          value={search}
+          style={styles.searchBar}
+          onChangeText={(text) => {
+            setSearch(text);
+          }}
+        ></TextInput>
+      </View>
       <View style={styles.catagoriesContainer}>
         <Text style={styles.sortBy}>Sort By:</Text>
         <View style={styles.catagoryButtonsGroup}>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Xbox SeriesX")}
+            onPress={() => setQuery('Xbox SeriesX')}
           >
             <Text style={styles.catagoryButtonText}>Xbox</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("PS5")}
+            onPress={() => setQuery('PS5')}
           >
             <Text style={styles.catagoryButtonText}>PS5</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Nintendo Switch")}
+            onPress={() => setQuery('Nintendo Switch')}
           >
             <Text style={styles.catagoryButtonText}>Nintendo</Text>
           </TouchableOpacity>
@@ -281,7 +359,7 @@ export default function CompareGamesPage({ navigation }) {
       {/* uses dummy data */}
       <FlatList
         data={mockArray}
-        renderItem={(item, index, separators) => GameCard(item, query)}
+        renderItem={(item, index, separators) => GameCard(item, query, search)}
         extraData={query}
         keyExtractor={uuidv4}
       />
@@ -290,4 +368,3 @@ export default function CompareGamesPage({ navigation }) {
     </View>
   );
 }
-// }
