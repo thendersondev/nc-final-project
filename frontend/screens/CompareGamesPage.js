@@ -137,80 +137,224 @@ export default function CompareGamesPage({ navigation }) {
       platform: "Nintendo Switch",
     },
     {
-      title: "Doki Doki Literature Club Plus",
+      title: "Horizon Forbidden West",
       imgUrl:
-        "https://d8mkdcmng3.imgix.net/b4fe/908616.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=570776766dc502c89643603b907a5518",
-      price: "29.49",
-      url: "https://www.365games.co.uk/nintendo-switch-games/doki-doki-literature-club-plus-nintendo-switch-game",
-      platform: "Nintendo Switch",
-    },
-    {
-      title: "Gyakuten Saiban 123 Phoenix Wright",
-      imgUrl:
-        "https://d8mkdcmng3.imgix.net/afd1/720418.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=acd73fa99cb545fb9a6d873a63e12e57",
-      price: "33.99",
-      url: "https://www.365games.co.uk/nintendo-switch-games/gyakuten-saiban-123-phoenix-wright-nintendo-switch-game-ntsc-j-version",
-      platform: "Nintendo Switch",
-    },
-    {
-      title: "Sonic Mania Plus",
-      imgUrl:
-        "https://d8mkdcmng3.imgix.net/b074/pc-and-video-games-games-switch-sonic-mania-plus-nintendo-2.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=3473ee3e9964da0b9ec7738b9413d02d",
-      price: "26.99",
-      url: "https://www.365games.co.uk/nintendo-switch-games/sonic-mania-plus-nintendo-switch-game",
-      platform: "Nintendo Switch",
-    },
-    {
-      title: "Streets of Rage 4",
-      imgUrl:
-        "https://d8mkdcmng3.imgix.net/a120/727648.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=f1ec7254db6de3febc59dec707f0dd9e",
-      price: "32.49",
-      url: "https://www.365games.co.uk/nintendo-switch-games/streets-of-rage-4-nintendo-switch-game",
-      platform: "Nintendo Switch",
-    },
-    {
-      title: "Untitled Goose Game",
-      imgUrl:
-        "https://d8mkdcmng3.imgix.net/061f/753255.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=3d9c64888d79cad624885a1acab9b343",
-      price: "27.99",
-      url: "https://www.365games.co.uk/nintendo-switch-games/untitled-goose-game-nintendo-switch-game",
-      platform: "Nintendo Switch",
-    },
-    {
-      title: "The Great Ace Attorney Chronicles",
-      imgUrl:
-        "https://d8mkdcmng3.imgix.net/fd21/908463.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=e7aa684c2b70dcacad556d24bf4b99f3",
+        "https://d8mkdcmng3.imgix.net/1846/917242.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=7cb4720b14689fdc0a537eb8bd9a47fa",
       price: "53.99",
-      url: "https://www.365games.co.uk/nintendo-switch-games/the-great-ace-attorney-chronicles-nintendo-switch-game-ntsc-version",
-      platform: "Nintendo Switch",
+      url: "https://www.365games.co.uk/ps5-games/horizon-forbidden-west-ps5-game",
+      platform: "PS5",
     },
     {
-      title: "Ys VIII Lacrimosa of DANA",
+      title: "Gran Turismo 7",
       imgUrl:
-        "https://d8mkdcmng3.imgix.net/8509/645654.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=696d15ce41a2b7ba2c27586e9792c9f4",
-      price: "39.39",
-      url: "https://www.365games.co.uk/nintendo-switch-games/ys-viii-lacrimosa-of-dana-nintendo-switch-game",
-      platform: "Nintendo Switch",
+        "https://d8mkdcmng3.imgix.net/2b33/953198.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=8004d6adc76945355550e303b844d697",
+      price: "61.99",
+      url: "https://www.365games.co.uk/ps5-games/gran-turismo-7-ps5-game",
+      platform: "PS5",
     },
     {
-      title: "Mega Man ZeroZX Legacy Collection",
+      title: "Dying Light 2 Stay Human",
       imgUrl:
-        "https://d8mkdcmng3.imgix.net/80c3/738112.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=7b7a618946d7413a42e57cfa2bcdcba1",
-      price: "24.99",
-      url: "https://www.365games.co.uk/nintendo-switch-games/mega-man-zero-zx-legacy-collection-nintendo-switch-game-ntsc-version",
-      platform: "Nintendo Switch",
+        "https://d8mkdcmng3.imgix.net/fcd2/894692.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=5e3435871a97b0071c1105a16752fc54",
+      price: "47.49",
+      url: "https://www.365games.co.uk/ps5-games/dying-light-2-stay-human-ps5-game",
+      platform: "PS5",
     },
     {
-      title: "Collection Of Mana",
+      title: "Far Cry 6",
       imgUrl:
-        "https://d8mkdcmng3.imgix.net/f65e/759828.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=bcdde965baaf89ce9a50bc8eb6b93883",
-      price: "25.49",
-      url: "https://www.365games.co.uk/nintendo-switch-games/collection-of-mana-nintendo-switch-game-ntsc-version",
-      platform: "Nintendo Switch",
+        "https://d8mkdcmng3.imgix.net/7fc1/758256.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=6aa81e585c1f2c0f50a2efd8681575e3",
+      price: "29.99",
+      url: "https://www.365games.co.uk/ps5-games/far-cry-6-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Lego Star Wars The Skywalker Saga",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/2e71/1032212.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=b92da6e0d1801678574837df10477441",
+      price: "37.99",
+      url: "https://www.365games.co.uk/ps5-games/lego-star-wars-the-skywalker-saga-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "WWE 2K22",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/e5f2/1025769.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=b69b3cdea91211a3b0dcd45fb413e651",
+      price: "52.99",
+      url: "https://www.365games.co.uk/ps5-games/wwe-2k22-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Uncharted Legacy of Thieves Collection",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/980d/971018.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=402f4516dbeba8a50e134395fbe5a50d",
+      price: "33.29",
+      url: "https://www.365games.co.uk/ps5-games/uncharted-legacy-of-thieves-collection-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Ratchet Clank Rift Apart",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/e2a8/853873.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=565261664dca88a2c7cdf1ce22e21b46",
+      price: "42.99",
+      url: "https://www.365games.co.uk/ps5-games/ratchet-and-clank-rift-apart-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Marvels SpiderMan Miles Morales",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/839d/764198.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=6684399a4b74d60ee42425812f1d44cc",
+      price: "38.99",
+      url: "https://www.365games.co.uk/ps5-games/marveland039s-spider-man-miles-morales-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Marvels Guardians of the Galaxy",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/fc86/897759.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=4aebf69847ae6ece0ef65b541b87c18d",
+      price: "56.99",
+      url: "https://www.365games.co.uk/ps5-games/marveland039s-guardians-of-the-galaxy-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Sackboy A Big Adventure",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/e956/764213.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=ed882cb1cda90a36619b42f2ba50d28b",
+      price: "59.49",
+      url: "https://www.365games.co.uk/ps5-games/sackboy-a-big-adventure-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Final Fantasy VII Remake Intergrade",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/ccab/805427.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=4e24f21bda715dbf5a87c479d2d8162c",
+      price: "66.49",
+      url: "https://www.365games.co.uk/ps5-games/final-fantasy-vii-remake-intergrade-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "FIFA 22",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/57e5/958383.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=99a9660346ab8f61a26b41c0366db57c",
+      price: "44.69",
+      url: "https://www.365games.co.uk/ps5-games/fifa-22-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Alan Wake Remastered",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/1cff/919167.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=bd08b2037a21709371a8045901eec9cc",
+      price: "16.29",
+      url: "https://www.365games.co.uk/ps5-games/alan-wake-remastered-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "Demons Souls",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/5edf/764188.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=cc40d12916572108f39984b12cc755dd",
+      price: "52.99",
+      url: "https://www.365games.co.uk/ps5-games/demonand039s-souls-ps5-game",
+      platform: "PS5",
+    },
+    {
+      title: "WWE 2K22",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/4bc8/1025789.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=67c8629b33bbc3c49d839c39dfc0a591",
+      price: "52.99",
+      url: "https://www.365games.co.uk/xbox-series-x-games/wwe-2k22-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Chorus Day One Edition",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/9c87/961135.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=28af3d02615de831655dc0603860d686",
+      price: "29.49",
+      url: "https://www.365games.co.uk/xbox-series-x-games/chorus-day-one-edition-xbox-one-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Forza Horizon 5",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/692e/918658.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=f75aeb8a16e19f4a8e965fbea1890826",
+      price: "49.39",
+      url: "https://www.365games.co.uk/xbox-series-x-games/forza-horizon-5-xbox-one-xbox-series-x",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Evil West",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/8fa3/1052368.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=56bb7e623a21500c523e8a4f980e2c9c",
+      price: "42.79",
+      url: "https://www.365games.co.uk/xbox-series-x-games/evil-west-xbox-one-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "A Plague Tale Requiem",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/c527/1052392.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=a37235d941b6e193d41f5350b3af543c",
+      price: "42.79",
+      url: "https://www.365games.co.uk/xbox-series-x-games/a-plague-tale-requiem-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "STALKER 2 Heart of Chernobyl",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/bf1d/913962.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=c43f7dcdbc69089f0cd749b5daf931fd",
+      price: "42.99",
+      url: "https://www.365games.co.uk/xbox-series-x-games/s-t-a-l-k-e-r-2-heart-of-chernobyl-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Maneater",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/c1af/767970.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=27b1a85713b1794025af85793ee3b403",
+      price: "12.69",
+      url: "https://www.365games.co.uk/xbox-series-x-games/maneater-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Dolmen Day One Edition",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/77e9/1034618.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=717f631535fd709fc19ec40c0cbd0ca3",
+      price: "31.49",
+      url: "https://www.365games.co.uk/xbox-series-x-games/dolmen-day-one-edition-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Tennis World Tour 2",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/426c/794662.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=615985e786cb6b559eb136ffd018a442",
+      price: "29.24",
+      url: "https://www.365games.co.uk/xbox-series-x-games/tennis-world-tour-2-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Port Royale 4 Extended Edition",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/1d16/912759.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=b52a322007d487d0653c3f5bbdd66d35",
+      price: "41.49",
+      url: "https://www.365games.co.uk/xbox-series-x-games/port-royale-4-extended-edition-xbox-one-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "NHL 22",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/9277/913818.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=2d0c466e85daf27b1e2d71316c1d5dc5",
+      price: "39.99",
+      url: "https://www.365games.co.uk/xbox-series-x-games/nhl-22-xbox-series-x-game",
+      platform: "Xbox SeriesX",
+    },
+    {
+      title: "Madden 22",
+      imgUrl:
+        "https://d8mkdcmng3.imgix.net/73da/907088.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=320d9c1f114976293e98c43a8aada9c9",
+      price: "46.49",
+      url: "https://www.365games.co.uk/xbox-series-x-games/madden-22-xbox-series-x-game",
+      platform: "Xbox SeriesX",
     },
   ];
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
   const [data, setData] = useState(null);
 
   // useEffect(() => {
@@ -234,13 +378,22 @@ export default function CompareGamesPage({ navigation }) {
       <View style={styles.catagoriesContainer}>
         <Text style={styles.sortBy}>Sort By:</Text>
         <View style={styles.catagoryButtonsGroup}>
-          <TouchableOpacity style={styles.catagoryButton}>
+          <TouchableOpacity
+            style={styles.catagoryButton}
+            onPress={() => setQuery("Xbox SeriesX")}
+          >
             <Text style={styles.catagoryButtonText}>Xbox</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.catagoryButton}>
+          <TouchableOpacity
+            style={styles.catagoryButton}
+            onPress={() => setQuery("PS5")}
+          >
             <Text style={styles.catagoryButtonText}>PS5</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.catagoryButton}>
+          <TouchableOpacity
+            style={styles.catagoryButton}
+            onPress={() => setQuery("Nintendo Switch")}
+          >
             <Text style={styles.catagoryButtonText}>Nintendo</Text>
           </TouchableOpacity>
         </View>
@@ -248,7 +401,7 @@ export default function CompareGamesPage({ navigation }) {
       {/* uses dummy data */}
       <FlatList
         data={mockArray}
-        renderItem={(item, index, separators) => GameCard(item)}
+        renderItem={(item, index, separators) => GameCard(item, query)}
         extraData={query}
         keyExtractor={uuidv4}
       />

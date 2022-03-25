@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const GameCard = ({ item, index, separators }) => {
+const GameCard = ({ item }, query) => {
+  if (!query.includes(item.platform)) return;
+
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
