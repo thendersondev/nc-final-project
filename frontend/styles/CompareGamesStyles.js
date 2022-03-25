@@ -1,21 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: 0,
   },
   pageTitle: {
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 20,
-    color: '#694FAD',
+    color: "#694FAD",
   },
   catagoriesContainer: {
     flexDirection: "row",
-    alignItems:"center",
-    padding:15,
+    alignItems: "center",
+    padding: 15,
   },
   catagoryButtonsGroup: {
     flexDirection: "row",
@@ -23,19 +23,26 @@ const styles = StyleSheet.create({
   catagoryButton: {
     backgroundColor: "#694fad",
     padding: 15,
-    marginHorizontal:5,
+    marginHorizontal: 5,
     borderRadius: 10,
     alignItems: "center",
   },
   catagoryButtonText: {
     color: "#FFFFFF",
   },
-  sortBy:{
+  sortBy: {
     color: "#694FAD",
     fontWeight: "700",
     fontSize: 16,
-    marginHorizontal:5,
-  }
+    marginHorizontal: 5,
+  },
+  searchBar: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginTop: 5,
+  },
 });
 
 export default styles;
