@@ -1,8 +1,12 @@
 import { StyleSheet } from "react-native";
 
+
 export default styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#694fad",
   },
   image: {
     height: 150,
@@ -11,44 +15,54 @@ export default styles = StyleSheet.create({
     borderRadius: 100,
   },
   imageContainer: {
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    padding: 20,
-  },
-  infoContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",    
-  },
-  info: {
-    flexDirection: "column",
-    alignItems: "center",
-    marginHorizontal: 35,
-    width: 150,
-    maxHeight:70,
-    padding:5,
-   
-  },
-  infoHeader: {
-    fontWeight: "300",
-    color: "#694FAD",
-    fontSize: 20,
-  },
-  infoText: {
-    fontWeight: "normal",
-    color: "grey",
-    fontSize: 15,
-  },
-  buttons: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
+    padding: 10,
   },
   username: {
     margin: 15,
     fontWeight: "bold",
-    color: "grey",
+    color: "white",
     fontSize: 18,
+  },
+  header: {
+    flex: 1,
+
+    width: "100%",
+  },
+  accountInfo: {
+    width: "100%",
+    flex: 1,
+    backgroundColor: "white",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  accountInfoHeader: {
+    textAlign: "center",
+    margin: 15,
+    color: "#694fad",
+    fontWeight: "bold",
+    fontSize: 22,
+    padding: 10,
+  },
+  accountInfoGrid: {
+    flexDirection: "column",
+  },
+  accountInfoGridTop: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingLeft: 5,
+  },
+
+  accountInfoHeadings: {
+    color: "grey",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  comments: {
+    flex: 1,
+    backgroundColor: "white",
+    width:"100%",
+    alignContent:"center",
   },
 });

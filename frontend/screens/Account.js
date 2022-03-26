@@ -8,36 +8,34 @@ export default function Account(props) {
   ];
   return (
     <View style={styles.pageContainer}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
-          }}
-        ></Image>
-        <Text style={styles.username}>USRERNAME</Text>
-      </View>
-
-      <View style={styles.infoContainer}>
-        <View style={styles.info}>
-          <Text style={styles.infoHeader}>Listings:</Text>
-          <Text style={styles.infoText}>4</Text>
-        </View>
-        <View style={styles.info}>
-          <Text style={styles.infoHeader}>Rating:</Text>
-          <Text style={styles.infoText}>5/10 </Text>
+      <View style={styles.header}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
+            }}
+          ></Image>
+          <Text style={styles.username}>USERNAME</Text>
         </View>
       </View>
 
-      <View style={styles.buttons}>
-        <Text style={styles.infoHeader}>Comments</Text>
-        <FlatList
-          data={mockComments}
-          renderItem={(item) => {
-            <Text>{item.comment}</Text>;
-          }}
-        />
-       
+      <View style={styles.accountInfo}>
+        <View>
+          <Text style={styles.accountInfoHeader}>Account Details</Text>
+          <View style={styles.accountInfoGrid}>
+            <View style={styles.accountInfoGridTop}>
+              <View>
+                <Text style={styles.accountInfoHeadings}>Listings:</Text>
+                <Text style={styles.accountInfoHeadings}>Ratings:</Text>
+                <Text style={styles.accountInfoHeadings}>Email:</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={styles.comments}>
+            <Text style={styles.accountInfoHeader} >Comments:</Text>
       </View>
 
       <StatusBar style="auto" />
