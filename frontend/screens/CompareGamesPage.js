@@ -5,7 +5,7 @@ import { GameCard } from "../Components/GameCard";
 import { v4 as uuidv4 } from "uuid";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
-
+import { fetchItems } from "../models/model_items";
 import { TextInput } from "react-native-gesture-handler";
 
 export default function CompareGamesPage({ navigation }) {
@@ -301,24 +301,16 @@ export default function CompareGamesPage({ navigation }) {
   };
   const mockArray = Object.values(mockObject);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
+  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
   const [data, setData] = useState(null);
   const [search, setSearch] = useState(null);
 
-  // useEffect(() => {
-  //   fetchItems().then((items) => {
-  //     setData(items);
-  //     setLoading(false);
-  //   });
-  // }, []);
-
-  // if (loading) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text>. . . L O A D I N G . . .</Text>
-  //     </View>
-  //   );
-  // } else {
+  useEffect(() => {
+    fetchItems().then((items) => {
+      setData(Object.values(items));
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -338,27 +330,33 @@ export default function CompareGamesPage({ navigation }) {
         <View style={styles.catagoryButtonsGroup}>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery('Xbox SeriesX')}
+            onPress={() => setQuery("Xbox SeriesX")}
           >
             <Text style={styles.catagoryButtonText}>Xbox</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery('PS5')}
+            onPress={() => setQuery("PS5")}
           >
             <Text style={styles.catagoryButtonText}>PS5</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery('Nintendo Switch')}
+            onPress={() => setQuery("Nintendo Switch")}
           >
             <Text style={styles.catagoryButtonText}>Nintendo</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.catagoryButton}
+            onPress={() => setQuery("Xbox SeriesX PS5 Nintendo Switch")}
+          >
+            <Text style={styles.catagoryButtonText}>All</Text>
           </TouchableOpacity>
         </View>
       </View>
       {/* uses dummy data */}
       <FlatList
-        data={mockArray}
+        data={data}
         renderItem={(item, index, separators) => GameCard(item, query, search)}
         extraData={query}
         keyExtractor={uuidv4}

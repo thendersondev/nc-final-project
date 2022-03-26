@@ -1,11 +1,24 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const GameCard = ({ item }, query, search) => {
   if (!query.includes(item.platform)) return;
   if (!item.title.includes(search) && search) return;
 
+  const onPress = (url) =>
+    Linking.canOpenURL(url).then(() => {
+      Linking.openURL(url);
+    });
+
   return (
-    <View style={styles.surroundingView}>
+    <SafeAreaView style={styles.surroundingView}>
       <View style={styles.cardLeft}>
         <Image
           style={styles.image}
@@ -23,22 +36,42 @@ const GameCard = ({ item }, query, search) => {
         </View>
 
         <View style={styles.cardRightBottom}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game</Text>
-
-            <Text style={styles.text}>£{item.price.game}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>£{item.price[365]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Box</Text>
-            <Text style={styles.text}>£{item.price.box}</Text>
-          </TouchableOpacity>
+          {item.price.game !== undefined ? (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => onPress(item.url.game)}
+            >
+              <Text style={styles.text}>Game</Text>
+              <Text style={styles.text}>£{item.price.game}</Text>
+            </TouchableOpacity>
+          ) : (
+            ""
+          )}
+          {item.price.game365 !== undefined ? (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => onPress(item.url.game365)}
+            >
+              <Text style={styles.text}>Game365</Text>
+              <Text style={styles.text}>£{item.price.game365}</Text>
+            </TouchableOpacity>
+          ) : (
+            ""
+          )}
+          {item.price.box !== undefined ? (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => onPress(item.url.box)}
+            >
+              <Text style={styles.text}>Box</Text>
+              <Text style={styles.text}>£{item.price.box}</Text>
+            </TouchableOpacity>
+          ) : (
+            ""
+          )}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -49,8 +82,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 10,
-    margin: 10,
+    width: "90%",
+    margin: "2%",
     borderColor: "#694fad",
   },
   image: {
@@ -77,8 +110,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontWeight: "700",
     fontSize: 16,
-    justifyContent: "center",
-    marginHorizontal: 10,
+    justifyContent: "left",
+    marginHorizontal: 5,
     height: 50,
     padding: 10,
   },
