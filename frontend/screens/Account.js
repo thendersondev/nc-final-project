@@ -1,7 +1,14 @@
 import { Text, View, Button, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "../styles/AccountPageStyles";
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
+const user = "auth.currentUser.providerData[0].email";
+
+
+
 export default function Account(props) {
+  console.log(user)
   const mockComments = [
     { comment: "A really good seller ", id: 1 },
     { comment: "Horrible guy!", id: 2 },
@@ -16,7 +23,7 @@ export default function Account(props) {
               uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
             }}
           ></Image>
-          <Text style={styles.username}>USERNAME</Text>
+          <Text style={styles.username}>Username:{user?user:"not signed in"} </Text>
         </View>
       </View>
 

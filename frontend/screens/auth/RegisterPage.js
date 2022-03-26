@@ -13,12 +13,15 @@ import {
   signInWithEmailAndPassword,
 } from "../../firebase.js";
 import { useNavigation } from "@react-navigation/core";
+import { db } from "../../firebase.js";
+import { doc, setDoc } from "firebase/firestore"; 
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
   const user = auth.currentUser;
+  const cityRef = doc(db, 'cities', 'user');
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -28,8 +31,12 @@ const LoginPage = () => {
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
+      }).then((userCredentials)=>{
+        console.log(user.uid)
+        console.log("2")
+        setDoc(doc(db, "users", user.uid), {data:"data"});
       })
-      .then((userCredentials) => {
+      .then(() => {
         navigation.navigate("Home");
       })
       .catch((err) => {
