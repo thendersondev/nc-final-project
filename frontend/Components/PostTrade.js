@@ -50,6 +50,7 @@ export default function PostTrade() {
         price: data.price.length < 4,
       });
     } else {
+      // POST TRADE TO FIREBASE HERE
       setCharAlert({
         title: false,
         platform: false,
