@@ -33,7 +33,7 @@ export default styles = StyleSheet.create({
   accountInfo: {
     width: "100%",
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#F1EEED",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
   },
@@ -61,7 +61,7 @@ export default styles = StyleSheet.create({
   },
   comments: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#F1EEED",
     width:"100%",
     alignContent:"center",
   },

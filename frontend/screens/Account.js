@@ -3,8 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import styles from "../styles/AccountPageStyles";
 export default function Account(props) {
   const mockComments = [
-    { comment: "A really good seller " },
-    { comment: "Horrible guy!" },
+    { comment: "A really good seller ", id: 1 },
+    { comment: "Horrible guy!", id: 2 },
   ];
   return (
     <View style={styles.pageContainer}>
@@ -35,7 +35,14 @@ export default function Account(props) {
         </View>
       </View>
       <View style={styles.comments}>
-            <Text style={styles.accountInfoHeader} >Comments:</Text>
+        <Text style={styles.accountInfoHeader}>Comments:</Text>
+        <FlatList
+          data={mockComments}
+          renderItem={({ item }) => (
+            <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
+          )}
+          keyExtractor={(item) => item.id}
+        />
       </View>
 
       <StatusBar style="auto" />
