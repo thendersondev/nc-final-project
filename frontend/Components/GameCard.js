@@ -9,9 +9,12 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const GameCard = ({ item }, query, search) => {
-  if (!query.includes(item.platform)) return;
   if (!item.title.includes(search) && search) return;
-
+  if (!query.includes(item.platform)) return;
+  if (item.title === "Gran Turismo 7") {
+    item.price.game = undefined;
+  }
+  console.log(item);
   const onPress = (url) =>
     Linking.canOpenURL(url).then(() => {
       Linking.openURL(url);
@@ -38,7 +41,11 @@ const GameCard = ({ item }, query, search) => {
         <View style={styles.cardRightBottom}>
           {item.price.game !== undefined ? (
             <TouchableOpacity
-              style={styles.button}
+              style={
+                item.bestPrice === item.price.game
+                  ? [styles.button, styles.best]
+                  : styles.button
+              }
               onPress={() => onPress(item.url.game)}
             >
               <Text style={styles.text}>Game</Text>
@@ -49,7 +56,11 @@ const GameCard = ({ item }, query, search) => {
           )}
           {item.price.game365 !== undefined ? (
             <TouchableOpacity
-              style={styles.button}
+              style={
+                item.bestPrice === item.price.game365
+                  ? [styles.button, styles.best]
+                  : styles.button
+              }
               onPress={() => onPress(item.url.game365)}
             >
               <Text style={styles.text}>Game365</Text>
@@ -60,7 +71,11 @@ const GameCard = ({ item }, query, search) => {
           )}
           {item.price.box !== undefined ? (
             <TouchableOpacity
-              style={styles.button}
+              style={
+                item.bestPrice === item.price.box
+                  ? [styles.button, styles.best]
+                  : styles.button
+              }
               onPress={() => onPress(item.url.box)}
             >
               <Text style={styles.text}>Box</Text>
@@ -79,10 +94,10 @@ const styles = StyleSheet.create({
   surroundingView: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "left",
     alignItems: "center",
     backgroundColor: "white",
-    width: "90%",
+    width: "95%",
     margin: "2%",
     borderColor: "#694fad",
   },
@@ -102,17 +117,24 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   cardRightBottom: {
+    alignItems: "center",
     flexDirection: "row",
   },
   button: {
-    backgroundColor: "#694fad",
+    backgroundColor: "#7b5dc7",
     borderRadius: 10,
     fontWeight: "700",
     fontSize: 16,
-    justifyContent: "left",
+    justifyContent: "center",
     marginHorizontal: 5,
     height: 50,
     padding: 10,
+  },
+  best: {
+    backgroundColor: "#694fad",
+    borderWidth: 2,
+    borderColor: "#9acd32",
+    height: 55,
   },
   text: {
     color: "#F0EDF6",
