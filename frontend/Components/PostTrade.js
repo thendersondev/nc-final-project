@@ -1,16 +1,13 @@
-import { Text, View, FlatList, Button, TextInput } from "react-native";
+import { Text, View, Button, TextInput, Alert } from "react-native";
 import styles from "../styles/TradeStyles";
-import { StatusBar } from "expo-status-bar";
-import { TradeGameCard } from "../Components/TradeGameCard";
-import { v4 as uuidv4 } from "uuid";
 import React from "react";
 
 export default function PostTrade() {
-  const [titleText, onChangeTitleText] = React.useState("");
-  const [platformText, onChangePlatformText] = React.useState("");
-  const [locationText, onChangeLocationText] = React.useState("");
-  const [priceText, onChangePriceText] = React.useState("");
-  const [number, onChangeNumber] = React.useState(null);
+  const [titleText, onChangeTitleText] = React.useState(null);
+  const [platformText, onChangePlatformText] = React.useState(null);
+  const [locationText, onChangeLocationText] = React.useState(null);
+  const [priceText, onChangePriceText] = React.useState(null);
+  // const [number, onChangeNumber] = React.useState(null);
   const [data, setData] = React.useState([
     {
       title: "",
@@ -36,7 +33,9 @@ export default function PostTrade() {
   ];
 
   const handleSubmit = () => {
-    console.log(data);
+    if (!data.title || !data.platform || !data.location || !data.price) {
+      Alert("please fill out all fields");
+    }
     // add this data into mock array
   };
 
@@ -44,47 +43,48 @@ export default function PostTrade() {
     <View style={styles.container}>
       <Text style={styles.pageTitle}>Trade games here!</Text>
       <View style={styles.form}>
-        <Text style={styles.postItemTitle}>Post your item here:</Text>
+        <Text style={styles.postItemTitle}>What do you want to trade?</Text>
         <TextInput
           style={styles.textInputBox}
           placeholderTextColor={"#3e2465"}
           placeholder="What ya wannae sell, Pal?"
-          value={data}
+          value={titleText}
           onChangeText={(text) =>
             setData((prevData) => {
               return { ...prevData, title: text };
             })
           }
         />
-
+        <Text style={styles.textAlert}>title is required</Text>
         <TextInput
           style={styles.textInputBox}
           placeholderTextColor={"#3e2465"}
           placeholder="What platform es et?"
-          value={data}
+          value={platformText}
           onChangeText={(text) =>
             setData((prevData) => {
               return { ...prevData, platform: text };
             })
           }
         />
-
+        <Text style={styles.textAlert}>platform is required</Text>
         <TextInput
           style={styles.textInputBox}
           placeholderTextColor={"#3e2465"}
           placeholder="Where are ya?"
-          value={data}
+          value={locationText}
           onChangeText={(text) =>
             setData((prevData) => {
               return { ...prevData, location: text };
             })
           }
         />
+        <Text style={styles.textAlert}>location is required</Text>
         <TextInput
           style={styles.textInputBox}
           placeholderTextColor={"#3e2465"}
           placeholder="What ya gonnae charge?"
-          value={data}
+          value={priceText}
           keyboardType="numeric"
           onChangeText={(num) =>
             setData((prevData) => {
@@ -92,6 +92,7 @@ export default function PostTrade() {
             })
           }
         />
+        <Text style={styles.textAlert}>trade value is required</Text>
 
         <Button title="Submit" onPress={handleSubmit} />
       </View>

@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
   },
+  textAlert: {
+    color: "red",
+    textAlign: "right",
+  },
 });
 
 export default styles;
