@@ -17,6 +17,13 @@ const styles = StyleSheet.create({
     margin: 5,
     borderColor: "#694FAD",
   },
+  inputAlert: {
+    padding: 7,
+    borderRadius: 5,
+    borderWidth: 2,
+    margin: 5,
+    borderColor: "red",
+  },
   pageTitle: {
     fontWeight: "700",
     fontSize: 20,
@@ -38,6 +45,10 @@ const styles = StyleSheet.create({
   textAlert: {
     color: "red",
     textAlign: "right",
+  },
+  postItem: {
+    textAlign: "center",
+    padding: 10,
   },
 });
 
