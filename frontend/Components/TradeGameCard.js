@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 const TradeGameCard = ({ item }) => {
+  console.log(item);
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -17,14 +18,6 @@ const TradeGameCard = ({ item }) => {
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Game</Text>
-            <Text style={styles.text}>{item.price}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>{item.price}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Box</Text>
             <Text style={styles.text}>{item.price}</Text>
           </TouchableOpacity>
         </View>

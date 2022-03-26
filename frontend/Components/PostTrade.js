@@ -73,7 +73,6 @@ export default function PostTrade() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>Trade games here!</Text>
       <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
         <Text style={styles.postItemTitle}>What do you want to trade?</Text>
         <TextInput

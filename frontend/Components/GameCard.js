@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     height: 110,
     left: 5,
   },
-
   cardLeft: {
     flexDirection: "row",
   },

@@ -50,6 +50,23 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
   },
+  button: {
+    backgroundColor: "#694fad",
+    borderRadius: 10,
+    fontWeight: "700",
+    fontSize: 16,
+
+    justifyContent: "center",
+    marginHorizontal: 5,
+    height: 50,
+    padding: 10,
+  },
+  text: {
+    alignText: "center",
+    color: "#F0EDF6",
+    fontWeight: "500",
+    fontSize: 16,
+  },
 });
 
 export default styles;

@@ -5,12 +5,13 @@ import {
   Button,
   TextInput,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../styles/TradeStyles";
 import { StatusBar } from "expo-status-bar";
 import { TradeGameCard } from "../Components/TradeGameCard";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostTrade from "../Components/PostTrade";
 
 export default function TradePage() {
@@ -80,21 +81,64 @@ export default function TradePage() {
       price: "£15",
     },
   ];
+  const [tradeables, setTradebles] = useState();
+  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
+  const [loadPost, setLoadPost] = useState(false);
+  const [loadTrade, setLoadTrade] = useState(true);
+  const [back, setBack] = useState(false);
+
+  useEffect(() => {
+    // fetch trade items
+    // setTradeables
+  }, []);
+
+  const onPress = (e) => {
+    switch (e) {
+      case "post":
+        setLoadPost(true);
+        setLoadTrade(false);
+        setBack(true);
+        break;
+      case "back":
+        setLoadPost(false);
+        setLoadTrade(true);
+        setBack(false);
+        break;
+    }
+  };
 
   return (
-    <>
-      <PostTrade />
-      <View style={styles.container}>
-        <Text>Games available for trading:</Text>
-        {/* <View> */}
-        <FlatList
-          data={mockTradeData}
-          renderItem={(item, index, separators) => TradeGameCard(item)}
-          keyExtractor={uuidv4}
-        />
-        <StatusBar style="auto" />
-        {/* </View> */}
-      </View>
-    </>
+    <View style={styles.container}>
+      {!loadPost && (
+        <TouchableOpacity style={styles.button} onPress={() => onPress("post")}>
+          <Text style={styles.text}>Post an item</Text>
+        </TouchableOpacity>
+      )}
+      {loadPost && (
+        <View>
+          <PostTrade />{" "}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onPress("back")}
+          >
+            <Text style={styles.text}>Go back</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {loadTrade && (
+        <View style={styles.container}>
+          <Text style={styles.pageTitle}>Trade games here!</Text>
+          {/* <View> */}
+          <FlatList
+            data={mockTradeData}
+            renderItem={(item, index, separators) => TradeGameCard(item)}
+            keyExtractor={uuidv4}
+          />
+          <StatusBar style="auto" />
+          {/* </View> */}
+        </View>
+      )}
+    </View>
   );
 }
