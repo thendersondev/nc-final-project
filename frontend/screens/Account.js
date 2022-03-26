@@ -1,18 +1,28 @@
 import { Text, View, Button, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "../styles/AccountPageStyles";
-import { getAuth } from "firebase/auth";
-const auth = getAuth();
-const user = "auth.currentUser.providerData[0].email";
-
-
+import { auth } from "../firebase";
+import { db } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 export default function Account(props) {
-  console.log(user)
+  const user = auth.currentUser.uid;
+  const username = "";
+  const [username1, setUsername1] = useState("")
+
   const mockComments = [
     { comment: "A really good seller ", id: 1 },
     { comment: "Horrible guy!", id: 2 },
   ];
+
+  useEffect(() => {
+    const docRef = doc(db, "users", user);
+    getDoc(docRef).then((data) => {
+      setUsername1(data.data().username)
+    });
+  }, []);
+
   return (
     <View style={styles.pageContainer}>
       <View style={styles.header}>
@@ -23,7 +33,9 @@ export default function Account(props) {
               uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
             }}
           ></Image>
-          <Text style={styles.username}>Username:{user?user:"not signed in"} </Text>
+          <Text style={styles.username}>
+            Username:{username1 }{" "}
+          </Text>
         </View>
       </View>
 
