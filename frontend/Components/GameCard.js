@@ -93,6 +93,9 @@ const GameCard = ({ item }, query, search) => {
 const styles = StyleSheet.create({
   surroundingView: {
     flex: 1,
+    borderRadius: 10,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
     flexDirection: "row",
     justifyContent: "left",
     alignItems: "center",
@@ -102,9 +105,10 @@ const styles = StyleSheet.create({
     borderColor: "#694fad",
   },
   image: {
-    width: 110,
-    height: 110,
-    left: 5,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
+    width: 100,
+    height: 100,
   },
   cardLeft: {
     flexDirection: "row",

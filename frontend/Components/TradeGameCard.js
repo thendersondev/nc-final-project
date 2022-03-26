@@ -1,6 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 const TradeGameCard = ({ item }) => {
-  console.log(item);
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -29,25 +28,28 @@ const TradeGameCard = ({ item }) => {
 const styles = StyleSheet.create({
   surroundingView: {
     flex: 1,
+    borderRadius: 10,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "left",
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 10,
-    margin: 10,
+    width: "95%",
+    margin: "2%",
     borderColor: "#694fad",
   },
   image: {
+    borderRadius: 20,
     width: 110,
     height: 110,
-    left: 5,
   },
-
   cardLeft: {
     flexDirection: "row",
   },
   cardRight: {
     flexDirection: "column",
+    flexShrink: 1,
   },
   cardRightTop: {
     flexShrink: 1,
