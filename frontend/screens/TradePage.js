@@ -1,160 +1,260 @@
-import { Text, View, FlatList } from 'react-native';
-import styles from '../styles/TradeStyles';
-import { StatusBar } from 'expo-status-bar';
-import TradeGameCard from '../Components/TradeGameCard';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  Text,
+  View,
+  FlatList,
+  Button,
+  TextInput,
+  SafeAreaView,
+} from "react-native";
+import styles from "../styles/TradeStyles";
+import { StatusBar } from "expo-status-bar";
+import { TradeGameCard } from "../Components/TradeGameCard";
+import { v4 as uuidv4 } from "uuid";
+import React from "react";
+import PostTrade from "../Components/PostTrade";
 
 export default function TradePage() {
   const mockArray2 = [
     {
-      title: 'NHL 22',
+      title: "Pokemon Shining Pearl",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/ffaa/1035780.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=924e24c001e035070f32efc95774dfa6',
-      price: '65.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/nhl-22-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4737312&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£34.99",
+      url: "https://www.box.co.uk/NINB62.UK.45ST-Pokémon-Shining-Pearl-Nintendo-Switch_3829005.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'NBA 2K22 75th Anniversary Edition',
+      title: "Pokemon Brilliant Diamond",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/4b2b/1035781.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=57b5b4e826b651656fc67df5f7f80c34',
-      price: '94.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/nba-2k22-75th-anniversary-edition-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4737005&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£42.99",
+      url: "https://www.box.co.uk/NINB61.UK.45ST-Pokémon-Brilliant-Diamond-Nintendo-Sw_3828594.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'FIFA 22 LATAM',
+      title: "Nintendo Super Smash Bros Ultimate",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/10e7/1042241.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=90f86a4b2d64a9ce1043a0eb7ca64ad1',
-      price: '62.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/fifa-22-latam-xbox-one-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4471738&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£47.94",
+      url: "https://www.box.co.uk/Nintendo-Super-Smash-Bros.-Ultimate_2361155.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'Kao The Kangaroo',
+      title: "Animal Crossing New Horizons for",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/2a2f/1050307.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=eee28423e642dc19f52428ad9cebc350',
-      price: '27.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/kao-the-kangaroo-xbox-one-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4481866&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£39.99",
+      url: "https://www.box.co.uk/Animal-Crossing-New-Horizons-for-Ninten_2832755.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'Vampire The Masquerade Swansong',
+      title: "Metroid Dread",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/7431/1050914.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=034549d158028268f4b25c2301b6b641',
-      price: '37.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/vampire-the-masquerade-swansong-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4735455&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£49.99",
+      url: "https://www.box.co.uk/10007300-Metroid-Dread-Nintendo-Switch_3825025.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'SpellForce 3 Reforced',
+      title: "Nintendo Switch RingFit Adventure",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/f00e/1051020.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=36a5150afba43de8d6af9ae00832ec0f',
-      price: '28.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/spellforce-3-reforced-xbox-one-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4363612&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£64.99",
+      url: "https://www.box.co.uk/Nintendo-Switch-RingFit-Adventure_2750121.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'Zorro The Chronicles',
+      title: "Mario Kart Live Home Circuit Luigi",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/1c22/1051039.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=8bb71000953263d6ea885cd39eeccd73',
-      price: '31.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/zorro-the-chronicles-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4509151&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£79.00",
+      url: "https://www.box.co.uk/Mario-Kart-Live-Home-Circuit-Luigi_3191045.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'MotoGP22 Standard Edition',
+      title: "Monster Hunter Rise",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/ba13/1051992.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=089f54f99b43464bb25d841966327e0f',
-      price: '45.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/motogp22-standard-edition-xbox-series-x-xboxone-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4551269&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£39.99",
+      url: "https://www.box.co.uk/Monster-Hunter-Rise-Nintendo-Switch_3574961.html",
+      platform: "Nintendo Switch",
     },
     {
-      title: 'Evil West',
+      title: "Ubisoft Tom Clancys Rainbow Six Extraction",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/8fa3/1052368.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=56bb7e623a21500c523e8a4f980e2c9c',
-      price: '42.79',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/evil-west-xbox-one-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4751112&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£39.99",
+      url: "https://www.box.co.uk/300112442-Ubisoft-Tom-Clancy's-Rainbow-Six-Extract_3825032.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'A Plague Tale Requiem',
+      title: "Ubisoft Tom Clancys Rainbow Six Extraction Deluxe",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/c527/1052392.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=a37235d941b6e193d41f5350b3af543c',
-      price: '42.79',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/a-plague-tale-requiem-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4751131&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£44.99",
+      url: "https://www.box.co.uk/300122235-Ubisoft-Tom-Clancy's-Rainbow-Six-Extract_3825048.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'STALKER 2 Heart of Chernobyl',
+      title: "Battlefield 2042",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/bf1d/913962.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=c43f7dcdbc69089f0cd749b5daf931fd',
-      price: '42.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/s-t-a-l-k-e-r-2-heart-of-chernobyl-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4795166&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£59.99",
+      url: "https://www.box.co.uk/5030931123870-Battlefield-2042-Xbox-Series-X_3943674.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'Maneater',
+      title: "Assassins Creed Valhalla",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/c1af/767970.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=27b1a85713b1794025af85793ee3b403',
-      price: '12.69',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/maneater-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4530810&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£50.65",
+      url: "https://www.box.co.uk/Assassin's-Creed-Valhalla-Xbox-One_2943941.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'Dolmen Day One Edition',
+      title: "Ubisoft Just Dance 2022",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/77e9/1034618.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=717f631535fd709fc19ec40c0cbd0ca3',
-      price: '31.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/dolmen-day-one-edition-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4751118&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£42.00",
+      url: "https://www.box.co.uk/300121745-Ubisoft-Just-Dance-2022-XBOX_3825044.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'Tennis World Tour 2',
+      title: "Watch Dogs Legion",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/426c/794662.png?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=615985e786cb6b559eb136ffd018a442',
-      price: '29.24',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/tennis-world-tour-2-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4498289&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£49.00",
+      url: "https://www.box.co.uk/Watch-Dogs-Legion-Xbox-One-Series-S_3007619.html",
+      platform: "Xbox SeriesX",
     },
     {
-      title: 'Port Royale 4 Extended Edition',
+      title: "Horizon Forbidden West",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/1d16/912759.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=b52a322007d487d0653c3f5bbdd66d35',
-      price: '41.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/port-royale-4-extended-edition-xbox-one-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4783261&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£69.99",
+      url: "https://www.box.co.uk/0711719720690-Horizon-Forbidden-West-PS5_3936742.html",
+      platform: "PS5",
     },
     {
-      title: 'NHL 22',
+      title: "Assassins Creed Valhalla",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/9277/913818.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=2d0c466e85daf27b1e2d71316c1d5dc5',
-      price: '39.99',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/nhl-22-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4530812&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£51.40",
+      url: "https://www.box.co.uk/Assassin's-Creed-Valhalla-PS5_3213274.html",
+      platform: "PS5",
     },
     {
-      title: 'Madden 22',
+      title: "Marvels SpiderMan Miles Morales Ultimate Edition",
       imgUrl:
-        'https://d8mkdcmng3.imgix.net/73da/907088.jpg?auto=format&bg=0FFF&fit=fill&h=276&q=100&w=276&s=320d9c1f114976293e98c43a8aada9c9',
-      price: '46.49',
-      url: 'https://www.365games.co.uk/xbox-series-x-games/madden-22-xbox-series-x-game',
-      platform: 'Xbox SeriesX',
+        "https://www.box.co.uk//image?id=4512588&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£62.99",
+      url: "https://www.box.co.uk/Marvel's-Spider-Man-Miles-Morales-Ultim_3199773.html",
+      platform: "PS5",
+    },
+    {
+      title: "Marvels Guardians of the Galaxy",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4736630&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£59.99",
+      url: "https://www.box.co.uk/SQEA63.UK.24ST-Marvel's-Guardians-of-the-Galaxy-PS5_3828511.html",
+      platform: "PS5",
+    },
+    {
+      title: "Call Of Duty Vanguard",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4779492&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£69.99",
+      url: "https://www.box.co.uk/5030917295300-Call-Of-Duty-Vanguard-PS5_3934313.html",
+      platform: "PS5",
+    },
+    {
+      title: "Marvels SpiderMan Miles Morales",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4512503&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£44.55",
+      url: "https://www.box.co.uk/Marvel's-Spider-Man-Miles-Morales-PS5_3199724.html",
+      platform: "PS5",
+    },
+    {
+      title: "Saints Row Day One Edition",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4865723&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£59.99",
+      url: "https://www.box.co.uk/DESA49.UK.24DE-Saints-Row-Day-One-Edition-PS5_3943904.html",
+      platform: "PS5",
+    },
+    {
+      title: "Saints Row Notorious Edition",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4865622&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£84.99",
+      url: "https://www.box.co.uk/DESA49.UK.24LE-Saints-Row-Notorious-Edition-PS5_4107897.html",
+      platform: "PS5",
+    },
+    {
+      title: "Ratchet and Clank Rift Apart",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4729636&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£60.19",
+      url: "https://www.box.co.uk/Ratchet-and-Clank-Rift-Apart-PS5_3607924.html",
+      platform: "PS5",
+    },
+    {
+      title: "F1 2021",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4607231&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£34.99",
+      url: "https://www.box.co.uk/F1-2021-PS5_3633683.html",
+      platform: "PS5",
+    },
+    {
+      title: "Ubisoft Far Cry 6 Standard Edition",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4755916&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£54.99",
+      url: "https://www.box.co.uk/300117235-Ubisoft-Far-Cry-6-Standard-Edition-PS_3213279.html",
+      platform: "PS5",
+    },
+    {
+      title: "Watch Dogs Legion",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4530813&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£55.56",
+      url: "https://www.box.co.uk/Watch-Dogs-Legion-PS5_3213275.html",
+      platform: "PS5",
+    },
+    {
+      title: "Battlefield 2042",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4795168&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£59.99",
+      url: "https://www.box.co.uk/5035224123858-Battlefield-2042-PS5_3943670.html",
+      platform: "PS5",
+    },
+    {
+      title: "Ubisoft Just Dance 2022",
+      imgUrl:
+        "https://www.box.co.uk//image?id=4751123&quality=90&quality=90&maxwidth=200&maxHeight=140",
+      price: "£42.00",
+      url: "https://www.box.co.uk/300121779-Ubisoft-Just-Dance-2022-PS5_3825046.html",
+      platform: "PS5",
     },
   ];
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.pageTitle}>Trade games here!</Text>
-
-      <FlatList
-        data={mockArray2}
-        renderItem={TradeGameCard}
-        keyExtractor={uuidv4}
-      />
-
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <PostTrade />
+      <View style={styles.container}>
+        <Text>Games available for trading:</Text>
+        {/* <View> */}
+        <FlatList
+          data={mockArray2}
+          renderItem={(item, index, separators) => TradeGameCard(item)}
+          keyExtractor={uuidv4}
+        />
+        <StatusBar style="auto" />
+        {/* </View> */}
+      </View>
+    </>
   );
 }

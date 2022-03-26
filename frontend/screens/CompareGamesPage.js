@@ -300,10 +300,8 @@ export default function CompareGamesPage({ navigation }) {
     },
   };
   const mockArray = Object.values(mockObject);
-
-
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
+  const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
   const [data, setData] = useState(null);
   const [search, setSearch] = useState(null);
 
@@ -340,19 +338,19 @@ export default function CompareGamesPage({ navigation }) {
         <View style={styles.catagoryButtonsGroup}>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Xbox SeriesX")}
+            onPress={() => setQuery('Xbox SeriesX')}
           >
             <Text style={styles.catagoryButtonText}>Xbox</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("PS5")}
+            onPress={() => setQuery('PS5')}
           >
             <Text style={styles.catagoryButtonText}>PS5</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Nintendo Switch")}
+            onPress={() => setQuery('Nintendo Switch')}
           >
             <Text style={styles.catagoryButtonText}>Nintendo</Text>
           </TouchableOpacity>

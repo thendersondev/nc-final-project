@@ -17,7 +17,9 @@ const GameCard = ({ item }, query, search) => {
 
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
-          <Text style={styles.gameTitle}>{item.title}</Text>
+          <Text style={styles.gameTitle}>
+            {item.title} - ({item.platform})
+          </Text>
         </View>
 
         <View style={styles.cardRightBottom}>
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
   },
   cardRight: {
     flexDirection: "column",
+    flexShrink: 1,
   },
   cardRightTop: {
     flexShrink: 1,
