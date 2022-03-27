@@ -1,6 +1,8 @@
 import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/TradeStyles";
 import React from "react";
+import { db, auth } from ".././firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function PostTrade() {
   const [titleText, setTitleText] = React.useState(null);
@@ -51,6 +53,14 @@ export default function PostTrade() {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
+      console.log(titleText);
+      setDoc(doc(db, "trades", "trade1"), {
+        titleText: titleText,
+        platformText: "platformText",
+        locationText: locationText,
+        priceText: priceText,
+      });
+
       setCharAlert({
         title: false,
         platform: false,
@@ -84,11 +94,7 @@ export default function PostTrade() {
           placeholderTextColor={"#3e2465"}
           placeholder="Game title..."
           value={titleText}
-          onChangeText={(text) =>
-            setData((prevData) => {
-              return { ...prevData, title: text };
-            })
-          }
+          onChangeText={(text) => setTitleText(text)}
         />
         {alert.title ? (
           <Text style={styles.textAlert}>title is required</Text>
@@ -106,11 +112,9 @@ export default function PostTrade() {
           placeholderTextColor={"#3e2465"}
           placeholder="Platform..."
           value={platformText}
-          onChangeText={(text) =>
-            setData((prevData) => {
-              return { ...prevData, platform: text };
-            })
-          }
+          onChangeText={(text) => {
+            setPlatformText(text);
+          }}
         />
         {alert.platform ? (
           <Text style={styles.textAlert}>platform is required</Text>
@@ -128,11 +132,7 @@ export default function PostTrade() {
           placeholderTextColor={"#3e2465"}
           placeholder="Location..."
           value={locationText}
-          onChangeText={(text) =>
-            setData((prevData) => {
-              return { ...prevData, location: text };
-            })
-          }
+          onChangeText={(text) => setLocationText(text)}
         />
         {alert.location ? (
           <Text style={styles.textAlert}>location is required</Text>
@@ -152,11 +152,7 @@ export default function PostTrade() {
           value={priceText}
           selectTextOnFocus={!postMsg}
           keyboardType="numeric"
-          onChangeText={(num) =>
-            setData((prevData) => {
-              return { ...prevData, price: num };
-            })
-          }
+          onChangeText={(text) => setPriceText(text)}
         />
         {alert.price ? (
           <Text style={styles.textAlert}>trade value is required</Text>
