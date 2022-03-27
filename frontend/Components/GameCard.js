@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
     flexDirection: "row",
-    justifyContent: "left",
+
     alignItems: "center",
     backgroundColor: "white",
     width: "95%",
