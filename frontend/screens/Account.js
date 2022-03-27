@@ -16,7 +16,6 @@ export default function Account(props) {
     { comment: "Horrible guy!", id: 2 },
   ];
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
-  
   const navigation = useNavigation();
 
   const handleSignOut = () => {
@@ -45,7 +44,9 @@ export default function Account(props) {
   if (loggedIn === null) {
     return (
       <View style={styles.loggedOut1}>
-        <Text style={styles.loggedOut}>Please register/Log-in to see this page</Text>
+        <Text style={styles.loggedOut}>
+          Please register/Log-in to see this page
+        </Text>
       </View>
     );
   }
@@ -59,7 +60,7 @@ export default function Account(props) {
               uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
             }}
           ></Image>
-          <Text style={styles.username}>Username:{username} </Text>
+          <Text style={styles.username}>{username} </Text>
           <TouchableOpacity
             onPress={handleSignOut}
             style={styles.signOutContainer}
@@ -73,12 +74,14 @@ export default function Account(props) {
         <View>
           <Text style={styles.accountInfoHeader}>Account Details</Text>
           <View style={styles.accountInfoGrid}>
-            <View style={styles.accountInfoGridTop}>
+     
               <View>
-                <Text style={styles.accountInfoHeadings}>Listings:</Text>
-                <Text style={styles.accountInfoHeadings}>Ratings:</Text>
-                <Text style={styles.accountInfoHeadings}>Email:</Text>
-              </View>
+                <Text style={styles.accountInfoHeadings}>Listings: 4</Text>
+                <Text style={styles.accountInfoHeadings}>Ratings: 5/10</Text>
+                <Text style={styles.accountInfoHeadings}>
+                  Email: {auth.currentUser.email}
+                </Text>
+            
             </View>
           </View>
         </View>

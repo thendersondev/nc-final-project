@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   accountInfo: {
     width: "100%",
     flex: 1,
-    backgroundColor: "#F1EEED",
+    backgroundColor: "white",
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
   },
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     margin: 15,
     color: "#694fad",
     fontWeight: "bold",
-    fontSize: 22,
+    fontSize: 18,
     padding: 10,
   },
   accountInfoGrid: {
@@ -55,12 +55,14 @@ const styles = StyleSheet.create({
 
   accountInfoHeadings: {
     color: "grey",
-    fontWeight: "bold",
+    fontWeight: "normal",
     fontSize: 18,
+    textAlign:"center",
+    padding:3,
   },
   comments: {
     flex: 1,
-    backgroundColor: "#F1EEED",
+    backgroundColor: "white",
     width: "100%",
     alignContent: "center",
   },
@@ -72,8 +74,19 @@ const styles = StyleSheet.create({
   },
   loggedOut1: {
     flex: 1,
-    justifyContent:"center"
+    justifyContent: "center",
   },
+  signOutContainer: {
+    color: "#694fad",
+    backgroundColor: "white",
+    padding: 7,
+    margin: 1,
+    borderRadius: 15,
+    paddingHorizontal: 40,
+  },
+  signOutText: { 
+    colour: "#694fad"
+   },
 });
 
 export default styles;
