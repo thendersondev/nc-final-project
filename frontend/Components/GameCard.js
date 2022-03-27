@@ -14,7 +14,6 @@ const GameCard = ({ item }, query, search) => {
   if (item.title === "Gran Turismo 7") {
     item.price.game = undefined;
   }
-
   const onPress = (url) =>
     Linking.canOpenURL(url).then(() => {
       Linking.openURL(url);
@@ -39,7 +38,7 @@ const GameCard = ({ item }, query, search) => {
         </View>
 
         <View style={styles.cardRightBottom}>
-          {item.price.game !== undefined ? (
+          {!!item.price.game && (
             <TouchableOpacity
               style={
                 item.bestPrice === item.price.game
@@ -51,10 +50,8 @@ const GameCard = ({ item }, query, search) => {
               <Text style={styles.text}>Game</Text>
               <Text style={styles.text}>£{item.price.game}</Text>
             </TouchableOpacity>
-          ) : (
-            ""
           )}
-          {item.price.game365 !== undefined ? (
+          {!!item.price.game365 && (
             <TouchableOpacity
               style={
                 item.bestPrice === item.price.game365
@@ -66,10 +63,8 @@ const GameCard = ({ item }, query, search) => {
               <Text style={styles.text}>Game365</Text>
               <Text style={styles.text}>£{item.price.game365}</Text>
             </TouchableOpacity>
-          ) : (
-            ""
           )}
-          {item.price.box !== undefined ? (
+          {!!item.price.box && (
             <TouchableOpacity
               style={
                 item.bestPrice === item.price.box
@@ -81,8 +76,6 @@ const GameCard = ({ item }, query, search) => {
               <Text style={styles.text}>Box</Text>
               <Text style={styles.text}>£{item.price.box}</Text>
             </TouchableOpacity>
-          ) : (
-            ""
           )}
         </View>
       </View>

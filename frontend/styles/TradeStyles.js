@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text: {
-    alignText: "center",
+    textAlign: "center",
     color: "#F0EDF6",
     fontWeight: "500",
     fontSize: 16,
