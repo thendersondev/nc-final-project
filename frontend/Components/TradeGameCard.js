@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+
 const TradeGameCard = ({ item }, setProfile, setMessage) => {
   return (
     <View style={styles.surroundingView}>

@@ -13,8 +13,8 @@ import { TradeGameCard } from "../Components/TradeGameCard";
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import PostTrade from "../Components/PostTrade";
-import UserPage from "./UserPage";
-import MessagePage from "./MessagePage";
+import UserPage from "../Components/UserPage";
+import MessagePage from "../Components/MessagePage";
 
 export default function TradePage() {
   const mockTradeData = [
@@ -93,6 +93,7 @@ export default function TradePage() {
   useEffect(() => {
     // fetch trade items
     // setTradeables
+    // flatList tradeables
   }, []);
 
   const onPress = (e) => {
@@ -141,6 +142,7 @@ export default function TradePage() {
             <Text style={styles.text}>Post an item</Text>
           </TouchableOpacity>
         )}
+
         {loadPost && (
           <View>
             <PostTrade />
