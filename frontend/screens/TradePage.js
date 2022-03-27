@@ -115,20 +115,14 @@ export default function TradePage() {
     return (
       <View style={styles.container}>
         <MessagePage
-          props={[message.username, setProfile, setMessage]}
+          props={[message.username, setProfile, setMessage, onPress]}
         ></MessagePage>
-        <TouchableOpacity style={styles.button} onPress={() => onPress("back")}>
-          <Text style={styles.text}>Go back to trades</Text>
-        </TouchableOpacity>
       </View>
     );
   else if (profile.on) {
     return (
       <View style={styles.container}>
-        <UserPage props={[profile.username, setMessage]}></UserPage>
-        <TouchableOpacity style={styles.button} onPress={() => onPress("back")}>
-          <Text style={styles.text}>Go back to trades</Text>
-        </TouchableOpacity>
+        <UserPage props={[profile.username, setMessage, onPress]}></UserPage>
       </View>
     );
   } else {
