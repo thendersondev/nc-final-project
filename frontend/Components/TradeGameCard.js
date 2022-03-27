@@ -11,13 +11,21 @@ const TradeGameCard = ({ item }) => {
 
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
-          <Text style={styles.gameTitle}>{item.title}</Text>
+          <Text style={styles.gameTitle}>
+            {item.title} - ({item.platform})
+          </Text>
+          <Text style={styles.gameDetails}>User: {item.username}</Text>
+          <Text style={styles.gameDetails}>Price: {item.price}</Text>
+          <Text style={styles.gameDetails}>Condition: {item.condition}</Text>
+          <Text style={styles.gameDetails}>Location: {item.location}</Text>
         </View>
 
-        <View style={styles.cardRightBottom}>
+        <View style={styles.cardLeft}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>Message</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>View Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -33,7 +41,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     flexDirection: "row",
     justifyContent: "left",
-    alignItems: "center",
+
     backgroundColor: "white",
     width: "95%",
     margin: "2%",
@@ -45,7 +53,8 @@ const styles = StyleSheet.create({
     height: 110,
   },
   cardLeft: {
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "top",
   },
   cardRight: {
     flexDirection: "column",
@@ -66,6 +75,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 50,
     padding: 10,
+    marginLeft: 1,
   },
   text: {
     color: "#F0EDF6",
@@ -76,6 +86,13 @@ const styles = StyleSheet.create({
     color: "#694FAD",
     fontWeight: "700",
     fontSize: 16,
+    paddingBottom: 10,
+    flexShrink: 1,
+  },
+  gameDetails: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 14,
     paddingBottom: 10,
     flexShrink: 1,
   },
