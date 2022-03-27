@@ -20,7 +20,7 @@ const TradeGameCard = ({ item }) => {
           <Text style={styles.gameDetails}>Location: {item.location}</Text>
         </View>
 
-        <View style={styles.cardRightBottom}>
+        <View style={styles.cardLeft}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.text}>Message</Text>
           </TouchableOpacity>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     flexDirection: "row",
     justifyContent: "left",
-    alignItems: "center",
+
     backgroundColor: "white",
     width: "95%",
     margin: "2%",
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     height: 110,
   },
   cardLeft: {
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "top",
   },
   cardRight: {
     flexDirection: "column",
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 50,
     padding: 10,
+    marginLeft: 1,
   },
   text: {
     color: "#F0EDF6",
