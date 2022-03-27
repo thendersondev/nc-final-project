@@ -2,11 +2,10 @@ import { Text, View, Button, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "../styles/AccountPageStyles";
 import { auth, db, signOut } from "../firebase";
-
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { set } from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/core";
 
 export default function Account(props) {
   const [username, setUsername] = useState(null);
@@ -15,13 +14,16 @@ export default function Account(props) {
     { comment: "Horrible guy!", id: 2 },
   ];
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigation = useNavigation();
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         alert("You have been signed out");
-        console.log(auth.currentUser.uid);
         setUsername(null);
+        setLoggedIn(null);
+        console.log(loggedIn)
+        navigation.navigate("Home");
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -45,7 +47,7 @@ export default function Account(props) {
         <Text>Please register/Log-in to see this page</Text>
       </View>
     );
-  } else {
+  } 
     return (
       <View style={styles.pageContainer}>
         <View style={styles.header}>
@@ -94,5 +96,5 @@ export default function Account(props) {
         <StatusBar style="auto" />
       </View>
     );
-  }
+  
 }
