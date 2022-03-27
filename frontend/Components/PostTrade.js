@@ -3,7 +3,7 @@ import styles from "../styles/TradeStyles";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function PostTrade() {
+export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
   const [platformText, setPlatformText] = React.useState(null);
   const [locationText, setLocationText] = React.useState(null);
