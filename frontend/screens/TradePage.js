@@ -17,7 +17,7 @@ import PostTrade from "../Components/PostTrade";
 export default function TradePage() {
   const mockTradeData = [
     {
-      user: "Jeff Bezos",
+      username: "MrAmazon247",
       title: "Pokemon Shining Pearl",
       platform: "Nintendo Switch",
       location: "Glasgow",
@@ -25,7 +25,7 @@ export default function TradePage() {
       price: "£23.99",
     },
     {
-      user: "Mark 'ZUCC' Zuccerberg",
+      username: "RandomUser",
       title: "Nintendo Super Smash Bros Ultimate",
       platform: "Xbox SeriesX",
       location: "Leeds",
@@ -33,7 +33,7 @@ export default function TradePage() {
       price: "£15",
     },
     {
-      user: "Jeff Bezos",
+      username: "MrAmazon247",
       title: "Call of Duty 4",
       platform: "Nintendo Switch",
       location: "Glasgow",
@@ -41,7 +41,7 @@ export default function TradePage() {
       price: "£12.99",
     },
     {
-      user: "Mark 'ZUCC' Zuccerberg",
+      username: "RandomUser",
       title: "Nintendo Super Smash Bros Ultimate",
       platform: "PS5",
       location: "Leeds",
@@ -49,7 +49,7 @@ export default function TradePage() {
       price: "£15",
     },
     {
-      user: "Jeff Bezos",
+      username: "MrAmazon247",
       title: "Pokemon Shining Pearl",
       platform: "Nintendo Switch",
       location: "Glasgow",
@@ -57,7 +57,7 @@ export default function TradePage() {
       price: "£27.99",
     },
     {
-      user: "Mark 'ZUCC' Zuccerberg",
+      username: "RandomUser",
       title: "Nintendo Super Smash Bros Ultimate",
       platform: "Nintendo Switch",
       location: "Leeds",
@@ -65,7 +65,7 @@ export default function TradePage() {
       price: "£15",
     },
     {
-      user: "Jeff Bezos",
+      username: "MrAmazon247",
       title: "Pokemon Shining Pearl",
       platform: "Nintendo Switch",
       location: "Glasgow",
@@ -73,7 +73,7 @@ export default function TradePage() {
       price: "£4.99",
     },
     {
-      user: "Mark 'ZUCC' Zuccerberg",
+      username: "RandomUser",
       title: "Nintendo Super Smash Bros Ultimate",
       platform: "Nintendo Switch",
       location: "Leeds",

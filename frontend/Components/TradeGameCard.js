@@ -14,12 +14,18 @@ const TradeGameCard = ({ item }) => {
           <Text style={styles.gameTitle}>
             {item.title} - ({item.platform})
           </Text>
+          <Text style={styles.gameDetails}>User: {item.username}</Text>
+          <Text style={styles.gameDetails}>Price: {item.price}</Text>
+          <Text style={styles.gameDetails}>Condition: {item.condition}</Text>
+          <Text style={styles.gameDetails}>Location: {item.location}</Text>
         </View>
 
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Price</Text>
-            <Text style={styles.text}>{item.price}</Text>
+            <Text style={styles.text}>Message</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>View Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -78,6 +84,13 @@ const styles = StyleSheet.create({
     color: "#694FAD",
     fontWeight: "700",
     fontSize: 16,
+    paddingBottom: 10,
+    flexShrink: 1,
+  },
+  gameDetails: {
+    color: "#694FAD",
+    fontWeight: "700",
+    fontSize: 14,
     paddingBottom: 10,
     flexShrink: 1,
   },
