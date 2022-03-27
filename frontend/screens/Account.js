@@ -6,6 +6,8 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
+import { useContext } from "react";
+import { LoginContext } from "../Contexts/LoginContext";
 
 export default function Account(props) {
   const [username, setUsername] = useState(null);
@@ -13,7 +15,8 @@ export default function Account(props) {
     { comment: "A really good seller ", id: 1 },
     { comment: "Horrible guy!", id: 2 },
   ];
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  
   const navigation = useNavigation();
 
   const handleSignOut = () => {
