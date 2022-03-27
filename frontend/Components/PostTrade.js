@@ -82,7 +82,7 @@ export default function PostTrade() {
               : styles.textInputBox
           }
           placeholderTextColor={"#3e2465"}
-          placeholder="What ya wannae sell, Pal?"
+          placeholder="Game title..."
           value={titleText}
           onChangeText={(text) =>
             setData((prevData) => {
@@ -104,7 +104,7 @@ export default function PostTrade() {
               : styles.textInputBox
           }
           placeholderTextColor={"#3e2465"}
-          placeholder="What platform es et?"
+          placeholder="Platform..."
           value={platformText}
           onChangeText={(text) =>
             setData((prevData) => {
@@ -126,7 +126,7 @@ export default function PostTrade() {
               : styles.textInputBox
           }
           placeholderTextColor={"#3e2465"}
-          placeholder="Where are ya?"
+          placeholder="Location..."
           value={locationText}
           onChangeText={(text) =>
             setData((prevData) => {
@@ -148,7 +148,7 @@ export default function PostTrade() {
               : styles.textInputBox
           }
           placeholderTextColor={"#3e2465"}
-          placeholder="What ya gonnae charge?"
+          placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
           keyboardType="numeric"
