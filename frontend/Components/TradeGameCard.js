@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
     flexDirection: "row",
-    justifyContent: "left",
-
     backgroundColor: "white",
     width: "95%",
     margin: "2%",
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
   },
   cardLeft: {
     flexDirection: "column",
-    alignItems: "top",
+    alignItems: "flex-start",
   },
   cardRight: {
     flexDirection: "column",
