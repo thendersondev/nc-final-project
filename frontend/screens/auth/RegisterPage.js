@@ -14,28 +14,27 @@ import {
 } from "../../firebase.js";
 import { useNavigation } from "@react-navigation/core";
 import { db } from "../../firebase.js";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  const user = auth.currentUser;
-  const cityRef = doc(db, 'cities', 'user');
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        const user = userCredentials.user;
         alert(`Account Created! You have been signed in as: ${username} `);
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
-      }).then((userCredentials)=>{
-        console.log(user.uid)
-        console.log("2")
-        setDoc(doc(db, "users", user.uid), {username:username, avatarUrl:"default"});
+      })
+      .then(() => {
+        setDoc(doc(db, "users", auth.currentUser.uid), {
+          username: username,
+          avatarUrl: "default",
+        });
       })
       .then(() => {
         navigation.navigate("Home");
@@ -55,7 +54,7 @@ const LoginPage = () => {
       })()}
     >
       <View style={styles.inputContainer}>
-      <TextInput
+        <TextInput
           placeholder="Username"
           value={username}
           onChangeText={(text) => {

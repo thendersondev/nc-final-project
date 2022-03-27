@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-
 export default styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
@@ -62,7 +61,9 @@ export default styles = StyleSheet.create({
   comments: {
     flex: 1,
     backgroundColor: "#F1EEED",
-    width:"100%",
-    alignContent:"center",
+    width: "100%",
+    alignContent: "center",
   },
+  signOutContainer: { backgroundColor: "white" },
+  signOutText: {},
 });
