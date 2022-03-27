@@ -11,12 +11,14 @@ const TradeGameCard = ({ item }) => {
 
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
-          <Text style={styles.gameTitle}>{item.title}</Text>
+          <Text style={styles.gameTitle}>
+            {item.title} - ({item.platform})
+          </Text>
         </View>
 
         <View style={styles.cardRightBottom}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game</Text>
+            <Text style={styles.text}>Price</Text>
             <Text style={styles.text}>{item.price}</Text>
           </TouchableOpacity>
         </View>
