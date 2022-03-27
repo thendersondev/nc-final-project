@@ -2,7 +2,7 @@ import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/TradeStyles";
 import React from "react";
 import { db, auth } from ".././firebase";
-import { doc, addDoc, collection } from "firebase/firestore";
+import { doc, addDoc,getDoc, collection } from "firebase/firestore";
 
 export default function PostTrade() {
   const [titleText, setTitleText] = React.useState(null);
@@ -53,12 +53,16 @@ export default function PostTrade() {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
+      // const userRef = doc(db, "users", auth.currentUser.uid );
+      // const userSnap =  getDoc(docRef);
 
       const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
         platform: data.platform,
         location: data.location,
         price: data.price,
+        userUID:auth.currentUser.uid,
+        // User: userSnap.data().username,
       });
 
       setCharAlert({
