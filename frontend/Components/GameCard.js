@@ -14,7 +14,7 @@ const GameCard = ({ item }, query, search) => {
   if (item.title === "Gran Turismo 7") {
     item.price.game = undefined;
   }
-  console.log(item);
+
   const onPress = (url) =>
     Linking.canOpenURL(url).then(() => {
       Linking.openURL(url);
