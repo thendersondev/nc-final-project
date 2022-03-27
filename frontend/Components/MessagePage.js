@@ -1,28 +1,30 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-export default function MessagePage({ props }) {
-  const [username, setProfile, setMessage, onPress] = props;
-
+export default function MessagePage({
+  navigation,
+  route: {
+    params: { username },
+  },
+}) {
   return (
     <View>
-      <Text>{username}</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>{username}</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Profile", { username });
+          }}
+        >
+          <Text style={styles.text}>View profile</Text>
+        </TouchableOpacity>
+      </View>
       <Text>message page</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-          setMessage({
-            on: false,
-          });
-          setProfile({
-            on: true,
-            username,
-          });
-        }}
+        onPress={() => navigation.navigate("Trade")}
       >
-        <Text style={styles.text}>View profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => onPress("back")}>
         <Text style={styles.text}>Go back to trades</Text>
       </TouchableOpacity>
     </View>
@@ -45,5 +47,12 @@ const styles = StyleSheet.create({
     color: "#F0EDF6",
     fontWeight: "500",
     fontSize: 16,
+  },
+  header: {
+    position: "relative",
+    flexDirection: "row",
+  },
+  headerText: {
+    fontSize: 42,
   },
 });

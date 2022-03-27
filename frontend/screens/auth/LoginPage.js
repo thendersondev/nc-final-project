@@ -25,7 +25,7 @@ const LoginPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert("Logged in");
-        navigation.navigate("Home");
+        navigation.navigate("Account");
       })
       .catch((err) => {
         alert(err.message);

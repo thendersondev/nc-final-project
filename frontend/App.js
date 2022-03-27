@@ -8,8 +8,8 @@ import LoginPage from "./screens/auth/LoginPage";
 import MyDrawer from "./navigation/Drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { useContext } from 'react';
-import { LoginContext } from './Contexts/LoginContext';
+import { useContext } from "react";
+import { LoginContext } from "./Contexts/LoginContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(null);
   return (
     <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
-    <SafeAreaProvider style={{ flex: 1 }}>
+      <SafeAreaProvider style={{ flex: 1 }}>
         <NavigationContainer>
           <MyDrawer />
           {/* <Stack.Navigator>
@@ -39,7 +39,7 @@ export default function App() {
       /> */}
           {/* </NavigationContainer> */}
         </NavigationContainer>
-    </SafeAreaProvider>
+      </SafeAreaProvider>
     </LoginContext.Provider>
   );
 }

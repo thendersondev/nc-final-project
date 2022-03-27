@@ -1,6 +1,7 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const TradeGameCard = ({ item }, setProfile, setMessage) => {
+const TradeGameCard = ({ item }, navigation) => {
+  const { username } = item;
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -25,10 +26,7 @@ const TradeGameCard = ({ item }, setProfile, setMessage) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setMessage({
-                on: true,
-                username: item.username,
-              });
+              navigation.navigate("Message", { username });
             }}
           >
             <Text style={styles.text}>Message</Text>
@@ -36,10 +34,7 @@ const TradeGameCard = ({ item }, setProfile, setMessage) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setProfile({
-                on: true,
-                username: item.username,
-              });
+              navigation.navigate("Profile", { username });
             }}
           >
             <Text style={styles.text}>View Profile</Text>

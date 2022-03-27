@@ -1,6 +1,7 @@
 import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/TradeStyles";
 import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function PostTrade() {
   const [titleText, setTitleText] = React.useState(null);
@@ -171,6 +172,12 @@ export default function PostTrade() {
         ) : (
           <Button title="Submit" onPress={handleSubmit} />
         )}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Trade")}
+        >
+          <Text style={styles.text}>Go back to trades</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
