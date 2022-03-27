@@ -13,23 +13,30 @@ import {
   signInWithEmailAndPassword,
 } from "../../firebase.js";
 import { useNavigation } from "@react-navigation/core";
+import { db } from "../../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  const user = auth.currentUser;
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        const user = userCredentials.user;
-        alert(`Account Created! You have been signed in with: ${user.email} `);
+        alert(`Account Created! You have been signed in as: ${username} `);
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
       })
-      .then((userCredentials) => {
+      .then(() => {
+        setDoc(doc(db, "users", auth.currentUser.uid), {
+          username: username,
+          avatarUrl: "default",
+        });
+      })
+      .then(() => {
         navigation.navigate("Home");
       })
       .catch((err) => {
@@ -47,6 +54,14 @@ const LoginPage = () => {
       })()}
     >
       <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Username"
+          value={username}
+          onChangeText={(text) => {
+            setUsername(text);
+          }}
+          style={styles.input}
+        />
         <TextInput
           placeholder="Email"
           value={email}
