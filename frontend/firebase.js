@@ -4,6 +4,7 @@ const {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } = require("firebase/auth");
 
 const firebaseConfig = {
@@ -28,4 +29,5 @@ module.exports = {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 };
