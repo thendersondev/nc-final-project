@@ -44,8 +44,8 @@ export default function Account(props) {
 
   if (loggedIn === null) {
     return (
-      <View>
-        <Text>Please register/Log-in to see this page</Text>
+      <View style={styles.loggedOut1}>
+        <Text style={styles.loggedOut}>Please register/Log-in to see this page</Text>
       </View>
     );
   }

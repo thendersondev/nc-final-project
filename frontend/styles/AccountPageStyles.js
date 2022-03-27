@@ -65,7 +65,15 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   signOutContainer: { backgroundColor: "white" },
-  signOutText: {},
+  loggedOut: {
+    textAlign: "center",
+    color: "#694fad",
+    fontSize: 18,
+  },
+  loggedOut1: {
+    flex: 1,
+    justifyContent:"center"
+  },
 });
 
 export default styles;
