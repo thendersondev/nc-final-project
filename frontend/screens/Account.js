@@ -22,7 +22,6 @@ export default function Account(props) {
         alert("You have been signed out");
         setUsername(null);
         setLoggedIn(null);
-        console.log(loggedIn)
         navigation.navigate("Home");
       })
       .catch((err) => {
@@ -32,7 +31,6 @@ export default function Account(props) {
 
   useEffect(() => {
     setLoggedIn(auth.currentUser);
-    console.log(loggedIn);
     if (loggedIn) {
       const docRef = doc(db, "users", auth.currentUser.uid);
       getDoc(docRef).then((data) => {
@@ -47,54 +45,53 @@ export default function Account(props) {
         <Text>Please register/Log-in to see this page</Text>
       </View>
     );
-  } 
-    return (
-      <View style={styles.pageContainer}>
-        <View style={styles.header}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={{
-                uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
-              }}
-            ></Image>
-            <Text style={styles.username}>Username:{username} </Text>
-            <TouchableOpacity
-              onPress={handleSignOut}
-              style={styles.signOutContainer}
-            >
-              <Text style={styles.signOutText}>SignOut</Text>
-            </TouchableOpacity>
-          </View>
+  }
+  return (
+    <View style={styles.pageContainer}>
+      <View style={styles.header}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
+            }}
+          ></Image>
+          <Text style={styles.username}>Username:{username} </Text>
+          <TouchableOpacity
+            onPress={handleSignOut}
+            style={styles.signOutContainer}
+          >
+            <Text style={styles.signOutText}>SignOut</Text>
+          </TouchableOpacity>
         </View>
+      </View>
 
-        <View style={styles.accountInfo}>
-          <View>
-            <Text style={styles.accountInfoHeader}>Account Details</Text>
-            <View style={styles.accountInfoGrid}>
-              <View style={styles.accountInfoGridTop}>
-                <View>
-                  <Text style={styles.accountInfoHeadings}>Listings:</Text>
-                  <Text style={styles.accountInfoHeadings}>Ratings:</Text>
-                  <Text style={styles.accountInfoHeadings}>Email:</Text>
-                </View>
+      <View style={styles.accountInfo}>
+        <View>
+          <Text style={styles.accountInfoHeader}>Account Details</Text>
+          <View style={styles.accountInfoGrid}>
+            <View style={styles.accountInfoGridTop}>
+              <View>
+                <Text style={styles.accountInfoHeadings}>Listings:</Text>
+                <Text style={styles.accountInfoHeadings}>Ratings:</Text>
+                <Text style={styles.accountInfoHeadings}>Email:</Text>
               </View>
             </View>
           </View>
         </View>
-        <View style={styles.comments}>
-          <Text style={styles.accountInfoHeader}>Comments:</Text>
-          <FlatList
-            data={mockComments}
-            renderItem={({ item }) => (
-              <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-
-        <StatusBar style="auto" />
       </View>
-    );
-  
+      <View style={styles.comments}>
+        <Text style={styles.accountInfoHeader}>Comments:</Text>
+        <FlatList
+          data={mockComments}
+          renderItem={({ item }) => (
+            <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
+
+      <StatusBar style="auto" />
+    </View>
+  );
 }

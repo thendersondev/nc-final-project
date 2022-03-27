@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-const TradeGameCard = ({ item }) => {
+
+const TradeGameCard = ({ item }, setProfile, setMessage) => {
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -21,10 +22,26 @@ const TradeGameCard = ({ item }) => {
         </View>
 
         <View style={styles.cardLeft}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setMessage({
+                on: true,
+                username: item.username,
+              });
+            }}
+          >
             <Text style={styles.text}>Message</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setProfile({
+                on: true,
+                username: item.username,
+              });
+            }}
+          >
             <Text style={styles.text}>View Profile</Text>
           </TouchableOpacity>
         </View>

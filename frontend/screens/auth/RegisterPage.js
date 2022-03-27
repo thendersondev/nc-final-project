@@ -1,5 +1,6 @@
 import {
   KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -51,7 +52,7 @@ const LoginPage = () => {
       keyboardVerticalOffset={Platform.select({
         ios: () => -300,
         android: () => -300,
-      })()}
+      })}
     >
       <View style={styles.inputContainer}>
         <TextInput
