@@ -1,13 +1,11 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 const TradeGameCard = ({ item }) => {
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
         <Image
           style={styles.image}
-          source={{
-            uri: `${item.imgUrl}`,
-          }}
+          source={require("../assets/placeholder.png")}
         ></Image>
       </View>
 
@@ -21,14 +19,6 @@ const TradeGameCard = ({ item }) => {
             <Text style={styles.text}>Game</Text>
             <Text style={styles.text}>{item.price}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Game365</Text>
-            <Text style={styles.text}>{item.price}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Box</Text>
-            <Text style={styles.text}>{item.price}</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -38,50 +28,53 @@ const TradeGameCard = ({ item }) => {
 const styles = StyleSheet.create({
   surroundingView: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
     borderRadius: 10,
-    margin: 10,
-    borderColor: '#694fad',
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
+    flexDirection: "row",
+    justifyContent: "left",
+    alignItems: "center",
+    backgroundColor: "white",
+    width: "95%",
+    margin: "2%",
+    borderColor: "#694fad",
   },
   image: {
+    borderRadius: 20,
     width: 110,
     height: 110,
-    left: 5,
   },
-
   cardLeft: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   cardRight: {
-    flexDirection: 'column',
+    flexDirection: "column",
+    flexShrink: 1,
   },
   cardRightTop: {
     flexShrink: 1,
   },
   cardRightBottom: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   button: {
-    backgroundColor: '#694fad',
+    backgroundColor: "#694fad",
     borderRadius: 10,
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: 16,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginHorizontal: 10,
     height: 50,
     padding: 10,
   },
   text: {
-    color: '#F0EDF6',
-    fontWeight: '500',
+    color: "#F0EDF6",
+    fontWeight: "500",
     fontSize: 16,
   },
   gameTitle: {
-    color: '#694FAD',
-    fontWeight: '700',
+    color: "#694FAD",
+    fontWeight: "700",
     fontSize: 16,
     paddingBottom: 10,
     flexShrink: 1,
