@@ -16,11 +16,14 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { db } from "../../firebase.js";
 import { doc, setDoc } from "firebase/firestore";
+import { useContext } from "react";
+import { LoginContext } from "../../Contexts/LoginContext.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const navigation = useNavigation();
 
   const handleSignUp = () => {
@@ -30,6 +33,7 @@ const LoginPage = () => {
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
+        setLoggedIn(auth.currentUser.uid)
       })
       .then(() => {
         setDoc(doc(db, "users", auth.currentUser.uid), {
