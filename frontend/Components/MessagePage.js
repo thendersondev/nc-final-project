@@ -9,7 +9,6 @@ export default function MessagePage({
     params: { username },
   },
 }) {
-  console.log(auth?.currentUser);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -26,6 +25,7 @@ export default function MessagePage({
       },
     ]);
   }, []);
+
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
@@ -36,14 +36,6 @@ export default function MessagePage({
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <Text style={styles.headerText}>{username}</Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Profile", { username });
-          }}
-        >
-          <Text style={styles.text}>View profile</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.messages}>
@@ -58,13 +50,22 @@ export default function MessagePage({
           }}
         />
       </View>
-
-      <TouchableOpacity
-        style={styles.back}
-        onPress={() => navigation.navigate("Trade")}
-      >
-        <Text style={styles.text}>Back</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonWrap}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Profile", { username });
+          }}
+        >
+          <Text style={styles.text}>View profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Trade")}
+        >
+          <Text style={styles.text}>Back</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
   wrapper: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonWrap: {
+    flexDirection: "row",
+    alignSelf: "space-evenly",
   },
   messages: {
     borderRadius: 10,
@@ -85,7 +90,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
     margin: 20,
     height: 580,
@@ -99,18 +103,10 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 16,
     justifyContent: "center",
-    marginHorizontal: 5,
-    height: 50,
-    padding: 10,
-  },
-  back: {
-    backgroundColor: "#694fad",
-    borderRadius: 10,
-    fontWeight: "700",
-    fontSize: 16,
-    justifyContent: "center",
-    marginTop: 10,
-    marginHorizontal: 5,
+    marginTop: 15,
+    marginBottom: 10,
+    marginHorizontal: 25,
+    width: 120,
     height: 50,
     padding: 10,
   },
