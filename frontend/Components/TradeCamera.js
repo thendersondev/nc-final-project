@@ -22,13 +22,6 @@ export default function TradeCamera() {
     return <Text>No access to camera</Text>;
   }
 
-  const takePicture = async () => {
-    if (!camera) return;
-    let photo = await camera.takePictureAsync();
-    setPreviewVisible(true);
-    setCapturedImage(photo);
-  };
-
   return (
     <View
       style={{

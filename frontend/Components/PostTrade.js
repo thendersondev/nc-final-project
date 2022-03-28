@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { db, auth } from '.././firebase';
 import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
 import TradeCamera from './TradeCamera';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -84,6 +85,14 @@ export default function PostTrade({ navigation }) {
       setPlatformText(null);
       setLocationText(null);
       setPriceText(null);
+    }
+  };
+
+  const takePicture = async () => {
+    if (TradeCamera) {
+      const options = { quality: 1, base64: true };
+      const data = await TradeCamera.takePictureAsync(options);
+      console.log(data);
     }
   };
 
@@ -181,7 +190,16 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
-        <TouchableOpacity style={styles.button} onPress={TradeCamera}>
+        <TouchableOpacity onPress={() => takePicture()}>
+          <MaterialCommunityIcons.Button
+            name="camera"
+            color={'#f0edf6'}
+            size={25}
+            backgroundColor={'#694fad'}
+          >
+            Add Image
+          </MaterialCommunityIcons.Button>
+
           <Text style={styles.text}>Add Image</Text>
         </TouchableOpacity>
 
@@ -192,6 +210,7 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.text}>Submit Trade</Text>
           </TouchableOpacity>
         )}
+        <View style={styles.space} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Trade')}
