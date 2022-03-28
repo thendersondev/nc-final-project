@@ -1,10 +1,11 @@
 import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/TradeStyles";
 import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from ".././firebase";
 import { doc, addDoc,getDoc, collection } from "firebase/firestore";
 
-export default function PostTrade() {
+export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
   const [platformText, setPlatformText] = React.useState(null);
   const [locationText, setLocationText] = React.useState(null);
@@ -185,6 +186,12 @@ export default function PostTrade() {
         ) : (
           <Button title="Submit" onPress={handleSubmit} />
         )}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Trade")}
+        >
+          <Text style={styles.text}>Go back to trades</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

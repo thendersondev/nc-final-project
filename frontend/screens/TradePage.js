@@ -1,22 +1,13 @@
-import {
-  Text,
-  View,
-  FlatList,
-  Button,
-  TextInput,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, FlatList, TouchableOpacity } from "react-native";
 import styles from "../styles/TradeStyles";
 import { StatusBar } from "expo-status-bar";
 import { TradeGameCard } from "../Components/TradeGameCard";
 import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
-import PostTrade from "../Components/PostTrade";
-import UserPage from "../Components/UserPage";
-import MessagePage from "../Components/MessagePage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function TradePage() {
+  const navigation = useNavigation();
   const mockTradeData = [
     {
       username: "MrAmazon247",
@@ -85,10 +76,6 @@ export default function TradePage() {
   ];
   const [tradeables, setTradebles] = useState();
   const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
-  const [loadPost, setLoadPost] = useState(false);
-  const [loadTrade, setLoadTrade] = useState(true);
-  const [profile, setProfile] = useState({ on: false });
-  const [message, setMessage] = useState({ on: false });
 
   useEffect(() => {
     // fetch trade items
@@ -96,75 +83,26 @@ export default function TradePage() {
     // flatList tradeables
   }, []);
 
-  const onPress = (e) => {
-    switch (e) {
-      case "post":
-        setLoadPost(true);
-        setLoadTrade(false);
-        break;
-      case "back":
-        setProfile({ on: false });
-        setMessage({ on: false });
-        setLoadPost(false);
-        setLoadTrade(true);
-        break;
-    }
-  };
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Post")}
+      >
+        <Text style={styles.text}>Post an item</Text>
+      </TouchableOpacity>
 
-  if (message.on)
-    return (
       <View style={styles.container}>
-        <MessagePage
-          props={[message.username, setProfile, setMessage, onPress]}
-        ></MessagePage>
+        <Text style={styles.pageTitle}>Trade games here!</Text>
+        <FlatList
+          data={mockTradeData}
+          renderItem={(item, index, separators) =>
+            TradeGameCard(item, navigation)
+          }
+          keyExtractor={uuidv4}
+        />
+        <StatusBar style="auto" />
       </View>
-    );
-  else if (profile.on) {
-    return (
-      <View style={styles.container}>
-        <UserPage props={[profile.username, setMessage, onPress]}></UserPage>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        {!loadPost && (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => onPress("post")}
-          >
-            <Text style={styles.text}>Post an item</Text>
-          </TouchableOpacity>
-        )}
-
-        {loadPost && (
-          <View>
-            <PostTrade />
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => onPress("back")}
-            >
-              <Text style={styles.text}>Go back</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-
-        {loadTrade && (
-          <View style={styles.container}>
-            <Text style={styles.pageTitle}>Trade games here!</Text>
-            {/* <View> */}
-            <FlatList
-              data={mockTradeData}
-              renderItem={(item, index, separators) =>
-                TradeGameCard(item, setProfile, setMessage)
-              }
-              keyExtractor={uuidv4}
-            />
-            <StatusBar style="auto" />
-            {/* </View> */}
-          </View>
-        )}
-      </View>
-    );
-  }
+    </View>
+  );
 }

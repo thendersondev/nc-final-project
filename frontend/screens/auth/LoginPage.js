@@ -28,7 +28,7 @@ const LoginPage = () => {
       .then((userCredentials) => {
         setLoggedIn(auth.currentUser.uid);
         alert("Logged in");
-        navigation.navigate("Home");
+        navigation.navigate("Account");
       })
       .catch((err) => {
         alert(err.message);

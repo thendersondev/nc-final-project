@@ -24,7 +24,7 @@ export default function Account(props) {
         alert("You have been signed out");
         setUsername(null);
         setLoggedIn(null);
-        navigation.navigate("Home");
+        navigation.navigate("Login");
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -74,14 +74,12 @@ export default function Account(props) {
         <View>
           <Text style={styles.accountInfoHeader}>Account Details</Text>
           <View style={styles.accountInfoGrid}>
-     
-              <View>
-                <Text style={styles.accountInfoHeadings}>Listings: 4</Text>
-                <Text style={styles.accountInfoHeadings}>Ratings: 5/10</Text>
-                <Text style={styles.accountInfoHeadings}>
-                  Email: {auth.currentUser.email}
-                </Text>
-            
+            <View>
+              <Text style={styles.accountInfoHeadings}>Listings: 4</Text>
+              <Text style={styles.accountInfoHeadings}>Ratings: 5/10</Text>
+              <Text style={styles.accountInfoHeadings}>
+                Email: {auth.currentUser.email}
+              </Text>
             </View>
           </View>
         </View>

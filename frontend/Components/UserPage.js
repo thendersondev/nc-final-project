@@ -2,8 +2,12 @@ import { Text, View, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function UserPage({ props }) {
-  const [username, setMessage, onPress] = props;
+export default function UserPage({
+  navigation,
+  route: {
+    params: { username },
+  },
+}) {
   const mockComments = [
     { comment: "A really good seller ", id: 1 },
     { comment: "Horrible guy!", id: 2 },
@@ -48,15 +52,17 @@ export default function UserPage({ props }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setMessage({
-            on: true,
-            username,
-          });
+          navigation.navigate("Message", { username });
         }}
       >
         <Text style={styles.text}>Message</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => onPress("back")}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Trade");
+        }}
+      >
         <Text style={styles.text}>Go back to trades</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
