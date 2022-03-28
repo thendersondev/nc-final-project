@@ -9,36 +9,31 @@ const TradeGameCard = ({ item }, navigation) => {
           style={styles.image}
           source={require("../assets/placeholder.png")}
         ></Image>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Message", { username });
+          }}
+        >
+          <Text style={styles.buttonText}>Message</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Profile", { username });
+          }}
+        >
+          <Text style={styles.buttonText}>View Profile</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.cardRight}>
-        <View style={styles.cardRightTop}>
-          <Text style={styles.gameTitle}>
-            {item.title} - ({item.platform})
-          </Text>
+        <Text style={styles.gameTitle}>{item.title}</Text>
+        <Text style={styles.gameDetails}>{item.platform}</Text>
+        <Text style={styles.gameDetails}>Price: {item.price}</Text>
+        <Text style={styles.gameDetails}>Location: {item.location}</Text>
+        <View style={styles.cardRightBottom}>
           <Text style={styles.gameDetails}>User: {item.username}</Text>
-          <Text style={styles.gameDetails}>Price: {item.price}</Text>
-          <Text style={styles.gameDetails}>Condition: {item.condition}</Text>
-          <Text style={styles.gameDetails}>Location: {item.location}</Text>
-        </View>
-
-        <View style={styles.cardLeft}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("Message", { username });
-            }}
-          >
-            <Text style={styles.text}>Message</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("Profile", { username });
-            }}
-          >
-            <Text style={styles.text}>View Profile</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -51,14 +46,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     backgroundColor: "white",
     width: "95%",
     margin: "2%",
     borderColor: "#694fad",
   },
   image: {
+    justifyContent: "center",
     borderRadius: 20,
+    marginHorizontal: 10,
     width: 110,
     height: 110,
   },
@@ -67,16 +64,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   cardRight: {
+    padding: 10,
     flexDirection: "column",
-    flexShrink: 1,
-  },
-  cardRightTop: {
     flexShrink: 1,
   },
   cardRightBottom: {
     flexDirection: "row",
   },
   button: {
+    marginTop: 5,
+    width: 110,
     backgroundColor: "#694fad",
     borderRadius: 10,
     fontWeight: "700",
@@ -85,17 +82,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 50,
     padding: 10,
-    marginLeft: 1,
   },
-  text: {
+  buttonText: {
     color: "#F0EDF6",
     fontWeight: "500",
     fontSize: 16,
+    textAlign: "center",
   },
   gameTitle: {
+    width: 235,
+    paddingTop: 10,
     color: "#694FAD",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 26,
     paddingBottom: 10,
     flexShrink: 1,
   },

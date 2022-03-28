@@ -85,6 +85,7 @@ export default function TradePage() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.pageTitle}>Trade games here!</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Post")}
@@ -93,7 +94,6 @@ export default function TradePage() {
       </TouchableOpacity>
 
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>Trade games here!</Text>
         <FlatList
           data={mockTradeData}
           renderItem={(item, index, separators) =>

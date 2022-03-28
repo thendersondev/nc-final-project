@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const GameCard = ({ item }) => {
+const GameCard = ({ item: { item }, search }) => {
+  if (!item.title.includes(search) && search) return <></>;
   if (item.title === "Gran Turismo 7") {
     item.price.game = undefined;
   }

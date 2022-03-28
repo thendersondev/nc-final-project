@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
+    paddingTop: 20,
     fontWeight: "700",
     fontSize: 20,
     color: "#694FAD",

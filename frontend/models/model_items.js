@@ -20,7 +20,6 @@ const shopRef = {
 
 async function fetchItemsByShop(shop_id, q) {
   const queryArgs = [collection(db, `items/shops/${shopRef[shop_id]}`)];
-
   if (q) {
     queryArgs.push(where("item.platform", "==", q));
   }
