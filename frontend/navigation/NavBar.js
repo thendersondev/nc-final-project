@@ -2,6 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CompareGamesPage from "../screens/CompareGamesPage";
 import Account from "../screens/Account";
+import HomePage from "../screens/HomePage";
 import TradeStackNavigator from "./TradeStackNav";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -10,7 +11,7 @@ export default function NavBar() {
   return (
     // <NavigationContainer>
     <Tab.Navigator
-      initialRouteName="Account"
+      initialRouteName="Home"
       activeColor="#f0edf6"
       inactiveColor="#3e2465"
       barStyle={{ backgroundColor: "#694fad" }}
@@ -19,10 +20,10 @@ export default function NavBar() {
       }}
     >
       <Tab.Screen
-        name="Account"
-        component={Account}
+        name="Home"
+        component={HomePage}
         options={{
-          tabBarLabel: "Account",
+          tabBarLabel: "Home",
           tabBarColor: "#60489d",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
