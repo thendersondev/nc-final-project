@@ -14,16 +14,19 @@ import {
   signInWithEmailAndPassword,
 } from "../../firebase.js";
 import { useNavigation } from "@react-navigation/core";
+import { useContext } from "react";
+import { LoginContext } from "../../Contexts/LoginContext.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const navigation = useNavigation();
-  const user = auth.currentUser;
 
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
+        setLoggedIn(auth.currentUser.uid);
         alert("Logged in");
         navigation.navigate("Home");
       })
