@@ -1,12 +1,12 @@
-import { Text, View, Button } from "react-native";
-import styles from "../styles/CompareGamesStyles";
-import { StatusBar } from "expo-status-bar";
+import { Text, View } from 'react-native';
+import styles from '../styles/CompareGamesStyles';
+import { StatusBar } from 'expo-status-bar';
 
-export default function Basket({ navigation }) {
+export default function Basket() {
   return (
     <View style={styles.container}>
       <Text>Your Basket:</Text>
-      {/* <Button title="Go to home" onPress={() => navigation.navigate('Home')} /> */}
+
       <StatusBar style="auto" />
     </View>
   );
