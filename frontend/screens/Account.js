@@ -1,19 +1,19 @@
-import { Text, View, Image, FlatList } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import styles from '../styles/AccountPageStyles';
-import { auth, db, signOut } from '../firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/core';
-import { useContext } from 'react';
-import { LoginContext } from '../Contexts/LoginContext';
+import { Text, View, Image, FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import styles from "../styles/AccountPageStyles";
+import { auth, db, signOut } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
+import { useContext } from "react";
+import { LoginContext } from "../Contexts/LoginContext";
 
 export default function Account() {
   const [username, setUsername] = useState(null);
   const mockComments = [
-    { comment: 'A really good seller ', id: 1 },
-    { comment: 'Horrible guy!', id: 2 },
+    { comment: "A really good seller ", id: 1 },
+    { comment: "Horrible guy!", id: 2 },
   ];
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const navigation = useNavigation();
@@ -21,10 +21,10 @@ export default function Account() {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        alert('You have been signed out');
+        navigation.navigate("Home");
+        alert("You have been signed out");
         setUsername(null);
         setLoggedIn(null);
-        navigation.navigate('Login');
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -34,7 +34,7 @@ export default function Account() {
   useEffect(() => {
     setLoggedIn(auth.currentUser);
     if (loggedIn) {
-      const docRef = doc(db, 'users', auth.currentUser.uid);
+      const docRef = doc(db, "users", auth.currentUser.uid);
       getDoc(docRef).then((data) => {
         setUsername(data.data().username);
       });
@@ -57,7 +57,7 @@ export default function Account() {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://www.amongusavatarcreator.com/assets/img/main/icon.png',
+              uri: "https://www.amongusavatarcreator.com/assets/img/main/icon.png",
             }}
           ></Image>
           <Text style={styles.username}>{username} </Text>

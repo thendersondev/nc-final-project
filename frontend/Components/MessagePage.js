@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
-import { TextInput } from "react-native-gesture-handler";
+import React, { useCallback, useEffect, useState } from "react";
+import { GiftedChat } from "react-native-gifted-chat";
+import { auth } from "../firebase";
 
 export default function MessagePage({
   navigation,
@@ -8,20 +9,28 @@ export default function MessagePage({
     params: { username },
   },
 }) {
+  console.log(auth?.currentUser);
   const [messages, setMessages] = useState([]);
-  const [currentMessage, setCurrentMessage] = useState(null);
 
-  const handleInput = (text) => {
-    setCurrentMessage(text);
-  };
-
-  const handleSend = (e) => {
-    e.preventDefault();
-    setMessages((prev) => {
-      return [...prev, currentMessage];
-    });
-    setCurrentMessage("");
-  };
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: "Oi mate you still got got abes oddessey?",
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any",
+        },
+      },
+    ]);
+  }, []);
+  const onSend = useCallback((messages = []) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
+    );
+  }, []);
 
   return (
     <View style={styles.wrapper}>
@@ -38,32 +47,20 @@ export default function MessagePage({
       </View>
 
       <View style={styles.messages}>
-        {messages.map((message) => {
-          return <Text style={styles.sentMessage}>{message}</Text>;
-        })}
-      </View>
-      <View style={styles.sendWrapper}>
-        <TextInput
-          style={styles.chatbox}
-          value={currentMessage}
-          onChangeText={(text) => {
-            handleInput(text);
+        <GiftedChat
+          messages={messages}
+          showAvatarForEveryMessage={true}
+          onSend={(messages) => onSend(messages)}
+          user={{
+            _id: auth?.currentUser?.email,
+            name: auth?.currentUser?.displayName,
+            avatar: auth?.currentUser?.photoURL,
           }}
-        ></TextInput>
-        <TouchableOpacity style={styles.send}>
-          <Text
-            style={styles.text}
-            onPress={(e) => {
-              handleSend(e);
-            }}
-          >
-            send
-          </Text>
-        </TouchableOpacity>
+        />
       </View>
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.back}
         onPress={() => navigation.navigate("Trade")}
       >
         <Text style={styles.text}>Back</Text>
@@ -73,54 +70,28 @@ export default function MessagePage({
 }
 
 const styles = StyleSheet.create({
-  sentMessage: {
-    textAlign: "right",
-    color: "black",
-    fontWeight: "500",
-    fontSize: 16,
-  },
   wrapper: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   messages: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  sendWrapper: {
-    width: "80%",
-    height: 50,
-    flex: 1,
-    flexDirection: "row",
-  },
-  form: {
-    padding: 20,
-  },
-  chatbox: {
-    width: 260,
-    height: 50,
-    borderWidth: 5,
-    borderStyle: "solid",
-    borderColor: "black",
-  },
-  messages: {
+    borderRadius: 10,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
     margin: 20,
+    height: 580,
     marginBottom: 0,
     width: "80%",
-    height: 450,
     backgroundColor: "lightgrey",
-  },
-  send: {
-    backgroundColor: "#694fad",
-    borderRadius: 10,
-    fontWeight: "700",
-    fontSize: 16,
-    justifyContent: "center",
-    marginHorizontal: 5,
-    height: 50,
-    padding: 10,
-    marginBottom: 10,
   },
   button: {
     backgroundColor: "#694fad",
@@ -132,6 +103,17 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
   },
+  back: {
+    backgroundColor: "#694fad",
+    borderRadius: 10,
+    fontWeight: "700",
+    fontSize: 16,
+    justifyContent: "center",
+    marginTop: 10,
+    marginHorizontal: 5,
+    height: 50,
+    padding: 10,
+  },
   text: {
     textAlign: "center",
     color: "#F0EDF6",
@@ -139,6 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   header: {
+    marginTop: 10,
     position: "relative",
     flexDirection: "row",
   },
