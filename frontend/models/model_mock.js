@@ -113,16 +113,72 @@ function fetchItemsByShop (store) {
 
 function fetchUsers () {
     return {
-    FikjxdJedW3YBulsfDpm: { "user": 'PotatoPie', "name": 'Mystery' },
-    I9YOgLc9NRl3f871sK5f: { "user": 'PotatoPie', "name": 'Mystery' },
-    KVoXaLUNZ511ihffCTVB: { "user": 'PotatoPie', "name": 'Mystery' },
+    FikjxdJedW3YBulsfDpm: { 
+        "user": 'PotatoPie', 
+        "reviews": {
+            0: {
+                "User": "MrAmazon247",
+                "body": "A really good seller",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+            1: {
+                "User": "MrAmazon247",
+                "body": "Horrible Guy",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+        } 
+    },
+    I9YOgLc9NRl3f871sK5f: { 
+        "user": 'PotatoPie', 
+        "reviews": {
+            0: {
+                "User": "MrAmazon247",
+                "body": "A really good seller",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+            1: {
+                "User": "MrAmazon247",
+                "body": "Horrible Guy",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+        } 
+    },
+    KVoXaLUNZ511ihffCTVB: { 
+        "user": 'PotatoPie', 
+        "reviews": {
+            0: {
+                "User": "MrAmazon247",
+                "body": "A really good seller",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+            1: {
+                "User": "MrAmazon247",
+                "body": "Horrible Guy",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+        } 
+    },
     }
 }
 
 function fetchUser (user) {
     if (user.length !== 20) return { "error": "Bad user ID" }
     return {
-        [user]: { "user": 'PotatoPie', "name": 'Mystery' },
+        [user]: { 
+            "user": 'PotatoPie', 
+            "reviews": {
+                0: {
+                    "User": "MrAmazon247",
+                    "body": "A really good seller",
+                    "userUID": "3X5TN8euxtDnsaGoFvSY"
+                } ,
+                1: {
+                    "User": "MrAmazon247",
+                    "body": "A really good seller",
+                    "userUID": "3X5TN8euxtDnsaGoFvSY"
+                } ,
+            } 
+        },
     }
 }
 
@@ -135,14 +191,26 @@ function addUser (newUser) {
 }
 
 function changeUser (id, newUser) {
-    const name = (!newUser.name ? null : newUser.name)
-    const user = (!newUser.user ? null : newUser.user)
-    if (!name && !user) return { error: "Bad submission" };
+    const reviews = (!newUser.reviews ? null : newUser.reviews)
+    if (!reviews) return { error: "Bad submission" };
     if (id.length !== 20) return { error: "No such user!" }
     const newData = {
-      "user": user ? user : "<unchanged>",
-      "name": name ? name : "<unchanged>"
-    };
+      "user": "<unchanged>",
+      "reviews": reviews ? {
+            0: {
+                "User": "MrAmazon247",
+                "body": "A really good seller",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } ,
+            1: {
+                "User": "MrAmazon247",
+                "body": "A really good seller",
+                "userUID": "3X5TN8euxtDnsaGoFvSY"
+            } , 
+            2 : reviews
+          } : "<unchanged>"}
+    ;
+    console.log({ [id]: newData })
     return { [id]: newData };
 
 }
