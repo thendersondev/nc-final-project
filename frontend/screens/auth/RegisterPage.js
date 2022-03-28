@@ -33,7 +33,7 @@ const LoginPage = () => {
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
-        setLoggedIn(auth.currentUser.uid)
+        setLoggedIn(auth.currentUser.uid);
       })
       .then(() => {
         setDoc(doc(db, "users", auth.currentUser.uid), {
@@ -53,10 +53,10 @@ const LoginPage = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
-      keyboardVerticalOffset={Platform.select({
-        ios: () => -300,
-        android: () => -300,
-      })}
+      // keyboardVerticalOffset={Platform.select({
+      //   ios: () => -300,
+      //   android: () => -300,
+      // })}
     >
       <View style={styles.inputContainer}>
         <TextInput

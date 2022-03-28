@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const GameCard = ({ item }, query, search) => {
-  if (!item.title.includes(search) && search) return;
-  if (!query.includes(item.platform)) return;
+const GameCard = ({ item }) => {
   if (item.title === "Gran Turismo 7") {
     item.price.game = undefined;
   }
@@ -90,7 +88,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
     flexDirection: "row",
-
     alignItems: "center",
     backgroundColor: "white",
     width: "95%",
@@ -125,7 +122,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 5,
     height: 50,
-    padding: 10,
+    padding: 4,
+  },
+  flatlist: {
+    width: "95%",
   },
   best: {
     backgroundColor: "#694fad",

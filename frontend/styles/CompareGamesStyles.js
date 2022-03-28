@@ -5,12 +5,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 0,
   },
   pageTitle: {
     fontWeight: "700",
     fontSize: 20,
     color: "#694FAD",
+  },
+  flatlist: {
+    width: "95%",
   },
   catagoriesContainer: {
     flexDirection: "row",
