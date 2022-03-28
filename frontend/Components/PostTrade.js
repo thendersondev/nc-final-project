@@ -2,6 +2,8 @@ import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/TradeStyles";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { db, auth } from ".././firebase";
+import { doc, addDoc,getDoc, collection } from "firebase/firestore";
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -30,7 +32,7 @@ export default function PostTrade({ navigation }) {
     },
   ]);
 
-  const handleSubmit = () => {
+  const  handleSubmit  = async () => {
     if (!data.title || !data.platform || !data.location || !data.price) {
       setAlert({
         title: !data.title,
@@ -52,6 +54,18 @@ export default function PostTrade({ navigation }) {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
+      const userRef = doc(db, "users", auth.currentUser.uid );
+      const userSnap =  await getDoc(docRef);
+
+      const docRef = addDoc(collection(db, "trades"), {
+        title: data.title,
+        platform: data.platform,
+        location: data.location,
+        price: data.price,
+        userUID:auth.currentUser.uid,
+         User: userSnap.data().username,
+      });
+
       setCharAlert({
         title: false,
         platform: false,
