@@ -31,7 +31,7 @@ export default function PostTrade() {
     },
   ]);
 
-  const handleSubmit = () => {
+  const  handleSubmit  = async () => {
     if (!data.title || !data.platform || !data.location || !data.price) {
       setAlert({
         title: !data.title,
@@ -53,8 +53,8 @@ export default function PostTrade() {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      // const userRef = doc(db, "users", auth.currentUser.uid );
-      // const userSnap =  getDoc(docRef);
+      const userRef = doc(db, "users", auth.currentUser.uid );
+      const userSnap =  await getDoc(docRef);
 
       const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
@@ -62,7 +62,7 @@ export default function PostTrade() {
         location: data.location,
         price: data.price,
         userUID:auth.currentUser.uid,
-        // User: userSnap.data().username,
+         User: userSnap.data().username,
       });
 
       setCharAlert({
