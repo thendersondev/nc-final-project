@@ -99,14 +99,14 @@ export default function PostTrade({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.form} pointerEvents={postMsg ? 'none' : 'auto'}>
-        <Text style={styles.postItemTitle}>What do you want to trade?</Text>
+        <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
             alert.title || charAlert.title
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#3e2465'}
+          placeholderTextColor={'#694fad'}
           placeholder="Game title..."
           value={titleText}
           onChangeText={(text) =>
@@ -116,10 +116,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.title ? (
-          <Text style={styles.textAlert}>title is required</Text>
+          <Text style={styles.textAlert}>Title is required</Text>
         ) : (
           charAlert.title && (
-            <Text style={styles.textAlert}>min 5 characters</Text>
+            <Text style={styles.textAlert}>Min 5 characters</Text>
           )
         )}
         <TextInput
@@ -128,7 +128,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#3e2465'}
+          placeholderTextColor={'#694fad'}
           placeholder="Platform..."
           value={platformText}
           onChangeText={(text) =>
@@ -138,10 +138,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.platform ? (
-          <Text style={styles.textAlert}>platform is required</Text>
+          <Text style={styles.textAlert}>Platform is required</Text>
         ) : (
           charAlert.platform && (
-            <Text style={styles.textAlert}>min 3 characters</Text>
+            <Text style={styles.textAlert}>Min 3 characters</Text>
           )
         )}
         <TextInput
@@ -150,7 +150,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#3e2465'}
+          placeholderTextColor={'#694fad'}
           placeholder="Location..."
           value={locationText}
           onChangeText={(text) =>
@@ -160,10 +160,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.location ? (
-          <Text style={styles.textAlert}>location is required</Text>
+          <Text style={styles.textAlert}>Location is required</Text>
         ) : (
           charAlert.location && (
-            <Text style={styles.textAlert}>min 4 characters</Text>
+            <Text style={styles.textAlert}>Min 4 characters</Text>
           )
         )}
         <TextInput
@@ -172,7 +172,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#3e2465'}
+          placeholderTextColor={'#694fad'}
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
@@ -184,10 +184,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.price ? (
-          <Text style={styles.textAlert}>trade value is required</Text>
+          <Text style={styles.textAlert}>Trade value is required</Text>
         ) : (
           charAlert.price && (
-            <Text style={styles.textAlert}>min 4 characters</Text>
+            <Text style={styles.textAlert}>Min 4 characters</Text>
           )
         )}
         <TouchableOpacity onPress={() => takePicture()}>
@@ -199,9 +199,8 @@ export default function PostTrade({ navigation }) {
           >
             Add Image
           </MaterialCommunityIcons.Button>
-
-          <Text style={styles.text}>Add Image</Text>
         </TouchableOpacity>
+        <View style={styles.space} />
 
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>

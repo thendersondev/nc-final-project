@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   textInputBox: {
+    backgroundColor: '#F0EDF6',
     padding: 7,
     borderRadius: 5,
     borderWidth: 2,
@@ -32,9 +33,11 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   postItemTitle: {
+    fontWeight: '700',
     color: '#694FAD',
-    fontSize: 15,
+    fontSize: 25,
     textAlign: 'center',
+    paddingBottom: 10,
   },
   inputTitle: {
     fontWeight: '200',
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     width: 200,
+    alignItems: 'center',
   },
   space: {
     width: 20,
