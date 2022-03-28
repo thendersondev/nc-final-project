@@ -1,4 +1,4 @@
-import { Text, View, Button, TextInput } from 'react-native';
+import { Text, View, Button, TextInput, Pressable } from 'react-native';
 import styles from '../styles/TradeStyles';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -181,18 +181,22 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
-        <Button title="Add Image" onPress={TradeCamera}></Button>
+        <TouchableOpacity style={styles.button} onPress={TradeCamera}>
+          <Text style={styles.text}>Add Image</Text>
+        </TouchableOpacity>
 
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
         ) : (
-          <Button title="Submit" onPress={handleSubmit} />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.text}>Submit Trade</Text>
+          </TouchableOpacity>
         )}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Trade')}
         >
-          <Text style={styles.text}>Go back to trades</Text>
+          <Text style={styles.text}>Back to trades</Text>
         </TouchableOpacity>
       </View>
     </View>
