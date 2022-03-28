@@ -1,6 +1,10 @@
 import { Text, View, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { db, auth } from "../test/testdataindex";
+import { useEffect } from "react";
+import { doc, addDoc,getDoc, collection } from "firebase/firestore";
+import { changeUser, fetchUser, fetchUsers } from "../models/model_mock";
 
 export default function UserPage({
   navigation,
@@ -8,10 +12,9 @@ export default function UserPage({
     params: { username },
   },
 }) {
-  const mockComments = [
-    { comment: "A really good seller ", id: 1 },
-    { comment: "Horrible guy!", id: 2 },
-  ];
+  const id = "KVoXaLUNZ511ihffCTVB"
+  const userData = fetchUser(id)
+  const comments = (Object.values(userData[id].reviews))
 
   return (
     <View style={styles.pageContainer}>
@@ -42,11 +45,11 @@ export default function UserPage({
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
         <FlatList
-          data={mockComments}
+          data={comments}
           renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
+            <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => comments.indexOf(item)}
         />
       </View>
       <TouchableOpacity
@@ -56,6 +59,14 @@ export default function UserPage({
         }}
       >
         <Text style={styles.text}>Message</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Review", { username , id });
+        }}
+      >
+        <Text style={styles.text}>Review User</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -71,6 +82,7 @@ export default function UserPage({
 }
 
 import { StyleSheet } from "react-native";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   pageContainer: {
