@@ -25,7 +25,7 @@ export default function MyDrawer(props) {
   return (
     // <NavigationContainer>
     <Drawer.Navigator
-      initialRouteName="HomePage"
+      initialRouteName="LandingPage"
       screenOptions={{
         headerTintColor: "#694fad",
         drawerIcon: ({ focused }) => (
@@ -34,7 +34,7 @@ export default function MyDrawer(props) {
       }}
     >
       <Drawer.Screen
-        name="Home"
+        name="Test"
         component={NavBar}
         options={{
           title: "Home",

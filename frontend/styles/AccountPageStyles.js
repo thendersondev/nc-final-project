@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     color: "grey",
     fontWeight: "normal",
     fontSize: 18,
-    textAlign:"center",
-    padding:3,
+    textAlign: "center",
+    padding: 3,
   },
   comments: {
     flex: 1,
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 40,
   },
-  signOutText: { 
-    colour: "#694fad"
-   },
+  signOutText: {
+    color: "#694fad",
+  },
 });
 
 export default styles;
