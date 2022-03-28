@@ -1,9 +1,10 @@
-import { Text, View, Button, TextInput } from "react-native";
-import styles from "../styles/TradeStyles";
-import React from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { db, auth } from ".././firebase";
-import { doc, addDoc,getDoc, collection } from "firebase/firestore";
+import { Text, View, Button, TextInput } from 'react-native';
+import styles from '../styles/TradeStyles';
+import React from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { db, auth } from '.././firebase';
+import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
+import TradeCamera from './TradeCamera';
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -25,14 +26,14 @@ export default function PostTrade({ navigation }) {
   const [postMsg, setPostMsg] = React.useState(false);
   const [data, setData] = React.useState([
     {
-      title: "",
-      platform: "",
-      location: "",
-      price: "",
+      title: '',
+      platform: '',
+      location: '',
+      price: '',
     },
   ]);
 
-  const  handleSubmit  = async () => {
+  const handleSubmit = async () => {
     if (!data.title || !data.platform || !data.location || !data.price) {
       setAlert({
         title: !data.title,
@@ -54,16 +55,16 @@ export default function PostTrade({ navigation }) {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userRef = doc(db, "users", auth.currentUser.uid );
-      const userSnap =  await getDoc(docRef);
+      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userSnap = await getDoc(docRef);
 
-      const docRef = addDoc(collection(db, "trades"), {
+      const docRef = addDoc(collection(db, 'trades'), {
         title: data.title,
         platform: data.platform,
         location: data.location,
         price: data.price,
-        userUID:auth.currentUser.uid,
-         User: userSnap.data().username,
+        userUID: auth.currentUser.uid,
+        User: userSnap.data().username,
       });
 
       setCharAlert({
@@ -88,7 +89,7 @@ export default function PostTrade({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
+      <View style={styles.form} pointerEvents={postMsg ? 'none' : 'auto'}>
         <Text style={styles.postItemTitle}>What do you want to trade?</Text>
         <TextInput
           style={
@@ -96,7 +97,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={"#3e2465"}
+          placeholderTextColor={'#3e2465'}
           placeholder="Game title..."
           value={titleText}
           onChangeText={(text) =>
@@ -118,7 +119,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={"#3e2465"}
+          placeholderTextColor={'#3e2465'}
           placeholder="Platform..."
           value={platformText}
           onChangeText={(text) =>
@@ -140,7 +141,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={"#3e2465"}
+          placeholderTextColor={'#3e2465'}
           placeholder="Location..."
           value={locationText}
           onChangeText={(text) =>
@@ -162,7 +163,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={"#3e2465"}
+          placeholderTextColor={'#3e2465'}
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
@@ -180,6 +181,7 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
+        <Button title="Add Image" onPress={TradeCamera}></Button>
 
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
@@ -188,7 +190,7 @@ export default function PostTrade({ navigation }) {
         )}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Trade")}
+          onPress={() => navigation.navigate('Trade')}
         >
           <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>
