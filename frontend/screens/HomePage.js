@@ -63,18 +63,18 @@ export default function HomePage() {
         <MaterialCommunityIcons
           name="microsoft-xbox-controller"
           color={'#694FAD'}
-          size={40}
+          size={30}
         >
           <Text style={styles.text}>
-            find the best deals on the latest games
+            Find the best deals on the latest games
           </Text>
         </MaterialCommunityIcons>
         <MaterialCommunityIcons
           name="swap-vertical-variant"
           color={'#694FAD'}
-          size={40}
+          size={30}
         >
-          <Text style={styles.text}>find games to trade in your area</Text>
+          <Text style={styles.text}>Find games to trade in your area</Text>
         </MaterialCommunityIcons>
       </View>
       <Text style={styles.featured}>featured games</Text>
