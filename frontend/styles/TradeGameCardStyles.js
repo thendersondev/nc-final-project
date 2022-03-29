@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     justifyContent: 'center',
     marginHorizontal: 10,
-    height: 50,
+    height: 40,
     padding: 10,
     marginLeft: 1,
   },
+
   text: {
     color: '#F0EDF6',
     fontWeight: '500',

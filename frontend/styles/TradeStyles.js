@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   textInputBox: {
+    backgroundColor: '#F0EDF6',
     padding: 7,
     borderRadius: 5,
     borderWidth: 2,
@@ -26,13 +27,17 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 35,
     color: '#694FAD',
-    paddingTop: 45,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   postItemTitle: {
+    fontWeight: '700',
     color: '#694FAD',
-    fontSize: 15,
+    fontSize: 25,
+    textAlign: 'center',
+    paddingBottom: 10,
   },
   inputTitle: {
     fontWeight: '200',
@@ -56,9 +61,15 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
     justifyContent: 'center',
-    marginHorizontal: 5,
-    height: 50,
+    marginHorizontal: 20,
+    height: 40,
     padding: 10,
+    width: 200,
+    alignItems: 'center',
+  },
+  space: {
+    width: 20,
+    height: 10,
   },
   text: {
     textAlign: 'center',
