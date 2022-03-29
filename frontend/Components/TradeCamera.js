@@ -11,7 +11,10 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase.js";
+
+// initialise app with firebase config
 
 let camera = Camera;
 export default function TradeCamera() {
@@ -33,16 +36,16 @@ export default function TradeCamera() {
   };
 
   const __takePicture = async () => {
-    console.log("taking picture");
+    // console.log("taking picture");
     // convert to base64 so can be stored on firebase storage
     const photo = await camera.takePictureAsync({ base64: true, quality: 0.1 });
-    console.log(photo, "data here");
+    // console.log(photo, "data here");
     setPreviewVisible(true);
     //setStartCamera(false)
     setCapturedImage(photo);
 
     if (!photo.cancelled) {
-      const storage = getStorage();
+      // const storage = getStorage();
       const imageRef = ref(storage, "image.jpg");
 
       const img = await fetch(photo.uri);
@@ -53,7 +56,7 @@ export default function TradeCamera() {
   };
 
   const __retakePicture = () => {
-    console.log("retake");
+    // console.log("retake");
     setCapturedImage(null);
     setPreviewVisible(false);
     __startCamera();
@@ -68,6 +71,7 @@ export default function TradeCamera() {
     }
   };
   const __switchCamera = () => {
+    // console.log("camera flipped");
     if (cameraType === "back") {
       setCameraType("front");
     } else {
@@ -230,8 +234,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
-  console.log(photo);
+const CameraPreview = ({ photo, retakePicture }) => {
+  // console.log(photo);
+  // console.log(retakePicture);
   return (
     <View
       style={{
@@ -280,17 +285,8 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
                 Re-take
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={savePhoto}
-              style={{
-                width: 130,
-                height: 40,
 
-                alignItems: "center",
-                borderRadius: 4,
-              }}
-            >
-              {/* <Text
+            {/* <Text
                 style={{
                   color: "#fff",
                   fontSize: 20,
@@ -298,7 +294,6 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
               >
                 Save
               </Text> */}
-            </TouchableOpacity>
           </View>
         </View>
       </ImageBackground>
