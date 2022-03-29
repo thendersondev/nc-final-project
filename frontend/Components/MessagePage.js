@@ -1,22 +1,14 @@
 import styles from "../styles/MessagePageStyles";
 import { Text, TouchableOpacity, View } from "react-native";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../firebase";
 import {
-  doc,
-  setDoc,
   collection,
   query,
   addDoc,
   onSnapshot,
   orderBy,
-  getDocs,
 } from "firebase/firestore";
 
 export default function MessagePage({
@@ -30,38 +22,19 @@ export default function MessagePage({
   useEffect(() => {
     const collRef = collection(db, `chats/${auth.currentUser.uid}/${uid}`);
     const q = query(collRef, orderBy("createdAt", "desc"));
-    const fetch = async () => {
-      const docs = await getDocs(q);
-      const readValues = [];
-      docs.forEach((doc) => {
-        readValues.push({
-          id: doc.data().id,
-          createdAt: doc.data().createdAt.toDate(),
-          text: doc.data().text,
-          user: doc.data().user,
-        });
-      });
-      setMessages(readValues);
-    };
-    return fetch();
-  }, []);
-
-  useLayoutEffect(() => {
-    const collRef = collection(db, `chats/${auth.currentUser.uid}/${uid}`);
-    const q = query(collRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       console.log(snapshot);
       setMessages(
         snapshot.docs.map((doc) => ({
-          id: doc.data().id,
+          _id: doc.data()._id,
           createdAt: doc.data().createdAt.toDate(),
           text: doc.data().text,
           user: doc.data().user,
         }))
       );
     });
-    return unsubscribe();
+    return unsubscribe;
   }, []);
 
   const onSend = useCallback((messages = []) => {
@@ -77,6 +50,7 @@ export default function MessagePage({
       text,
       user,
     });
+
     addDoc(collection(db, `chats/${uid}/${auth.currentUser.uid}`), {
       _id,
       createdAt,
