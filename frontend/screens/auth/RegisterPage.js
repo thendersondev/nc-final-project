@@ -5,24 +5,24 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from "react-native";
-import React, { useState } from "react";
+} from 'react-native';
+import React, { useState } from 'react';
 import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "../../firebase.js";
-import { useNavigation } from "@react-navigation/core";
-import { db } from "../../firebase.js";
-import { doc, setDoc } from "firebase/firestore";
-import styles from "../../styles/RegisterPageStyles";
-import { updateProfile } from "firebase/auth";
+} from '../../firebase.js';
+import { useNavigation } from '@react-navigation/core';
+import { db } from '../../firebase.js';
+import { doc, setDoc } from 'firebase/firestore';
+import styles from '../../styles/RegisterPageStyles';
+import { updateProfile } from 'firebase/auth';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [avatar, setAvatar] = useState('');
   const navigation = useNavigation();
   console.log(auth.currentUser);
   const handleSignUp = () => {
@@ -35,20 +35,20 @@ const LoginPage = () => {
           displayName: username,
           photoURL: avatar
             ? avatar
-            : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
+            : 'https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg',
         });
       })
       .then(() => {
         signInWithEmailAndPassword(auth, email, password);
       })
       .then(() => {
-        setDoc(doc(db, "users", auth.currentUser.uid), {
+        setDoc(doc(db, 'users', auth.currentUser.uid), {
           username: username,
-          avatarUrl: "default",
+          avatarUrl: 'default',
         });
       })
       .then(() => {
-        navigation.navigate("Account");
+        navigation.navigate('Nav');
       })
       .catch((err) => {
         alert(`Oops something went wrong! ${err.message}`);

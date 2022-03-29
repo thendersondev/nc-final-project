@@ -1,15 +1,15 @@
-import { Text, View, Button, TextInput } from "react-native";
-import styles from "../styles/ReviewStyles";
-import React from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { db, auth } from "../test/testdataindex";
-import { doc, addDoc,getDoc, collection } from "firebase/firestore";
-import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
+import { Text, View, Button, TextInput } from 'react-native';
+import styles from '../styles/ReviewStyles';
+import React from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { db, auth } from '../test/testdataindex';
+import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
+import { changeUser, fetchUser, fetchUsers } from '../models/model_users';
 
 export default function PostTradeMessagePage({
   navigation,
   route: {
-    params: { username , id },
+    params: { username, id },
   },
 }) {
   const [bodyText, setBodyText] = React.useState(null);
@@ -22,31 +22,31 @@ export default function PostTradeMessagePage({
   const [postMsg, setPostMsg] = React.useState(false);
   const [data, setData] = React.useState([
     {
-      body: "",
+      body: '',
     },
   ]);
 
-  const handleSubmit  = async () => {
+  const handleSubmit = async () => {
     if (!data.body) {
       setAlert({
         body: !data.body,
       });
-    } else if (
-      data.body.length < 10
-    ) {
+    } else if (data.body.length < 10) {
       setCharAlert({
         body: data.body.length < 10,
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userSnap = await fetchUser(/*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3");
-      changeUser(id, { 
-            "reviews": {
-                body: data.body,
-                userUID: /*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3",
-                User: userSnap["39hJViTortdLPJF48DTYqnuFpyC3"].username
-              },
-        })
+      const userSnap = await fetchUser(
+        /*auth.currentUser.uid*/ '39hJViTortdLPJF48DTYqnuFpyC3'
+      );
+      changeUser(id, {
+        reviews: {
+          body: data.body,
+          userUID: /*auth.currentUser.uid*/ '39hJViTortdLPJF48DTYqnuFpyC3',
+          User: userSnap['39hJViTortdLPJF48DTYqnuFpyC3'].username,
+        },
+      });
       setCharAlert({
         body: false,
       });
@@ -55,13 +55,15 @@ export default function PostTradeMessagePage({
       });
       setPostMsg(true);
       setBodyText(null);
-      setTimeout(function goBackToUser() {navigation.navigate("Profile", {username})},2000)
+      setTimeout(function goBackToUser() {
+        navigation.navigate('Profile', { username });
+      }, 2000);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
+      <View style={styles.form} pointerEvents={postMsg ? 'none' : 'auto'}>
         <Text style={styles.postItemBody}>Leave a review for {username}</Text>
         <TextInput
           style={
@@ -69,8 +71,7 @@ export default function PostTradeMessagePage({
               ? styles.inputAlert
               : styles.textInputBox
           }
-          
-          placeholderTextColor={"#3e2465"}
+          placeholderTextColor={'#694FAD'}
           placeholder="Enter review here..."
           value={bodyText}
           onChangeText={(text) =>
@@ -90,13 +91,15 @@ export default function PostTradeMessagePage({
         {postMsg ? (
           <Text style={styles.postItem}>REVIEW POSTED</Text>
         ) : (
-          <Button title="Submit" onPress={handleSubmit} />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.text}>Submit Review</Text>
+          </TouchableOpacity>
         )}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Profile", {username})}
+          onPress={() => navigation.navigate('Profile', { username })}
         >
-          <Text style={styles.text}>Go back to trades</Text>
+          <Text style={styles.text}>Back to Profile</Text>
         </TouchableOpacity>
       </View>
     </View>

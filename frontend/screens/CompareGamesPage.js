@@ -1,17 +1,17 @@
-import styles from "../styles/CompareGamesStyles";
-import { Text, View, FlatList } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { GameCard } from "../Components/GameCard";
-import { v4 as uuidv4 } from "uuid";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useState, useEffect } from "react";
-import { fetchItems } from "../models/model_items";
-import { TextInput } from "react-native-gesture-handler";
+import styles from '../styles/CompareGamesStyles';
+import { Text, View, FlatList } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { GameCard } from '../Components/GameCard';
+import { v4 as uuidv4 } from 'uuid';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useState, useEffect } from 'react';
+import { fetchItems } from '../models/model_items';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default function CompareGamesPage() {
-  const [query, setQuery] = useState("PS5");
+  const [query, setQuery] = useState('PS5');
   const [data, setData] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchItems(query).then((items) => {
@@ -24,12 +24,13 @@ export default function CompareGamesPage() {
       <Text style={styles.pageTitle}>Compare game prices here!</Text>
       <View>
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Search Here..."
           value={search}
           style={styles.searchBar}
           onChangeText={(text) => {
             setSearch(text);
-            setQuery("");
+            setQuery('');
           }}
         ></TextInput>
       </View>
@@ -38,25 +39,25 @@ export default function CompareGamesPage() {
         <View style={styles.catagoryButtonsGroup}>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Xbox SeriesX")}
+            onPress={() => setQuery('Xbox SeriesX')}
           >
             <Text style={styles.catagoryButtonText}>Xbox</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("PS5")}
+            onPress={() => setQuery('PS5')}
           >
             <Text style={styles.catagoryButtonText}>PS5</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("Nintendo Switch")}
+            onPress={() => setQuery('Nintendo Switch')}
           >
             <Text style={styles.catagoryButtonText}>Nintendo</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.catagoryButton}
-            onPress={() => setQuery("")}
+            onPress={() => setQuery('')}
           >
             <Text style={styles.catagoryButtonText}>All</Text>
           </TouchableOpacity>

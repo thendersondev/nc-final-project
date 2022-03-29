@@ -1,19 +1,19 @@
-import styles from "../styles/AccountPageStyles";
-import { Text, View, Image, FlatList } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { auth, signOut } from "../firebase";
-import { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/core";
+import styles from '../styles/AccountPageStyles';
+import { Text, View, Image, FlatList } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { auth, signOut } from '../firebase';
+import { useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/core';
 
 export default function Account() {
-  const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState('');
+  const [avatar, setAvatar] = useState('');
   const [loading, setLoading] = useState(true);
 
   const mockComments = [
-    { comment: "A really good seller ", id: 1 },
-    { comment: "Horrible guy!", id: 2 },
+    { comment: 'A really good seller ', id: 1 },
+    { comment: 'Horrible guy!', id: 2 },
   ];
 
   const navigation = useNavigation();
@@ -21,8 +21,8 @@ export default function Account() {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        alert("You have been signed out");
-        navigation.navigate("Login");
+        alert('You have been signed out');
+        navigation.navigate('Login');
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -46,7 +46,7 @@ export default function Account() {
             source={{
               uri: avatar
                 ? avatar
-                : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
+                : 'https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg',
             }}
           ></Image>
           <Text style={styles.username}>{username} </Text>
@@ -54,7 +54,7 @@ export default function Account() {
             onPress={handleSignOut}
             style={styles.signOutContainer}
           >
-            <Text style={styles.signOutText}>SignOut</Text>
+            <Text style={styles.signOutText}>Sign Out</Text>
           </TouchableOpacity>
         </View>
       </View>
