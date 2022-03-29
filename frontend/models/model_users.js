@@ -1,4 +1,4 @@
-const { db } = require("../firebase");
+const { db } = require("../test/testdataindex");
 const {
   updateDoc,
   doc,
@@ -22,7 +22,7 @@ async function fetchUsers() {
 }
 
 async function fetchUser(user) {
-  if (user.length !== 20) return { error: "Bad user ID" }
+  if (user.length !== 28) return { error: "Bad user ID" }
   const userId = doc(db, "users", user);
   const querySnapshot = await getDoc(userId);
   if (!querySnapshot.data()) return { error: "No such user!" }
@@ -41,15 +41,15 @@ async function addUser(newUser) {
 }
 
 async function changeUser(id, newUser) {
-  const name = (!newUser.name ? null : newUser.name)
-  const user = (!newUser.user ? null : newUser.user)
-  if (!name && !user) return { error: "Bad submission" };
+  const reviews = (!newUser.reviews ? null : newUser.reviews)
+  if (!reviews) return { error: "Bad submission" };
   const userId = doc(db, "users", id);
   const querySnapshot = await getDoc(userId);
   if (!querySnapshot.data()) return { error: "No such user!" }
+  const num = (!querySnapshot.data().reviews) ? null : Object.values(querySnapshot.data().reviews).length
   const newData = {
-    user: user ? user : querySnapshot.data().user,
-    name: name ? name : querySnapshot.data().name,
+    username: querySnapshot.data().username,
+    reviews: reviews ? {...querySnapshot.data().reviews,[num]: reviews} : querySnapshot.data().reviews,
   };
   await updateDoc(userId, newData);
   return { [id]: newData };

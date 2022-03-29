@@ -218,3 +218,5 @@ describe('Trades DB', function () {
     });
   });
 });
+
+})

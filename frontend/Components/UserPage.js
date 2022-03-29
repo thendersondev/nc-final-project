@@ -1,7 +1,9 @@
-import { Text, View, Image, FlatList } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import styles from '../styles/UserPageStyles';
+import { Text, View, Image, FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
+import styles from "../styles/UserPageStyles";
+import { useState } from "react";
 
 export default function UserPage({
   navigation,
@@ -9,10 +11,14 @@ export default function UserPage({
     params: { username },
   },
 }) {
-  const mockComments = [
-    { comment: 'A really good seller ', id: 1 },
-    { comment: 'Horrible guy!', id: 2 },
-  ];
+  const [comments , setComments] = useState([])
+  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3"
+  fetchUser(id)
+  .then((userData)=>{
+    const newComments = (!Object.values(userData[id].reviews)) ? [] : Object.values(userData[id].reviews)
+    setComments(newComments)
+  })
+  .catch((err)=>console.log(err))
 
   return (
     <View style={styles.pageContainer}>
@@ -43,11 +49,11 @@ export default function UserPage({
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
         <FlatList
-          data={mockComments}
+          data={comments}
           renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
+            <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => comments.indexOf(item)}
         />
       </View>
       <TouchableOpacity
@@ -61,7 +67,15 @@ export default function UserPage({
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate('Trade');
+          navigation.navigate("Review", { username , id });
+        }}
+      >
+        <Text style={styles.text}>Review User</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Trade");
         }}
       >
         <Text style={styles.text}>Go back to trades</Text>
