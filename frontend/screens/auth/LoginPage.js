@@ -1,35 +1,26 @@
 import {
   KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from '../../firebase.js';
-import { useNavigation } from '@react-navigation/core';
-import { useContext } from 'react';
-import { LoginContext } from '../../Contexts/LoginContext.js';
-import styles from '../../styles/LoginPageStyles';
+  Image,
+} from "react-native";
+import React, { useState } from "react";
+import { auth, signInWithEmailAndPassword } from "../../firebase.js";
+import { useNavigation } from "@react-navigation/core";
+import styles from "../../styles/LoginPageStyles";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        setLoggedIn(auth.currentUser.uid);
-        alert('Logged in');
-        navigation.navigate('Account');
+        alert("Logged in");
+        navigation.navigate("Nav");
       })
       .catch((err) => {
         alert(err.message);
@@ -40,11 +31,15 @@ const LoginPage = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
-      keyboardVerticalOffset={Platform.select({
-        ios: () => -300,
-        android: () => -300,
-      })}
+      // keyboardVerticalOffset={Platform.select({
+      //   ios: () => -300,
+      //   android: () => -300,
+      // })}
     >
+      {/* <Image
+        style={styles.mainLogo}
+        source={require("../../assets/logo.png")}
+      /> */}
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -69,7 +64,15 @@ const LoginPage = () => {
         <TouchableOpacity style={styles.button} onPress={handleLogIn}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <Text style={styles.forgottenPassword}>Forgotten password?</Text>
+        <Text style={styles.registerPrompt}>Not a user?</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Register");
+          }}
+        >
+          <Text style={styles.buttonText}>Register</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
