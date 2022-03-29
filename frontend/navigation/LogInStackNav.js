@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Account from "../screens/Account";
 import LoginPage from "../screens/auth/LoginPage";
 import RegisterPage from "../screens/auth/RegisterPage";
 import NavBar from "./NavBar";
@@ -16,7 +17,7 @@ export default function LogInStackNav() {
       <Stack.Screen
         name="Register"
         component={RegisterPage}
-        options={{ headerShown: false }}
+        // options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Nav"

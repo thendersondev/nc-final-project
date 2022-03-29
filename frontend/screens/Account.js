@@ -1,30 +1,28 @@
-import { Text, View, Image, FlatList } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import styles from '../styles/AccountPageStyles';
-import { auth, db, signOut } from '../firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/core';
-import { useContext } from 'react';
-import { LoginContext } from '../Contexts/LoginContext';
+import styles from "../styles/AccountPageStyles";
+import { Text, View, Image, FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { auth, signOut } from "../firebase";
+import { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
 
 export default function Account() {
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const mockComments = [
-    { comment: 'A really good seller ', id: 1 },
-    { comment: 'Horrible guy!', id: 2 },
+    { comment: "A really good seller ", id: 1 },
+    { comment: "Horrible guy!", id: 2 },
   ];
-  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+
   const navigation = useNavigation();
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        alert('You have been signed out');
-        setUsername(null);
-        setLoggedIn(null);
-        navigation.navigate('Login');
+        alert("You have been signed out");
+        navigation.navigate("Login");
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -32,24 +30,13 @@ export default function Account() {
   };
 
   useEffect(() => {
-    setLoggedIn(auth.currentUser);
-    if (loggedIn) {
-      const docRef = doc(db, 'users', auth.currentUser.uid);
-      getDoc(docRef).then((data) => {
-        setUsername(data.data().username);
-      });
-    }
-  }, [loggedIn]);
+    setLoading(true);
+    setUsername(auth.currentUser.displayName);
+    setAvatar(auth.currentUser.photoURL);
+    setLoading(false);
+  }, []);
 
-  if (loggedIn === null) {
-    return (
-      <View style={styles.loggedOut1}>
-        <Text style={styles.loggedOut}>
-          Please register/Log-in to see this page
-        </Text>
-      </View>
-    );
-  }
+  if (loading) return <View></View>;
   return (
     <View style={styles.pageContainer}>
       <View style={styles.header}>
@@ -57,7 +44,9 @@ export default function Account() {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://www.amongusavatarcreator.com/assets/img/main/icon.png',
+              uri: avatar
+                ? avatar
+                : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
             }}
           ></Image>
           <Text style={styles.username}>{username} </Text>

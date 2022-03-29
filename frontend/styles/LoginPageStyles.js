@@ -1,16 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: 0,
   },
+  mainLogo: {
+    height: "60%",
+    width: "60%",
+  },
   inputContainer: {
-    width: '80%',
+    width: "80%",
   },
   input: {
+
+
+    backgroundColor: "white",
+
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
@@ -22,35 +30,36 @@ const styles = StyleSheet.create({
     borderColor: '#694FAD',
   },
   buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 40,
   },
   button: {
-    backgroundColor: '#694fad',
-    width: '100%',
+    backgroundColor: "#694fad",
+    width: "100%",
     padding: 15,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonOutline: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginTop: 5,
-    borderColor: '#0782F9',
+    borderColor: "#0782F9",
     borderWidth: 2,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '700',
+    color: "white",
+    fontWeight: "700",
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: '#694fad',
-    fontWeight: '700',
+    color: "#694fad",
+    fontWeight: "700",
     fontSize: 16,
   },
-  forgottenPassword: {
+  registerPrompt: {
+    marginTop: 20,
     padding: 10,
     color: '#694FAD',
   },
