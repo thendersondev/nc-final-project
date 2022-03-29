@@ -1,11 +1,10 @@
-import { View, Text, Image, TouchableOpacity, Linking } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../styles/GameCardStyles';
+import { View, Text, Image, TouchableOpacity, Linking } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import styles from "../styles/GameCardStyles";
 
-const GameCard = ({ item }, query, search) => {
-  if (!item.title.includes(search) && search) return;
-  if (!query.includes(item.platform)) return;
-  if (item.title === 'Gran Turismo 7') {
+const GameCard = ({ item: { item }, search }) => {
+  if (!item.title.includes(search) && search) return <></>;
+  if (item.title === "Gran Turismo 7") {
     item.price.game = undefined;
   }
   const onPress = (url) =>

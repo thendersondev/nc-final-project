@@ -5,6 +5,8 @@ const {
   collection,
   getDocs,
   getDoc,
+  query,
+  where,
 } = require("firebase/firestore");
 
 const docRef = doc(db, "users", "t1sKcLakK5MncSizlxEv");
@@ -16,9 +18,15 @@ const shopRef = {
   3: "game",
 };
 
-async function fetchItemsByShop(shop_id) {
-  const collRef = collection(db, `items/shops/${shopRef[shop_id]}`);
+async function fetchItemsByShop(shop_id, q) {
+  const queryArgs = [collection(db, `items/shops/${shopRef[shop_id]}`)];
+  if (q) {
+    queryArgs.push(where("item.platform", "==", q));
+  }
+
+  const collRef = query(...queryArgs);
   const readValues = [];
+
   const querySnapshot = await getDocs(collRef);
   querySnapshot.forEach((doc) => {
     readValues.push(doc.data());
@@ -26,12 +34,12 @@ async function fetchItemsByShop(shop_id) {
   return readValues;
 }
 
-async function fetchItems() {
+async function fetchItems(query) {
   const gamesList = [];
 
-  const returnOne = await fetchItemsByShop(1);
-  const returnTwo = await fetchItemsByShop(2);
-  const returnThr = await fetchItemsByShop(3);
+  const returnOne = await fetchItemsByShop(1, query);
+  const returnTwo = await fetchItemsByShop(2, query);
+  const returnThr = await fetchItemsByShop(3, query);
   const itemList = {
     1: returnOne,
     2: returnTwo,

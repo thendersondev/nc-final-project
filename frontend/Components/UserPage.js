@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 import styles from "../styles/UserPageStyles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserPage({
   navigation,
@@ -11,14 +11,19 @@ export default function UserPage({
     params: { username },
   },
 }) {
-  const [comments , setComments] = useState([])
-  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3"
-  fetchUser(id)
-  .then((userData)=>{
-    const newComments = (!Object.values(userData[id].reviews)) ? [] : Object.values(userData[id].reviews)
-    setComments(newComments)
-  })
-  .catch((err)=>console.log(err))
+  const [comments, setComments] = useState([]);
+
+  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
+  useEffect(() => {
+    fetchUser(id)
+      .then((userData) => {
+        const newComments = !Object.values(userData[id].reviews)
+          ? []
+          : Object.values(userData[id].reviews);
+        setComments(newComments);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <View style={styles.pageContainer}>
@@ -26,7 +31,7 @@ export default function UserPage({
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
-            source={require('../assets/shrek.webp')}
+            source={require("../assets/shrek.webp")}
           ></Image>
           <Text style={styles.username}>{username}</Text>
         </View>
@@ -48,38 +53,30 @@ export default function UserPage({
       </View>
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
-        <FlatList
+                <FlatList
           data={comments}
           renderItem={({ item }) => (
             <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
           )}
           keyExtractor={(item) => comments.indexOf(item)}
         />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Review", { username, id });
+          }}
+        >
+          <Text style={styles.text}>Review User</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Message", { username });
+          }}
+        >
+          <Text style={styles.text}>Message</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('Message', { username });
-        }}
-      >
-        <Text style={styles.text}>Message</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("Review", { username , id });
-        }}
-      >
-        <Text style={styles.text}>Review User</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("Trade");
-        }}
-      >
-        <Text style={styles.text}>Go back to trades</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
