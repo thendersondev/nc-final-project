@@ -59,7 +59,7 @@ export default function PostTrade({ navigation }) {
     } else {
       // POST TRADE TO FIREBASE HERE
       const userRef = doc(db, "users", auth.currentUser.uid);
-      const userSnap = await getDoc(docRef);
+      const userSnap = await getDoc(userRef);
 
       const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
@@ -68,6 +68,7 @@ export default function PostTrade({ navigation }) {
         price: data.price,
         userUID: auth.currentUser.uid,
         User: userSnap.data().username,
+        
       });
 
       setCharAlert({
@@ -83,10 +84,10 @@ export default function PostTrade({ navigation }) {
         price: false,
       });
       setPostMsg(true);
-      setTitleText(null);
-      setPlatformText(null);
-      setLocationText(null);
-      setPriceText(null);
+      setTitleText("");
+      setPlatformText("");
+      setLocationText("");
+      setPriceText("");
     }
   };
 
@@ -100,7 +101,7 @@ export default function PostTrade({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
+      <View style={styles.form} pointerEvents={postMsg ? "auto" : "auto"}>
         <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
