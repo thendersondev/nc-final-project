@@ -22,13 +22,13 @@ import {
 export default function MessagePage({
   navigation,
   route: {
-    params: { username },
+    params: { username, uid },
   },
 }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const collRef = collection(db, "chats");
+    const collRef = collection(db, `chats/${auth.currentUser.uid}/${uid}`);
     const q = query(collRef, orderBy("createdAt", "desc"));
     const fetch = async () => {
       const docs = await getDocs(q);
@@ -47,7 +47,7 @@ export default function MessagePage({
   }, []);
 
   useLayoutEffect(() => {
-    const collRef = collection(db, "chats");
+    const collRef = collection(db, `chats/${auth.currentUser.uid}/${uid}`);
     const q = query(collRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -71,7 +71,13 @@ export default function MessagePage({
 
     const { _id, createdAt, text, user } = messages[0];
 
-    addDoc(collection(db, "chats"), {
+    addDoc(collection(db, `chats/${auth.currentUser.uid}/${uid}`), {
+      _id,
+      createdAt,
+      text,
+      user,
+    });
+    addDoc(collection(db, `chats/${uid}/${auth.currentUser.uid}`), {
       _id,
       createdAt,
       text,
@@ -91,12 +97,9 @@ export default function MessagePage({
           showAvatarForEveryMessage={true}
           onSend={(messages) => onSend(messages)}
           user={{
-            // _id: auth?.currentUser?.email,
-            // name: auth?.currentUser?.displayName,
-            // avatar: auth?.currentUser?.photoURL,
-            _id: "hi",
-            name: "tom",
-            avatar: "biscuits",
+            _id: auth?.currentUser?.email,
+            name: auth?.currentUser?.displayName,
+            avatar: auth?.currentUser?.photoURL,
           }}
         />
       </View>

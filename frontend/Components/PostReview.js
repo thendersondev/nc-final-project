@@ -3,13 +3,13 @@ import styles from "../styles/ReviewStyles";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from "../test/testdataindex";
-import { doc, addDoc,getDoc, collection } from "firebase/firestore";
+import { doc, addDoc, getDoc, collection } from "firebase/firestore";
 import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 
 export default function PostTradeMessagePage({
   navigation,
   route: {
-    params: { username , id },
+    params: { username, id },
   },
 }) {
   const [bodyText, setBodyText] = React.useState(null);
@@ -26,27 +26,27 @@ export default function PostTradeMessagePage({
     },
   ]);
 
-  const handleSubmit  = async () => {
+  const handleSubmit = async () => {
     if (!data.body) {
       setAlert({
         body: !data.body,
       });
-    } else if (
-      data.body.length < 10
-    ) {
+    } else if (data.body.length < 10) {
       setCharAlert({
         body: data.body.length < 10,
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userSnap = await fetchUser(/*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3");
-      changeUser(id, { 
-            "reviews": {
-                body: data.body,
-                userUID: /*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3",
-                User: userSnap["39hJViTortdLPJF48DTYqnuFpyC3"].username
-              },
-        })
+      const userSnap = await fetchUser(
+        /*auth.currentUser.uid*/ "39hJViTortdLPJF48DTYqnuFpyC3"
+      );
+      changeUser(id, {
+        reviews: {
+          body: data.body,
+          userUID: /*auth.currentUser.uid*/ "39hJViTortdLPJF48DTYqnuFpyC3",
+          User: userSnap["39hJViTortdLPJF48DTYqnuFpyC3"].username,
+        },
+      });
       setCharAlert({
         body: false,
       });
@@ -55,7 +55,9 @@ export default function PostTradeMessagePage({
       });
       setPostMsg(true);
       setBodyText(null);
-      setTimeout(function goBackToUser() {navigation.navigate("Profile", {username})},2000)
+      setTimeout(function goBackToUser() {
+        navigation.navigate("Profile", { username });
+      }, 2000);
     }
   };
 
@@ -69,7 +71,6 @@ export default function PostTradeMessagePage({
               ? styles.inputAlert
               : styles.textInputBox
           }
-          
           placeholderTextColor={"#3e2465"}
           placeholder="Enter review here..."
           value={bodyText}
@@ -94,7 +95,7 @@ export default function PostTradeMessagePage({
         )}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Profile", {username})}
+          onPress={() => navigation.navigate("Profile", { username })}
         >
           <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>

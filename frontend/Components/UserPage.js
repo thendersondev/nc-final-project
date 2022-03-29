@@ -8,16 +8,16 @@ import { useEffect, useState } from "react";
 export default function UserPage({
   navigation,
   route: {
-    params: { username },
+    params: { username, uid },
   },
 }) {
   const [comments, setComments] = useState([]);
 
-  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
   useEffect(() => {
-    fetchUser(id)
+    fetchUser(uid)
       .then((userData) => {
-        const newComments = !Object.values(userData[id].reviews)
+        console.log(userData);
+        const newComments = !Object.values(userData[uid].reviews)
           ? []
           : Object.values(userData[id].reviews);
         setComments(newComments);
@@ -53,10 +53,15 @@ export default function UserPage({
       </View>
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
-                <FlatList
+        <FlatList
           data={comments}
           renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
+            <Text
+              style={styles.accountInfoHeadings}
+              key={`comm${item.body}key`}
+            >
+              {item.body}
+            </Text>
           )}
           keyExtractor={(item) => comments.indexOf(item)}
         />
