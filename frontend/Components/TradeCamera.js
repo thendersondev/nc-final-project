@@ -10,6 +10,9 @@ import {
   Image,
 } from "react-native";
 import { Camera } from "expo-camera";
+
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 let camera = Camera;
 export default function TradeCamera() {
   const [startCamera, setStartCamera] = React.useState(false);
@@ -28,14 +31,29 @@ export default function TradeCamera() {
       Alert.alert("Camera permissions not granted");
     }
   };
+
   const __takePicture = async () => {
-    const photo = await camera.takePictureAsync();
+    console.log("taking picture");
+    // convert to base64 so can be stored on firebase storage
+    const photo = await camera.takePictureAsync({ base64: true, quality: 0.1 });
+    console.log(photo, "data here");
     setPreviewVisible(true);
     //setStartCamera(false)
     setCapturedImage(photo);
+
+    if (!photo.cancelled) {
+      const storage = getStorage();
+      const imageRef = ref(storage, "image.jpg");
+
+      const img = await fetch(photo.uri);
+      const bytes = await img.blob();
+
+      await uploadBytes(imageRef, bytes);
+    }
   };
 
   const __retakePicture = () => {
+    console.log("retake");
     setCapturedImage(null);
     setPreviewVisible(false);
     __startCamera();

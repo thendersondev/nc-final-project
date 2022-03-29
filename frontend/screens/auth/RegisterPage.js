@@ -48,7 +48,7 @@ const LoginPage = () => {
         });
       })
       .then(() => {
-        navigation.navigate("Account");
+        navigation.navigate("Nav");
       })
       .catch((err) => {
         alert(`Oops something went wrong! ${err.message}`);
