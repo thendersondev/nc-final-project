@@ -4,7 +4,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from "../test/testdataindex";
 import { doc, addDoc,getDoc, collection } from "firebase/firestore";
-import { changeUser, fetchUser, fetchUsers } from "../models/model_mock";
+import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 
 export default function PostTradeMessagePage({
   navigation,
@@ -39,12 +39,12 @@ export default function PostTradeMessagePage({
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userSnap = await fetchUser(/*auth.currentUser.uid*/"IEJ72uSikSwDIa7dAh3S");
+      const userSnap = await fetchUser(/*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3");
       changeUser(id, { 
             "reviews": {
                 body: data.body,
-                userUID: /*auth.currentUser.uid*/"IEJ72uSikSwDIa7dAh3S",
-                User: userSnap["IEJ72uSikSwDIa7dAh3S"].user
+                userUID: /*auth.currentUser.uid*/"39hJViTortdLPJF48DTYqnuFpyC3",
+                User: userSnap["39hJViTortdLPJF48DTYqnuFpyC3"].username
               },
         })
       setCharAlert({

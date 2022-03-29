@@ -22,7 +22,7 @@ async function fetchUsers() {
 }
 
 async function fetchUser(user) {
-  if (user.length !== 20) return { error: "Bad user ID" }
+  if (user.length !== 28) return { error: "Bad user ID" }
   const userId = doc(db, "users", user);
   const querySnapshot = await getDoc(userId);
   if (!querySnapshot.data()) return { error: "No such user!" }
@@ -46,9 +46,9 @@ async function changeUser(id, newUser) {
   const userId = doc(db, "users", id);
   const querySnapshot = await getDoc(userId);
   if (!querySnapshot.data()) return { error: "No such user!" }
-  const num = Object.values(querySnapshot.data().reviews).length
+  const num = (!querySnapshot.data().reviews) ? null : Object.values(querySnapshot.data().reviews).length
   const newData = {
-    user: querySnapshot.data().user,
+    username: querySnapshot.data().username,
     reviews: reviews ? {...querySnapshot.data().reviews,[num]: reviews} : querySnapshot.data().reviews,
   };
   await updateDoc(userId, newData);
