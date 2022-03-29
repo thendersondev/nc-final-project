@@ -12,7 +12,7 @@ export default function SearchPage() {
           style={searchStyles.input}
           placeholder="what you looking for bro?"
         />
-        {/* <Button title="Go to home" onPress={() => navigation.navigate('Home')} /> */}
+
         <StatusBar style="auto" />
       </View>
     </KeyboardAwareScrollView>
