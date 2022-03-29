@@ -60,6 +60,7 @@ const LoginPage = () => {
     >
       <View style={styles.inputContainer}>
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Username"
           value={username}
           onChangeText={(text) => {
@@ -68,6 +69,7 @@ const LoginPage = () => {
           style={styles.input}
         />
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Email"
           value={email}
           onChangeText={(text) => {
@@ -77,6 +79,7 @@ const LoginPage = () => {
         />
 
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Password"
           value={password}
           onChangeText={(text) => {
