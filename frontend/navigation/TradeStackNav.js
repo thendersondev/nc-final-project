@@ -4,6 +4,7 @@ import PostTrade from "../Components/PostTrade";
 import PostReview from "../Components/PostReview";
 import UserPage from "../Components/UserPage";
 import TradePage from "../screens/TradePage";
+import ChatsPage from "../screens/ChatsPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,27 +14,32 @@ export default function TradeStackNavigator() {
       <Stack.Screen
         name="Trade"
         component={TradePage}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Post"
         component={PostTrade}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Review"
         component={PostReview}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Message"
         component={MessagePage}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Profile"
         component={UserPage}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Chats"
+        component={ChatsPage}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
