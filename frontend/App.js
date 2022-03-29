@@ -1,10 +1,11 @@
-import 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import MyDrawer from './navigation/Drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { LoginContext } from './Contexts/LoginContext';
-import { LogBox } from 'react-native';
+import "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import MyDrawer from "./navigation/Drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import React, { useState } from "react";
+import { LoginContext } from "./Contexts/LoginContext";
+import { LogBox } from "react-native";
+import LogInStackNav from "./navigation/LogInStackNav";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(null);
@@ -12,7 +13,8 @@ export default function App() {
     <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
       <SafeAreaProvider style={{ flex: 1 }}>
         <NavigationContainer>
-          <MyDrawer />
+          <LogInStackNav />
+          {/* <MyDrawer /> */}
         </NavigationContainer>
       </SafeAreaProvider>
     </LoginContext.Provider>

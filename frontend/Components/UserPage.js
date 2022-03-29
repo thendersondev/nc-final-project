@@ -48,23 +48,16 @@ export default function UserPage({
           )}
           keyExtractor={(item) => item.id}
         />
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Message", { username });
+          }}
+        >
+          <Text style={styles.text}>Message</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("Message", { username });
-        }}
-      >
-        <Text style={styles.text}>Message</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("Trade");
-        }}
-      >
-        <Text style={styles.text}>Go back to trades</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
@@ -99,7 +92,6 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-
     width: "100%",
   },
   accountInfo: {
@@ -125,20 +117,25 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingLeft: 5,
   },
-
   accountInfoHeadings: {
+    textAlign: "center",
     color: "grey",
     fontWeight: "bold",
     fontSize: 18,
+  },
+  buttonWrap: {
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: "#F1EEED",
+    flexDirection: "row",
   },
   comments: {
     flex: 1,
     backgroundColor: "#F1EEED",
     width: "100%",
     alignContent: "center",
+    alignItems: "center",
   },
-  signOutContainer: { backgroundColor: "white" },
-  signOutText: {},
   button: {
     backgroundColor: "#694fad",
     borderRadius: 10,
@@ -146,8 +143,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     justifyContent: "center",
     marginHorizontal: 5,
+    width: 120,
     height: 50,
     padding: 10,
+    marginBottom: 10,
   },
   text: {
     textAlign: "center",

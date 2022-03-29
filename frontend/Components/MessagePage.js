@@ -1,7 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  addDoc,
+  onSnapshot,
+  orderBy,
+  getDocs,
+} from "firebase/firestore";
 
 export default function MessagePage({
   navigation,
@@ -12,24 +27,55 @@ export default function MessagePage({
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: "Oi mate you still got got abes oddessey?",
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: "React Native",
-          avatar: "https://placeimg.com/140/140/any",
-        },
-      },
-    ]);
+    const collRef = collection(db, "chats");
+    const q = query(collRef, orderBy("createdAt", "desc"));
+    const fetch = async () => {
+      const docs = await getDocs(q);
+      const readValues = [];
+      docs.forEach((doc) => {
+        readValues.push({
+          id: doc.data().id,
+          createdAt: doc.data().createdAt.toDate(),
+          text: doc.data().text,
+          user: doc.data().user,
+        });
+      });
+      setMessages(readValues);
+    };
+    return fetch();
+  }, []);
+
+  useLayoutEffect(() => {
+    const collRef = collection(db, "chats");
+    const q = query(collRef, orderBy("createdAt", "desc"));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      console.log(snapshot);
+      setMessages(
+        snapshot.docs.map((doc) => ({
+          id: doc.data().id,
+          createdAt: doc.data().createdAt.toDate(),
+          text: doc.data().text,
+          user: doc.data().user,
+        }))
+      );
+    });
+    return unsubscribe();
   }, []);
 
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
+
+    const { _id, createdAt, text, user } = messages[0];
+
+    addDoc(collection(db, "chats"), {
+      _id,
+      createdAt,
+      text,
+      user,
+    });
   }, []);
 
   return (
@@ -44,9 +90,12 @@ export default function MessagePage({
           showAvatarForEveryMessage={true}
           onSend={(messages) => onSend(messages)}
           user={{
-            _id: auth?.currentUser?.email,
-            name: auth?.currentUser?.displayName,
-            avatar: auth?.currentUser?.photoURL,
+            // _id: auth?.currentUser?.email,
+            // name: auth?.currentUser?.displayName,
+            // avatar: auth?.currentUser?.photoURL,
+            _id: "hi",
+            name: "tom",
+            avatar: "biscuits",
           }}
         />
       </View>
@@ -58,12 +107,6 @@ export default function MessagePage({
           }}
         >
           <Text style={styles.text}>View profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Trade")}
-        >
-          <Text style={styles.text}>Back</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -77,7 +120,7 @@ const styles = StyleSheet.create({
   },
   buttonWrap: {
     flexDirection: "row",
-    alignSelf: "space-evenly",
+    alignSelf: "center",
   },
   messages: {
     borderRadius: 10,
