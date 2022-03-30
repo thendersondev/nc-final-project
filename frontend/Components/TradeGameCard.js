@@ -10,8 +10,19 @@ import styles from "../styles/TradeGameCardStyles";
 import { removeTrade } from "../models/model_trades";
 import { auth } from "../firebase";
 
-const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
+const TradeGameCard = (
+  { item, index },
+  refresh,
+  setRefresh,
+  navigation,
+  urls
+) => {
   const { User, userUID, location, platform, price, title, key } = item;
+
+  // urls are returned asynchronously, no guaranteed order
+  const [uri] = urls.filter((url) => {
+    return url.includes(userUID) && url.includes(title.replaceAll(" ", "-"));
+  });
 
   const deleteOption =
     userUID === auth.currentUser.uid ? (
@@ -47,23 +58,20 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
         <Text style={styles.buttontext}>Delete</Text>
       </TouchableOpacity>
     ) : (
-    <TouchableOpacity
-    style={styles.button}
-    onPress={() => {
-      navigation.navigate("Message", { User, userUID });
-    }}
-    >
-      <Text style={styles.buttontext}>Message</Text>
-    </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Message", { User, userUID });
+        }}
+      >
+        <Text style={styles.buttontext}>Message</Text>
+      </TouchableOpacity>
     );
 
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
-        <Image
-          style={styles.image}
-          source={require("../assets/placeholder.png")}
-        ></Image>
+        <Image style={styles.image} source={{ uri }}></Image>
         {deleteOption}
       </View>
 

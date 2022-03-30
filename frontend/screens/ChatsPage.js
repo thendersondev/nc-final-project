@@ -23,18 +23,6 @@ const ChatsPage = () => {
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const mockChats = [
-    {
-      User: "test2",
-      userUID: "F1KzoQUobUMbR2c5K0WrejYGJpw1",
-    },
-    {
-      User: "test2",
-      userUID: "fX5XTxQ8xiUI1rtZSw5s9mGvV292",
-    },
-    { User: "test3", userUID: "yvsEiUH7Sdcc29MX3PLpqKuG4Uw1" },
-  ];
-
   useEffect(() => {
     setLoading(true);
     const userRef = doc(db, "users", auth.currentUser.uid);
