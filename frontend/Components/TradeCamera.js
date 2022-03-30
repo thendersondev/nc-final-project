@@ -14,8 +14,6 @@ import { Camera } from "expo-camera";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase.js";
 
-// initialise app with firebase config
-
 let camera = Camera;
 export default function TradeCamera(props) {
   const [startCamera, setStartCamera] = React.useState(false);
