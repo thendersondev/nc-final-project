@@ -43,20 +43,9 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
   },
-  button_delete: {
-    backgroundColor: '#AA0000',
-    borderRadius: 10,
-    fontWeight: '700',
-    fontSize: 16,
-    justifyContent: 'center',
-    marginHorizontal: 10,
-    height: 50,
-    padding: 10,
-    marginLeft: 1,
-  },
-  buttontext: {
-    color: '#F0EDF6',
-    fontWeight: '500',
+  buttonText: {
+    color: "#F0EDF6",
+    fontWeight: "500",
     fontSize: 16,
     textAlign: "center",
   },
@@ -76,11 +65,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     flexShrink: 1,
   },
-  alert_button: {
-    flex: 1,
-    justifyContent: "space-around",
-    alignItems: "center"
-  }
 });
 
 export default styles;

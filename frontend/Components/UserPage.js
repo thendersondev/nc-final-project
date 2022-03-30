@@ -3,18 +3,20 @@ import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 import styles from "../styles/UserPageStyles";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserPage({
   navigation,
   route: {
-    params: { userUID },
+    params: { username },
   },
 }) {
   const [comments, setComments] = useState([]);
   const [username, setUsername] = useState("");
   const none = "<none>";
 
+
+  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
   useEffect(() => {
     fetchUser(userUID).then((userData) => {
       const newComments = !Object.values(userData[userUID].reviews)
@@ -43,9 +45,9 @@ export default function UserPage({
           <View style={styles.accountInfoGrid}>
             <View style={styles.accountInfoGridTop}>
               <View>
-                <Text style={styles.accountInfoHeadings}>Listings: {none}</Text>
-                <Text style={styles.accountInfoHeadings}>Ratings: {none}</Text>
-                <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
+                <Text style={styles.accountInfoHeadings}>Listings:</Text>
+                <Text style={styles.accountInfoHeadings}>Ratings:</Text>
+                <Text style={styles.accountInfoHeadings}>Email:</Text>
               </View>
             </View>
           </View>

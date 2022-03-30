@@ -40,7 +40,7 @@ export default function TradePage() {
           <Text style={styles.text}>Post an item</Text>
         </TouchableOpacity>
         <FlatList
-          data={trades}
+          data={mockTradeData}
           renderItem={(item, index, separators) =>
             TradeGameCard(item, refresh, setRefresh, navigation)
           }
