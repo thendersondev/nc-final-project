@@ -10,7 +10,7 @@ import styles from "../styles/TradeGameCardStyles";
 import { removeTrade } from "../models/model_trades";
 import { auth } from "../firebase";
 
-const TradeGameCard = ({ item }, navigation) => {
+const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
   const { User, userUID, location, platform, price, title, key } = item;
 
   const deleteOption =
@@ -18,7 +18,7 @@ const TradeGameCard = ({ item }, navigation) => {
       <TouchableOpacity
         style={styles.button_delete}
         onPress={() => {
-          alert(
+          Alert.alert(
             "Delete this trade?",
             "This action cannot be undone",
             [
@@ -26,7 +26,7 @@ const TradeGameCard = ({ item }, navigation) => {
                 text: "OK",
                 onPress: () => {
                   removeTrade(key);
-                  navigation.navigate("Trade");
+                  setRefresh(refresh + 1);
                 },
                 style: "alert_button",
               },
@@ -61,7 +61,7 @@ const TradeGameCard = ({ item }, navigation) => {
             navigation.navigate("Message", { User, userUID });
           }}
         >
-          <Text style={styles.buttonText}>Message</Text>
+          <Text style={styles.buttontext}>Message</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -69,7 +69,7 @@ const TradeGameCard = ({ item }, navigation) => {
             navigation.navigate("Profile", { User, userUID });
           }}
         >
-          <Text style={styles.buttonText}>View Profile</Text>
+          <Text style={styles.buttontext}>View Profile</Text>
         </TouchableOpacity>
       </View>
 

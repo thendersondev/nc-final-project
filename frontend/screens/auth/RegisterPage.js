@@ -43,6 +43,7 @@ const LoginPage = () => {
       })
       .then(() => {
         setDoc(doc(db, "users", auth.currentUser.uid), {
+          chats: [],
           reviews: [],
           username: username,
           avatarUrl: avatar

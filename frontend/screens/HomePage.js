@@ -6,6 +6,7 @@ import { useState } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { FeaturedGames } from "../Components/FeaturedGames";
 import FadeInView from "../Components/FadeInView";
+import { Appbar, Provider } from "react-native-paper";
 
 export default function HomePage() {
   const fakeRandom = [

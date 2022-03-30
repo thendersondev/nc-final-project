@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   collection,
   collectionGroup,
@@ -12,22 +13,24 @@ import {
 import { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { Appbar, Provider } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import { ChatCard } from "../Components/ChatCard";
 import { auth, db } from "../firebase";
 
 const ChatsPage = () => {
+  const navigation = useNavigation();
   const [chats, setChats] = useState([]);
   const mockChats = [
     {
-      user: "test2",
-      uid: "F1KzoQUobUMbR2c5K0WrejYGJpw1",
+      User: "test2",
+      userUID: "F1KzoQUobUMbR2c5K0WrejYGJpw1",
     },
     {
-      user: "test2",
-      uid: "fX5XTxQ8xiUI1rtZSw5s9mGvV292",
+      User: "test2",
+      userUID: "fX5XTxQ8xiUI1rtZSw5s9mGvV292",
     },
-    { user: "test3", uid: "yvsEiUH7Sdcc29MX3PLpqKuG4Uw1" },
+    { User: "test3", userUID: "yvsEiUH7Sdcc29MX3PLpqKuG4Uw1" },
   ];
   useEffect(() => {
     // const collRef = doc(db, "chats", auth.currentUser.uid);
@@ -43,24 +46,29 @@ const ChatsPage = () => {
   }, []);
 
   return (
-    <View style={styles.mainbox}>
-      <FlatList
-        data={mockChats}
-        renderItem={(item) => {
-          <ChatCard item={item} />;
-        }}
-        keyExtractor={uuidv4}
-      />
-    </View>
+    <Provider>
+      <Appbar.Header style={styles.Appbar}>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title="Your chats" />
+      </Appbar.Header>
+      <View style={styles.mainbox}>
+        <FlatList
+          data={mockChats}
+          renderItem={(item) => ChatCard(item, navigation)}
+          keyExtractor={uuidv4}
+        />
+      </View>
+    </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  mainbox: {
-    // textAlign: "center",
-    // margin: 0,
-    // flex: 1,
-    // justifyContent: "space-between",
+  Appbar: {
+    backgroundColor: "#694fad",
   },
 });
 

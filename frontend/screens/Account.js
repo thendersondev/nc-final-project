@@ -5,6 +5,7 @@ import { auth, signOut } from "../firebase";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
+import { Provider, Appbar } from "react-native-paper";
 
 export default function Account() {
   const [username, setUsername] = useState("");
@@ -38,26 +39,30 @@ export default function Account() {
 
   if (loading) return <View></View>;
   return (
-    <View style={styles.pageContainer}>
-      <View style={styles.header}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: avatar
-                ? avatar
-                : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
-            }}
-          ></Image>
-          <Text style={styles.username}>{username} </Text>
-          <TouchableOpacity
-            onPress={handleSignOut}
-            style={styles.signOutContainer}
-          >
-            <Text style={styles.signOutText}>SignOut</Text>
-          </TouchableOpacity>
+    <Provider>
+      <Appbar.Header style={styles.Appbar}>
+        <Appbar.Content title="Account" />
+      </Appbar.Header>
+      <View style={styles.pageContainer}>
+        <View style={styles.header}>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: avatar
+                  ? avatar
+                  : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
+              }}
+            ></Image>
+            <Text style={styles.username}>{username} </Text>
+            <TouchableOpacity
+              onPress={handleSignOut}
+              style={styles.signOutContainer}
+            >
+              <Text style={styles.signOutText}>SignOut</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
 
       <View style={styles.accountInfo}>
         <View>
@@ -70,19 +75,19 @@ export default function Account() {
             </View>
           </View>
         </View>
-      </View>
-      <View style={styles.comments}>
-        <Text style={styles.accountInfoHeader}>Comments:</Text>
-        <FlatList
-          data={mockComments}
-          renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+        <View style={styles.comments}>
+          <Text style={styles.accountInfoHeader}>Comments:</Text>
+          <FlatList
+            data={mockComments}
+            renderItem={({ item }) => (
+              <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
 
-      <StatusBar style="auto" />
-    </View>
+        <StatusBar style="auto" />
+      </View>
+    </Provider>
   );
 }

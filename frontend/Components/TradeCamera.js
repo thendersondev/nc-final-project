@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -10,72 +10,63 @@ import {
   Image,
 } from "react-native";
 import { Camera } from "expo-camera";
-
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase.js";
 
-// initialise app with firebase config
-
 let camera = Camera;
-export default function TradeCamera() {
+export default function TradeCamera(props) {
   const [startCamera, setStartCamera] = React.useState(false);
   const [previewVisible, setPreviewVisible] = React.useState(false);
   const [capturedImage, setCapturedImage] = React.useState(null);
   const [cameraType, setCameraType] = React.useState(
     Camera.Constants.Type.back
   );
-  const [flashMode, setFlashMode] = React.useState('off');
+  const [flashMode, setFlashMode] = React.useState("off");
 
   const __startCamera = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
-    if (status === 'granted') {
+    if (status === "granted") {
       setStartCamera(true);
     } else {
-      Alert.alert('Camera permissions not granted');
+      Alert.alert("Camera permissions not granted");
     }
   };
 
   const __takePicture = async () => {
-    // console.log("taking picture");
-    // convert to base64 so can be stored on firebase storage
     const photo = await camera.takePictureAsync({ base64: true, quality: 0.1 });
-    // console.log(photo, "data here");
     setPreviewVisible(true);
     //setStartCamera(false)
     setCapturedImage(photo);
 
-    // format of auth.currentUser.uid-trade-title
     if (!photo.cancelled) {
-      // const storage = getStorage();
-      const imageRef = ref(storage, "image.jpg");
-
+      const gameTitleWithoutSpaces = props.gameTitle.replace(/\s+/g, "-");
+      const imageName = `${props.userUID}-${gameTitleWithoutSpaces}`;
+      const imageRef = ref(storage, imageName);
       const img = await fetch(photo.uri);
       const bytes = await img.blob();
-
       await uploadBytes(imageRef, bytes);
     }
   };
 
   const __retakePicture = () => {
-    // console.log("retake");
     setCapturedImage(null);
     setPreviewVisible(false);
     __startCamera();
   };
   const __handleFlashMode = () => {
-    if (flashMode === 'on') {
-      setFlashMode('off');
-    } else if (flashMode === 'off') {
-      setFlashMode('on');
+    if (flashMode === "on") {
+      setFlashMode("off");
+    } else if (flashMode === "off") {
+      setFlashMode("on");
     } else {
-      setFlashMode('auto');
+      setFlashMode("auto");
     }
   };
   const __switchCamera = () => {
-    if (cameraType === 'back') {
-      setCameraType('front');
+    if (cameraType === "back") {
+      setCameraType("front");
     } else {
-      setCameraType('back');
+      setCameraType("back");
     }
   };
   return (
@@ -84,7 +75,7 @@ export default function TradeCamera() {
         <View
           style={{
             flex: 1,
-            width: '100%',
+            width: "100%",
           }}
         >
           {previewVisible && capturedImage ? (
@@ -104,25 +95,25 @@ export default function TradeCamera() {
               <View
                 style={{
                   flex: 1,
-                  width: '100%',
-                  backgroundColor: 'transparent',
-                  flexDirection: 'row',
+                  width: "100%",
+                  backgroundColor: "transparent",
+                  flexDirection: "row",
                 }}
               >
                 <View
                   style={{
-                    position: 'absolute',
-                    left: '5%',
-                    top: '10%',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    position: "absolute",
+                    left: "5%",
+                    top: "10%",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
                   }}
                 >
                   <TouchableOpacity
                     onPress={__handleFlashMode}
                     style={{
-                      backgroundColor: flashMode === 'off' ? '#000' : '#fff',
-                      borderRadius: '75%',
+                      backgroundColor: flashMode === "off" ? "#000" : "#fff",
+                      borderRadius: "75%",
                       height: 30,
                       width: 30,
                     }}
@@ -139,7 +130,7 @@ export default function TradeCamera() {
                     onPress={__switchCamera}
                     style={{
                       marginTop: 20,
-                      borderRadius: '50%',
+                      borderRadius: "50%",
                       height: 35,
                       width: 35,
                     }}
@@ -149,26 +140,26 @@ export default function TradeCamera() {
                         fontSize: 20,
                       }}
                     >
-                      {cameraType === 'front' ? '🔄' : '🔄'}
+                      {cameraType === "front" ? "🔄" : "🔄"}
                     </Text>
                   </TouchableOpacity>
                 </View>
                 <View
                   style={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: 0,
-                    flexDirection: 'row',
+                    flexDirection: "row",
                     flex: 1,
-                    width: '100%',
+                    width: "100%",
                     padding: 20,
-                    justifyContent: 'space-between',
+                    justifyContent: "space-between",
                   }}
                 >
                   <View
                     style={{
-                      alignSelf: 'center',
+                      alignSelf: "center",
                       flex: 1,
-                      alignItems: 'center',
+                      alignItems: "center",
                     }}
                   >
                     <TouchableOpacity
@@ -178,7 +169,7 @@ export default function TradeCamera() {
                         height: 70,
                         bottom: 0,
                         borderRadius: 50,
-                        backgroundColor: '#fff',
+                        backgroundColor: "#fff",
                       }}
                     />
                   </View>
@@ -201,17 +192,17 @@ export default function TradeCamera() {
           style={{
             width: 105,
             borderRadius: 10,
-            backgroundColor: '#694fad',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundColor: "#694fad",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
             height: 30,
           }}
         >
           <Text
             style={{
-              color: '#dcdcdc',
-              textAlign: 'center',
+              color: "#dcdcdc",
+              textAlign: "center",
             }}
           >
             Add photo
@@ -228,22 +219,20 @@ export default function TradeCamera() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#f2f2f2",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
 const CameraPreview = ({ photo, retakePicture }) => {
-  // console.log(photo);
-  // console.log(retakePicture);
   return (
     <View
       style={{
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         flex: 1,
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
       }}
     >
       <ImageBackground
@@ -255,15 +244,15 @@ const CameraPreview = ({ photo, retakePicture }) => {
         <View
           style={{
             flex: 1,
-            flexDirection: 'column',
+            flexDirection: "column",
             padding: 15,
-            justifyContent: 'flex-end',
+            justifyContent: "flex-end",
           }}
         >
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
             <TouchableOpacity
@@ -272,13 +261,13 @@ const CameraPreview = ({ photo, retakePicture }) => {
                 width: 130,
                 height: 40,
 
-                alignItems: 'center',
+                alignItems: "center",
                 borderRadius: 4,
               }}
             >
               <Text
                 style={{
-                  color: '#dcdcdc',
+                  color: "#dcdcdc",
                   fontSize: 20,
                 }}
               >
