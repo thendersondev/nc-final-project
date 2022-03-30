@@ -15,13 +15,13 @@ import { Appbar, Provider } from "react-native-paper";
 export default function MessagePage({
   navigation,
   route: {
-    params: { username, uid },
+    params: { User, userUID },
   },
 }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const collRef = collection(db, `chats/${auth.currentUser.uid}/${uid}`);
+    const collRef = collection(db, `chats/${auth.currentUser.uid}/${userUID}`);
     const q = query(collRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -44,14 +44,14 @@ export default function MessagePage({
 
     const { _id, createdAt, text, user } = messages[0];
 
-    addDoc(collection(db, `chats/${auth.currentUser.uid}/${uid}`), {
+    addDoc(collection(db, `chats/${auth.currentUser.uid}/${userUID}`), {
       _id,
       createdAt,
       text,
       user,
     });
 
-    addDoc(collection(db, `chats/${uid}/${auth.currentUser.uid}`), {
+    addDoc(collection(db, `chats/${userUID}/${auth.currentUser.uid}`), {
       _id,
       createdAt,
       text,
@@ -67,11 +67,11 @@ export default function MessagePage({
             navigation.goBack();
           }}
         />
-        <Appbar.Content title={username} />
+        <Appbar.Content title={User} />
         <Appbar.Action
           icon="account-box"
           onPress={() => {
-            navigation.navigate("Profile", { username });
+            navigation.navigate("Profile", { User });
           }}
         />
       </Appbar.Header>
