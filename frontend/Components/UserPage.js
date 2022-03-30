@@ -8,15 +8,13 @@ import { useEffect, useState } from "react";
 export default function UserPage({
   navigation,
   route: {
-    params: { username },
+    params: { User, userUID },
   },
 }) {
   const [comments, setComments] = useState([]);
   const [username, setUsername] = useState("");
   const none = "<none>";
 
-
-  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
   useEffect(() => {
     fetchUser(userUID).then((userData) => {
       const newComments = !Object.values(userData[userUID].reviews)
@@ -70,7 +68,7 @@ export default function UserPage({
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Review", { username, userUID });
+            navigation.navigate("Review", { User, userUID });
           }}
         >
           <Text style={styles.text}>Review User</Text>
@@ -78,7 +76,7 @@ export default function UserPage({
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Message", { username, userUID });
+            navigation.navigate("Message", { User, userUID });
           }}
         >
           <Text style={styles.text}>Message</Text>
