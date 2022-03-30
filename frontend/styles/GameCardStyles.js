@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   surroundingView: {
@@ -6,63 +6,66 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "white",
-    width: "95%",
-    margin: "2%",
-    borderColor: "#694fad",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    width: '95%',
+    margin: '2%',
+    borderColor: '#694fad',
   },
   image: {
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
   },
   cardLeft: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   cardRight: {
-    flexDirection: "column",
+    flexDirection: 'column',
     flexShrink: 1,
   },
   cardRightTop: {
     flexShrink: 1,
   },
   cardRightBottom: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   button: {
-    backgroundColor: "#7b5dc7",
+    backgroundColor: '#7b5dc7',
     borderRadius: 10,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
-    justifyContent: "center",
+    justifyContent: 'center',
     marginHorizontal: 5,
     height: 50,
     padding: 4,
+    marginBottom: 2,
   },
   flatlist: {
-    width: "95%",
+    width: '95%',
   },
   best: {
-    backgroundColor: "#694fad",
+    backgroundColor: '#694fad',
     borderWidth: 2,
-    borderColor: "#9acd32",
+    borderColor: '#9acd32',
     height: 55,
   },
   text: {
-    color: "#F0EDF6",
-    fontWeight: "500",
+    color: '#F0EDF6',
+    fontWeight: '500',
     fontSize: 16,
   },
   gameTitle: {
-    color: "#694FAD",
-    fontWeight: "700",
+    color: '#694FAD',
+    fontWeight: '700',
     fontSize: 16,
     paddingBottom: 10,
     flexShrink: 1,
+    marginRight: 15,
+    marginBottom: -7,
   },
 });
 
