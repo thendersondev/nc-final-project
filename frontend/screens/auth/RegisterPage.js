@@ -24,13 +24,13 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
   const navigation = useNavigation();
-  console.log(auth.currentUser);
+
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert(`Account Created! You have been signed in as: ${username} `);
         const user = userCredentials.user;
-
+        console.log(user);
         updateProfile(user, {
           displayName: username,
           photoURL: avatar
@@ -43,8 +43,11 @@ const LoginPage = () => {
       })
       .then(() => {
         setDoc(doc(db, "users", auth.currentUser.uid), {
+          reviews: [],
           username: username,
-          avatarUrl: "default",
+          avatarUrl: avatar
+            ? avatar
+            : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
         });
       })
       .then(() => {
@@ -66,6 +69,7 @@ const LoginPage = () => {
     >
       <View style={styles.inputContainer}>
         <TextInput
+          placeholderTextColor={"#694fad"}
           placeholder="Username"
           value={username}
           onChangeText={(text) => {
@@ -74,6 +78,7 @@ const LoginPage = () => {
           style={styles.input}
         />
         <TextInput
+          placeholderTextColor={"#694fad"}
           placeholder="Email"
           value={email}
           onChangeText={(text) => {
@@ -83,6 +88,7 @@ const LoginPage = () => {
         />
 
         <TextInput
+          placeholderTextColor={"#694fad"}
           placeholder="Password"
           value={password}
           onChangeText={(text) => {

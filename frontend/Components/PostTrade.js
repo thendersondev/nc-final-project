@@ -14,6 +14,7 @@ import { db, auth } from ".././firebase";
 import { doc, addDoc, getDoc, collection } from "firebase/firestore";
 import TradeCamera from "./TradeCamera";
 
+
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
   const [platformText, setPlatformText] = React.useState(null);
@@ -64,7 +65,7 @@ export default function PostTrade({ navigation }) {
     } else {
       // POST TRADE TO FIREBASE HERE
       const userRef = doc(db, "users", auth.currentUser.uid);
-      const userSnap = await getDoc(docRef);
+      const userSnap = await getDoc(userRef);
 
       const docRef = addDoc(collection(db, "trades"), {
         title: data.title,

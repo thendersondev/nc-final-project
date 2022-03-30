@@ -12,17 +12,19 @@ export default function UserPage({
   },
 }) {
   const [comments, setComments] = useState([]);
+  const [username, setUsername] = useState("");
+  const none = "<none>";
+
 
   const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
   useEffect(() => {
-    fetchUser(id)
-      .then((userData) => {
-        const newComments = !Object.values(userData[id].reviews)
-          ? []
-          : Object.values(userData[id].reviews);
-        setComments(newComments);
-      })
-      .catch((err) => console.log(err));
+    fetchUser(userUID).then((userData) => {
+      const newComments = !Object.values(userData[userUID].reviews)
+        ? []
+        : Object.values(userData[userUID].reviews);
+      setComments(newComments);
+      setUsername(userData[userUID].username);
+    });
   }, []);
 
   return (
@@ -53,17 +55,22 @@ export default function UserPage({
       </View>
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
-                <FlatList
+        <FlatList
           data={comments}
           renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
+            <Text
+              style={styles.accountInfoHeadings}
+              key={`comm${item.body}key`}
+            >
+              {item.body}
+            </Text>
           )}
           keyExtractor={(item) => comments.indexOf(item)}
         />
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Review", { username, id });
+            navigation.navigate("Review", { username, userUID });
           }}
         >
           <Text style={styles.text}>Review User</Text>
@@ -71,7 +78,7 @@ export default function UserPage({
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Message", { username });
+            navigation.navigate("Message", { username, userUID });
           }}
         >
           <Text style={styles.text}>Message</Text>
