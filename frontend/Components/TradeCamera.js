@@ -38,7 +38,6 @@ export default function TradeCamera(props) {
     //setStartCamera(false)
     setCapturedImage(photo);
 
-    // format of auth.currentUser.uid-trade-title
     if (!photo.cancelled) {
       const gameTitleWithoutSpaces = props.gameTitle.replace(/\s+/g, "-");
       const imageName = `${props.userUID}-${gameTitleWithoutSpaces}`;
