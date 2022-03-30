@@ -1,8 +1,40 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import styles from '../styles/TradeGameCardStyles';
+import { removeTrade } from '../models/model_trades';
 
 const TradeGameCard = ({ item }, navigation) => {
-  const { username } = item;
+  const { user, userUID, location, platform, price, title, key } = item;
+
+  const deleteOption = (userUID !== key) ? (
+    <TouchableOpacity
+            style={styles.button_delete}
+            onPress={() => {
+              Alert.alert(
+                "Delete this trade?",
+                "This action cannot be undone",
+                [
+                  {
+                  text: "OK" ,
+                  onPress: () => {
+                    removeTrade(key)
+                    navigation.navigate('Trade')
+                  },
+                  style: "alert_button"
+                },{
+                  text: "Cancel" , 
+                  onPress: () => {return},
+                  style: "alert_button"
+                }],
+                {
+                  cancelable: true
+                }
+                );
+            }}
+          >
+            <Text style={styles.text}>Delete</Text>
+          </TouchableOpacity>
+  ) : null
+
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -17,9 +49,8 @@ const TradeGameCard = ({ item }, navigation) => {
           <Text style={styles.gameTitle}>
             {item.title} - ({item.platform})
           </Text>
-          <Text style={styles.gameDetails}>User: {item.username}</Text>
+          <Text style={styles.gameDetails}>User: {item.user}</Text>
           <Text style={styles.gameDetails}>Price: {item.price}</Text>
-          <Text style={styles.gameDetails}>Condition: {item.condition}</Text>
           <Text style={styles.gameDetails}>Location: {item.location}</Text>
         </View>
 
@@ -32,10 +63,11 @@ const TradeGameCard = ({ item }, navigation) => {
           >
             <Text style={styles.text}>Message</Text>
           </TouchableOpacity>
+          {deleteOption}
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              navigation.navigate('Profile', { username });
+              navigation.navigate('Profile', {userUID});
             }}
           >
             <Text style={styles.text}>View Profile</Text>
