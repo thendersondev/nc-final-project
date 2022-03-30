@@ -12,6 +12,8 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from ".././firebase";
 import { doc, addDoc, getDoc, collection } from "firebase/firestore";
+import TradeCamera from "./TradeCamera";
+
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -188,11 +190,19 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
-
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
         ) : (
-          <Button title="Submit" onPress={handleSubmit} />
+          <>
+            <TradeCamera
+              userUID={auth.currentUser.uid}
+              gameTitle={data.title}
+            />
+            <View style={styles.space} />
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.text}>Submit Trade</Text>
+            </TouchableOpacity>
+          </>
         )}
         <TouchableOpacity
           style={styles.button}

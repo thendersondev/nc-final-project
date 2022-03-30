@@ -30,15 +30,13 @@ async function fetchTrade(trade) {
 }
 
 async function addTrade(newTrade) {
-  const {user, title, location, price, userUID, platform} = newTrade
-  if (!title || !user || !location || !price || !userUID || !platform) return { error: "Bad submission" };
+  const {user, item, location, price} = newTrade
+  if (!item || !user || !location || !price) return { error: "Bad submission" };
   const newDoc = await addDoc(collection(db, "trades"), {
-    title: title,
+    item: item,
     user: user,
     location: location,
     price: price,
-    userUID: userUID,
-    platform: platform,
   });
   const newRef = await getDoc(doc(db, "trades", newDoc.id));
   return { [newDoc.id]: newRef.data() };
