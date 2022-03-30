@@ -93,6 +93,7 @@ export default function PostTrade({ navigation }) {
       setPlatformText(null);
       setLocationText(null);
       setPriceText(null);
+      setTimeout(function goBackTrades() {navigation.navigate("Trade")},2000)
     }
   };
 

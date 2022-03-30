@@ -1,54 +1,40 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import styles from "../styles/TradeGameCardStyles";
-import { removeTrade } from "../models/model_trades";
-import { auth } from "../firebase";
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import styles from '../styles/TradeGameCardStyles';
+import { removeTrade } from '../models/model_trades';
+import { auth } from '../firebase';
 
-const TradeGameCard = ({ item }, navigation) => {
-  const { User, userUID, location, platform, price, title, key } = item;
+const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
+  const { user, userUID, location, platform, price, title, key } = item;
 
-  const deleteOption =
-    userUID === auth.currentUser.uid ? (
-      <TouchableOpacity
-        style={styles.button_delete}
-        onPress={() => {
-          alert(
-            "Delete this trade?",
-            "This action cannot be undone",
-            [
-              {
-                text: "OK",
-                onPress: () => {
-                  removeTrade(key);
-                  navigation.navigate("Trade");
-                },
-                style: "alert_button",
-              },
-              {
-                text: "Cancel",
-                onPress: () => {
-                  return;
-                },
-                style: "alert_button",
-              },
-            ],
-            {
-              cancelable: true,
-            }
-          );
-        }}
-      >
-        <Text style={styles.text}>Delete</Text>
-      </TouchableOpacity>
-    ) : null;
-
-  console.log(userUID);
+  const deleteOption = (userUID === auth.currentUser.uid) ? (
+    <TouchableOpacity
+            style={styles.button_delete}
+            onPress={() => {
+              Alert.alert(
+                "Delete this trade?",
+                "This action cannot be undone",
+                [
+                  {
+                  text: "OK" ,
+                  onPress: () => {
+                    removeTrade(key)
+                    setRefresh(refresh+1);
+                  },
+                  style: "alert_button"
+                },{
+                  text: "Cancel" , 
+                  onPress: () => {return},
+                  style: "alert_button"
+                }],
+                {
+                  cancelable: true
+                }
+                );
+            }}
+          >
+            <Text style={styles.text}>Delete</Text>
+          </TouchableOpacity>
+  ) : null
 
   return (
     <View style={styles.surroundingView}>
