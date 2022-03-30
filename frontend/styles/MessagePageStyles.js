@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   Appbar: {
-    backgroundColor: "#694fad",
+    backgroundColor: '#694fad',
   },
   wrapper: {
     justifyContent: 'center',
@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
   },
 
   messages: {
-    textAlign: "center",
+    textAlign: 'center',
     margin: 0,
     flex: 1,
-    justifyContent: "space-between",
-
+    justifyContent: 'space-between',
+    color: '#694FAD',
   },
 });
 
