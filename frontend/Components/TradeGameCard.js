@@ -18,7 +18,7 @@ const TradeGameCard = ({ item }, navigation) => {
       <TouchableOpacity
         style={styles.button_delete}
         onPress={() => {
-          Alert.alert(
+          alert(
             "Delete this trade?",
             "This action cannot be undone",
             [
@@ -47,6 +47,8 @@ const TradeGameCard = ({ item }, navigation) => {
         <Text style={styles.text}>Delete</Text>
       </TouchableOpacity>
     ) : null;
+
+  console.log(userUID);
 
   return (
     <View style={styles.surroundingView}>
