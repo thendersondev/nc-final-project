@@ -18,6 +18,7 @@ export default function UserPage({
 
   useEffect(() => {
     fetchUser(userUID).then((userData) => {
+      console.log(userData);
       const newComments = !Object.values(userData[userUID].reviews)
         ? []
         : Object.values(userData[userUID].reviews);
@@ -53,16 +54,13 @@ export default function UserPage({
           </View>
         </View>
 
-        <View style={styles.accountInfo}>
-          <View>
-            <Text style={styles.accountInfoHeader}>Account Details</Text>
-            <View style={styles.accountInfoGrid}>
-              <View style={styles.accountInfoGridTop}>
-                <View>
-                  <Text style={styles.accountInfoHeadings}>Listings:</Text>
-                  <Text style={styles.accountInfoHeadings}>Ratings:</Text>
-                  <Text style={styles.accountInfoHeadings}>Email:</Text>
-                </View>
+      <View style={styles.accountInfo}>
+        <View>
+          <Text style={styles.accountInfoHeader}>Account Details</Text>
+          <View style={styles.accountInfoGrid}>
+            <View style={styles.accountInfoGridTop}>
+              <View>
+                <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
               </View>
             </View>
           </View>
