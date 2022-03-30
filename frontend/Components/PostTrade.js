@@ -1,4 +1,12 @@
-import { Text, View, Button, TextInput } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+} from "react-native";
+
 import styles from "../styles/TradeStyles";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -62,8 +70,8 @@ export default function PostTrade({ navigation }) {
         platform: data.platform,
         location: data.location,
         price: data.price,
-        userUID:auth.currentUser.uid,
-         User: userSnap.data().username,
+        userUID: auth.currentUser.uid,
+        User: userSnap.data().username,
       });
 
       setCharAlert({
@@ -87,9 +95,9 @@ export default function PostTrade({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
-        <Text style={styles.postItemTitle}>What do you want to trade?</Text>
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.form} pointerEvents={postMsg ? "auto" : "auto"}>
+        <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
             alert.title || charAlert.title
@@ -166,7 +174,7 @@ export default function PostTrade({ navigation }) {
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           onChangeText={(num) =>
             setData((prevData) => {
               return { ...prevData, price: num };
@@ -193,6 +201,6 @@ export default function PostTrade({ navigation }) {
           <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

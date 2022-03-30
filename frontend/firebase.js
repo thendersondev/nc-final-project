@@ -1,4 +1,5 @@
 const { initializeApp, getApp, getApps } = require("firebase/app");
+import { getStorage } from "firebase/storage";
 const { getFirestore } = require("firebase/firestore");
 const {
   getAuth,
@@ -22,6 +23,8 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const db = getFirestore(app);
 
+const storage = getStorage(app);
+
 const auth = getAuth(app);
 
 module.exports = {
@@ -30,4 +33,5 @@ module.exports = {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  storage,
 };
