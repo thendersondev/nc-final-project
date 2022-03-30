@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   signOutText: {
     color: '#694fad',
-    fontWeight: 500,
+    fontWeight: '500',
   },
 });
 
