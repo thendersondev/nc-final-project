@@ -223,7 +223,7 @@ export default function TradeCamera(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f2f2f2",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -278,15 +278,6 @@ const CameraPreview = ({ photo, retakePicture }) => {
                 Re-take
               </Text>
             </TouchableOpacity>
-
-            {/* <Text
-                style={{
-                  color: "#fff",
-                  fontSize: 20,
-                }}
-              >
-                Save
-              </Text> */}
           </View>
         </View>
       </ImageBackground>
