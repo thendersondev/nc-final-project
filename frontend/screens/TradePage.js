@@ -29,15 +29,14 @@ export default function TradePage() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Post')}
-      >
-        <Text style={styles.text}>Post an item</Text>
-      </TouchableOpacity>
-
+      <Text style={styles.pageTitle}>Trade games here!</Text>
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>Trade games here!</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Post')}
+        >
+          <Text style={styles.text}>Post an item</Text>
+        </TouchableOpacity>
         <FlatList
           data={trades}
           renderItem={(item, index, separators) =>

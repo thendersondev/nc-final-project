@@ -40,8 +40,24 @@ const TradeGameCard = ({ item }, navigation) => {
       <View style={styles.cardLeft}>
         <Image
           style={styles.image}
-          source={require('../assets/placeholder.png')}
+          source={require("../assets/placeholder.png")}
         ></Image>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Message", { username });
+          }}
+        >
+          <Text style={styles.buttonText}>Message</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Profile", { username });
+          }}
+        >
+          <Text style={styles.buttonText}>View Profile</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.cardRight}>

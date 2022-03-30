@@ -5,44 +5,50 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+} from "react-native";
+import React, { useState } from "react";
 import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from '../../firebase.js';
-import { useNavigation } from '@react-navigation/core';
-import { db } from '../../firebase.js';
-import { doc, setDoc } from 'firebase/firestore';
-import { useContext } from 'react';
-import { LoginContext } from '../../Contexts/LoginContext.js';
-import styles from '../../styles/RegisterPageStyles';
+} from "../../firebase.js";
+import { useNavigation } from "@react-navigation/core";
+import { db } from "../../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
+import styles from "../../styles/RegisterPageStyles";
+import { updateProfile } from "firebase/auth";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
   const navigation = useNavigation();
-
+  console.log(auth.currentUser);
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert(`Account Created! You have been signed in as: ${username} `);
-      })
-      .then(() => {
-        signInWithEmailAndPassword(auth, email, password);
-        setLoggedIn(auth.currentUser.uid);
-      })
-      .then(() => {
-        setDoc(doc(db, 'users', auth.currentUser.uid), {
-          username: username,
-          avatarUrl: 'default',
+        const user = userCredentials.user;
+
+        updateProfile(user, {
+          displayName: username,
+          photoURL: avatar
+            ? avatar
+            : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
         });
       })
       .then(() => {
-        navigation.navigate('Home');
+        signInWithEmailAndPassword(auth, email, password);
+      })
+      .then(() => {
+        setDoc(doc(db, "users", auth.currentUser.uid), {
+          username: username,
+          avatarUrl: "default",
+        });
+      })
+      .then(() => {
+        navigation.navigate("Account");
       })
       .catch((err) => {
         alert(`Oops something went wrong! ${err.message}`);
@@ -53,13 +59,14 @@ const LoginPage = () => {
     <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
-      keyboardVerticalOffset={Platform.select({
-        ios: () => -300,
-        android: () => -300,
-      })}
+      // keyboardVerticalOffset={Platform.select({
+      //   ios: () => -300,
+      //   android: () => -300,
+      // })}
     >
       <View style={styles.inputContainer}>
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Username"
           value={username}
           onChangeText={(text) => {
@@ -68,6 +75,7 @@ const LoginPage = () => {
           style={styles.input}
         />
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Email"
           value={email}
           onChangeText={(text) => {
@@ -77,6 +85,7 @@ const LoginPage = () => {
         />
 
         <TextInput
+          placeholderTextColor={'#694fad'}
           placeholder="Password"
           value={password}
           onChangeText={(text) => {
@@ -84,6 +93,14 @@ const LoginPage = () => {
           }}
           style={styles.input}
           secureTextEntry
+        />
+        <TextInput
+          placeholder="Avatar url"
+          value={avatar}
+          onChangeText={(text) => {
+            setAvatar(text);
+          }}
+          style={styles.input}
         />
       </View>
       <View style={styles.buttonContainer}>
