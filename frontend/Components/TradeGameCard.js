@@ -48,8 +48,6 @@ const TradeGameCard = ({ item }, navigation) => {
       </TouchableOpacity>
     ) : null;
 
-  console.log(userUID);
-
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>

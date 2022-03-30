@@ -17,6 +17,7 @@ export default function UserPage({
 
   useEffect(() => {
     fetchUser(userUID).then((userData) => {
+      console.log(userData);
       const newComments = !Object.values(userData[userUID].reviews)
         ? []
         : Object.values(userData[userUID].reviews);

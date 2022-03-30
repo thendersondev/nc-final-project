@@ -17,7 +17,6 @@ export default function TradePage() {
     fetchTrades().then((data) => {
       const keys = Object.keys(data);
       const values = Object.values(data);
-      console.log(values);
       const array = [];
       keys.forEach((key) => {
         data[key].key = key;
