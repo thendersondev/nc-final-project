@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 0,
+    marginBottom: 100,
   },
   mainLogo: {
     height: '60%',
