@@ -15,11 +15,19 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
+
+
     backgroundColor: "white",
+
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
+    backgroundColor: '#F0EDF6',
+    color: '#694FAD',
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#694FAD',
   },
   buttonContainer: {
     width: "60%",
@@ -53,6 +61,7 @@ const styles = StyleSheet.create({
   registerPrompt: {
     marginTop: 20,
     padding: 10,
+    color: '#694FAD',
   },
 });
 
