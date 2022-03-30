@@ -8,10 +8,24 @@ import {
 } from "react-native";
 import styles from "../styles/TradeGameCardStyles";
 import { removeTrade } from "../models/model_trades";
-import { auth } from "../firebase";
+import { auth, storage } from "../firebase";
+import { ref, getDownloadURL } from "firebase/storage";
+import { useEffect, useState } from "react";
 
 const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
   const { User, userUID, location, platform, price, title, key } = item;
+
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      const photoReference = ref(storage, "/image.jpg");
+      await getDownloadURL(photoReference).then((img) => {
+        setUrl(img);
+      });
+    };
+    fetchPhotos();
+  }, []);
 
   const deleteOption =
     userUID === auth.currentUser.uid ? (
@@ -51,10 +65,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
-        <Image
-          style={styles.image}
-          source={require("../assets/placeholder.png")}
-        ></Image>
+        <Image style={styles.image} source={{ uri: url }}></Image>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
