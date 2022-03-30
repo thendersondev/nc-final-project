@@ -17,7 +17,7 @@ const FeaturedGames = ({ item }) => {
         <View style={styles.cardRightTop}>
           <Text style={styles.gameTitle}>{item.title}</Text>
           <Text style={styles.gameTitle}>£{item.price}</Text>
-          <Text style={styles.gameTitle}>YOU SAVE £100</Text>
+          <Text style={styles.gameTitle}>YOU SAVE £20</Text>
         </View>
       </View>
     </View>

@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110,
     left: 5,
+    paddingBottom: 6,
   },
 
   cardLeft: {
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
   gameTitle: {
     color: '#694FAD',
     fontWeight: '700',
-    fontSize: 16,
-    paddingBottom: 10,
+    fontSize: 15,
+    paddingBottom: 6,
     flexShrink: 1,
   },
 });

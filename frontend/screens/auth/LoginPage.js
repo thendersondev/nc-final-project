@@ -5,22 +5,22 @@ import {
   TouchableOpacity,
   View,
   Image,
-} from "react-native";
-import React, { useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../../firebase.js";
-import { useNavigation } from "@react-navigation/core";
-import styles from "../../styles/LoginPageStyles";
+} from 'react-native';
+import React, { useState } from 'react';
+import { auth, signInWithEmailAndPassword } from '../../firebase.js';
+import { useNavigation } from '@react-navigation/core';
+import styles from '../../styles/LoginPageStyles';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   const handleLogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        alert("Logged in");
-        navigation.navigate("Nav");
+        alert('Logged in');
+        navigation.navigate('Nav');
       })
       .catch((err) => {
         alert(err.message);
@@ -36,12 +36,13 @@ const LoginPage = () => {
       //   android: () => -300,
       // })}
     >
-      {/* <Image
+      <Image
         style={styles.mainLogo}
-        source={require("../../assets/logo.png")}
-      /> */}
+        source={require('../../assets/logo.png')}
+      />
       <View style={styles.inputContainer}>
         <TextInput
+          placeholderTextColor={'#3e2465'}
           placeholder="Email"
           value={email}
           onChangeText={(text) => {
@@ -51,6 +52,7 @@ const LoginPage = () => {
         />
 
         <TextInput
+          placeholderTextColor={'#3e2465'}
           placeholder="Password"
           value={password}
           onChangeText={(text) => {
@@ -68,7 +70,7 @@ const LoginPage = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Register");
+            navigation.navigate('Register');
           }}
         >
           <Text style={styles.buttonText}>Register</Text>
