@@ -1,52 +1,40 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import styles from "../styles/TradeGameCardStyles";
-import { removeTrade } from "../models/model_trades";
-import { auth } from "../firebase";
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import styles from '../styles/TradeGameCardStyles';
+import { removeTrade } from '../models/model_trades';
 
 const TradeGameCard = ({ item }, navigation) => {
-  const { User, userUID, location, platform, price, title, key } = item;
+  const { user, userUID, location, platform, price, title, key } = item;
 
-  const deleteOption =
-    userUID === auth.currentUser.uid ? (
-      <TouchableOpacity
-        style={styles.button_delete}
-        onPress={() => {
-          Alert.alert(
-            "Delete this trade?",
-            "This action cannot be undone",
-            [
-              {
-                text: "OK",
-                onPress: () => {
-                  removeTrade(key);
-                  navigation.navigate("Trade");
-                },
-                style: "alert_button",
-              },
-              {
-                text: "Cancel",
-                onPress: () => {
-                  return;
-                },
-                style: "alert_button",
-              },
-            ],
-            {
-              cancelable: true,
-            }
-          );
-        }}
-      >
-        <Text style={styles.text}>Delete</Text>
-      </TouchableOpacity>
-    ) : null;
+  const deleteOption = (userUID !== key) ? (
+    <TouchableOpacity
+            style={styles.button_delete}
+            onPress={() => {
+              Alert.alert(
+                "Delete this trade?",
+                "This action cannot be undone",
+                [
+                  {
+                  text: "OK" ,
+                  onPress: () => {
+                    removeTrade(key)
+                    navigation.navigate('Trade')
+                  },
+                  style: "alert_button"
+                },{
+                  text: "Cancel" , 
+                  onPress: () => {return},
+                  style: "alert_button"
+                }],
+                {
+                  cancelable: true
+                }
+                );
+            }}
+          >
+            <Text style={styles.text}>Delete</Text>
+          </TouchableOpacity>
+  ) : null
+
 
   return (
     <View style={styles.surroundingView}>
@@ -58,7 +46,7 @@ const TradeGameCard = ({ item }, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Message", { User, userUID });
+            navigation.navigate("Message", { username, uid });
           }}
         >
           <Text style={styles.buttonText}>Message</Text>
@@ -66,7 +54,7 @@ const TradeGameCard = ({ item }, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Profile", { User, userUID });
+            navigation.navigate("Profile", { username, uid });
           }}
         >
           <Text style={styles.buttonText}>View Profile</Text>
@@ -76,14 +64,32 @@ const TradeGameCard = ({ item }, navigation) => {
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
           <Text style={styles.gameTitle}>
-            {title} - {platform}
+            {item.title} - ({item.platform})
           </Text>
-          <Text style={styles.gameDetails}>User: {User}</Text>
-          <Text style={styles.gameDetails}>Price: {price}</Text>
-          <Text style={styles.gameDetails}>Location: {location}</Text>
+          <Text style={styles.gameDetails}>User: {item.user}</Text>
+          <Text style={styles.gameDetails}>Price: {item.price}</Text>
+          <Text style={styles.gameDetails}>Location: {item.location}</Text>
         </View>
 
-        <View style={styles.cardLeft}>{deleteOption}</View>
+        <View style={styles.cardLeft}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Message', { username });
+            }}
+          >
+            <Text style={styles.text}>Message</Text>
+          </TouchableOpacity>
+          {deleteOption}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Profile', {userUID});
+            }}
+          >
+            <Text style={styles.text}>View Profile</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
