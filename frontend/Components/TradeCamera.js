@@ -17,7 +17,7 @@ import { storage } from "../firebase.js";
 // initialise app with firebase config
 
 let camera = Camera;
-export default function TradeCamera() {
+export default function TradeCamera(props) {
   const [startCamera, setStartCamera] = React.useState(false);
   const [previewVisible, setPreviewVisible] = React.useState(false);
   const [capturedImage, setCapturedImage] = React.useState(null);
@@ -36,28 +36,23 @@ export default function TradeCamera() {
   };
 
   const __takePicture = async () => {
-    // console.log("taking picture");
-    // convert to base64 so can be stored on firebase storage
     const photo = await camera.takePictureAsync({ base64: true, quality: 0.1 });
-    // console.log(photo, "data here");
     setPreviewVisible(true);
     //setStartCamera(false)
     setCapturedImage(photo);
 
     // format of auth.currentUser.uid-trade-title
     if (!photo.cancelled) {
-      // const storage = getStorage();
-      const imageRef = ref(storage, "image.jpg");
-
+      const gameTitleWithoutSpaces = props.gameTitle.replace(/\s+/g, "-");
+      const imageName = `${props.userUID}-${gameTitleWithoutSpaces}`;
+      const imageRef = ref(storage, imageName);
       const img = await fetch(photo.uri);
       const bytes = await img.blob();
-
       await uploadBytes(imageRef, bytes);
     }
   };
 
   const __retakePicture = () => {
-    // console.log("retake");
     setCapturedImage(null);
     setPreviewVisible(false);
     __startCamera();
@@ -72,7 +67,6 @@ export default function TradeCamera() {
     }
   };
   const __switchCamera = () => {
-    // console.log("camera flipped");
     if (cameraType === "back") {
       setCameraType("front");
     } else {
@@ -236,8 +230,6 @@ const styles = StyleSheet.create({
 });
 
 const CameraPreview = ({ photo, retakePicture }) => {
-  // console.log(photo);
-  // console.log(retakePicture);
   return (
     <View
       style={{

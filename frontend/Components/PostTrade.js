@@ -209,15 +209,25 @@ export default function PostTrade({ navigation }) {
             Add Image
           </MaterialCommunityIcons.Button>
         </TouchableOpacity> */}
-        {isAvailable ? <TradeCamera /> : null}
-        <View style={styles.space} />
+        {/* {isAvailable ? (
+          <TradeCamera userUID={auth.currentUser.uid} gameTitle={data.title} />
+        ) : null}
+        <View style={styles.space} /> */}
 
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.text}>Submit Trade</Text>
-          </TouchableOpacity>
+          <>
+            <TradeCamera
+              userUID={auth.currentUser.uid}
+              gameTitle={data.title}
+            />
+
+            <View style={styles.space} />
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.text}>Submit Trade</Text>
+            </TouchableOpacity>
+          </>
         )}
         <View style={styles.space} />
         <TouchableOpacity
