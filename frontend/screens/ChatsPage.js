@@ -36,16 +36,13 @@ const ChatsPage = () => {
   ];
 
   useEffect(() => {
-    // const collRef = doc(db, "chats", auth.currentUser.uid);
-    // getDoc(collRef).then((document) => {
-    //   console.log(document.exists()); // false
-    // });
-    // const currentChats = collection(db, "chats");
-    // currentChats.listCollections().then((collections) => {
-    //   collections.forEach((collection) => {
-    //     console.log("Found subcollection with id:", collection.id);
-    //   });
-    // });
+    setLoading(true);
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    getDoc(userRef).then((document) => {
+      const data = document.data();
+      setChats(data.chats);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -59,11 +56,13 @@ const ChatsPage = () => {
         <Appbar.Content title="Your chats" />
       </Appbar.Header>
       <View style={styles.mainbox}>
-        <FlatList
-          data={mockChats}
-          renderItem={(item) => ChatCard(item, navigation)}
-          keyExtractor={uuidv4}
-        />
+        {!loading && (
+          <FlatList
+            data={chats}
+            renderItem={(item) => ChatCard(item, navigation)}
+            keyExtractor={uuidv4}
+          />
+        )}
       </View>
     </Provider>
   );
