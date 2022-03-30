@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   },
 
   button_delete: {
+    marginTop: 5,
+    width: 125,
     backgroundColor: "#AA0000",
     borderRadius: 10,
     fontWeight: "700",
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: 50,
     padding: 10,
-    marginLeft: 1,
+    marginBottom: 3,
   },
 
   gameTitle: {
