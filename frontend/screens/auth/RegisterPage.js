@@ -24,13 +24,13 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
   const navigation = useNavigation();
-  console.log(auth.currentUser);
+
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         alert(`Account Created! You have been signed in as: ${username} `);
         const user = userCredentials.user;
-
+        console.log(user);
         updateProfile(user, {
           displayName: username,
           photoURL: avatar
@@ -44,7 +44,9 @@ const LoginPage = () => {
       .then(() => {
         setDoc(doc(db, "users", auth.currentUser.uid), {
           username: username,
-          avatarUrl: "default",
+          avatarUrl: avatar
+            ? avatar
+            : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
         });
       })
       .then(() => {

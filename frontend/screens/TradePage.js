@@ -11,7 +11,7 @@ export default function TradePage() {
   const navigation = useNavigation();
   const [trades , setTrades] = useState([])
   const [tradeables, setTradebles] = useState();
-  const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
+  const [query, setQuery] = useState("Xbox SeriesX PS5 Nintendo Switch");
 
   useEffect(() => {
     fetchTrades()
@@ -33,7 +33,7 @@ export default function TradePage() {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Post')}
+          onPress={() => navigation.navigate("Post")}
         >
           <Text style={styles.text}>Post an item</Text>
         </TouchableOpacity>

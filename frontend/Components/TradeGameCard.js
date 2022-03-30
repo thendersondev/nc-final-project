@@ -35,6 +35,7 @@ const TradeGameCard = ({ item }, navigation) => {
           </TouchableOpacity>
   ) : null
 
+
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
@@ -45,7 +46,7 @@ const TradeGameCard = ({ item }, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Message", { username });
+            navigation.navigate("Message", { username, uid });
           }}
         >
           <Text style={styles.buttonText}>Message</Text>
@@ -53,7 +54,7 @@ const TradeGameCard = ({ item }, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Profile", { username });
+            navigation.navigate("Profile", { username, uid });
           }}
         >
           <Text style={styles.buttonText}>View Profile</Text>

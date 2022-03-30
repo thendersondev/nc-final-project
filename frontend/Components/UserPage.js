@@ -52,10 +52,15 @@ export default function UserPage({
       </View>
       <View style={styles.comments}>
         <Text style={styles.accountInfoHeader}>Comments:</Text>
-                <FlatList
+        <FlatList
           data={comments}
           renderItem={({ item }) => (
-            <Text style={styles.accountInfoHeadings} key={`comm${item.body}key`}>{item.body}</Text>
+            <Text
+              style={styles.accountInfoHeadings}
+              key={`comm${item.body}key`}
+            >
+              {item.body}
+            </Text>
           )}
           keyExtractor={(item) => comments.indexOf(item)}
         />
