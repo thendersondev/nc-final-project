@@ -1,18 +1,25 @@
-import { Text, View, Button, TextInput, Pressable } from 'react-native';
-import styles from '../styles/TradeStyles';
-import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { db, auth } from '.././firebase';
-import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
-import TradeCamera from './TradeCamera';
+import {
+  Text,
+  View,
+  Button,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+} from "react-native";
+
+import styles from "../styles/TradeStyles";
+import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { db, auth } from ".././firebase";
+import { doc, addDoc, getDoc, collection } from "firebase/firestore";
+import TradeCamera from "./TradeCamera";
+
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
   const [platformText, setPlatformText] = React.useState(null);
   const [locationText, setLocationText] = React.useState(null);
   const [priceText, setPriceText] = React.useState(null);
-  const [available, isAvailable] = React.useState(false);
-  // if camera is available, render the TradeCamera component, if not then hide component
   const [alert, setAlert] = React.useState({
     title: false,
     platform: false,
@@ -28,10 +35,10 @@ export default function PostTrade({ navigation }) {
   const [postMsg, setPostMsg] = React.useState(false);
   const [data, setData] = React.useState([
     {
-      title: '',
-      platform: '',
-      location: '',
-      price: '',
+      title: "",
+      platform: "",
+      location: "",
+      price: "",
     },
   ]);
 
@@ -57,10 +64,10 @@ export default function PostTrade({ navigation }) {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userRef = doc(db, "users", auth.currentUser.uid);
       const userSnap = await getDoc(userRef);
 
-      const docRef = addDoc(collection(db, 'trades'), {
+      const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
         platform: data.platform,
         location: data.location,
@@ -82,16 +89,17 @@ export default function PostTrade({ navigation }) {
         price: false,
       });
       setPostMsg(true);
-      setTitleText('');
-      setPlatformText('');
-      setLocationText('');
-      setPriceText('');
+      setTitleText(null);
+      setPlatformText(null);
+      setLocationText(null);
+      setPriceText(null);
+      setTimeout(function goBackTrades() {navigation.navigate("Trade")},2000)
     }
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? 'auto' : 'auto'}>
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.form} pointerEvents={postMsg ? "auto" : "auto"}>
         <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
@@ -99,7 +107,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694fad'}
+          placeholderTextColor={"#3e2465"}
           placeholder="Game title..."
           value={titleText}
           onChangeText={(text) =>
@@ -109,10 +117,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.title ? (
-          <Text style={styles.textAlert}>Title is required</Text>
+          <Text style={styles.textAlert}>title is required</Text>
         ) : (
           charAlert.title && (
-            <Text style={styles.textAlert}>Min 5 characters</Text>
+            <Text style={styles.textAlert}>min 5 characters</Text>
           )
         )}
         <TextInput
@@ -121,7 +129,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694fad'}
+          placeholderTextColor={"#3e2465"}
           placeholder="Platform..."
           value={platformText}
           onChangeText={(text) =>
@@ -131,10 +139,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.platform ? (
-          <Text style={styles.textAlert}>Platform is required</Text>
+          <Text style={styles.textAlert}>platform is required</Text>
         ) : (
           charAlert.platform && (
-            <Text style={styles.textAlert}>Min 3 characters</Text>
+            <Text style={styles.textAlert}>min 3 characters</Text>
           )
         )}
         <TextInput
@@ -143,7 +151,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694fad'}
+          placeholderTextColor={"#3e2465"}
           placeholder="Location..."
           value={locationText}
           onChangeText={(text) =>
@@ -153,10 +161,10 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.location ? (
-          <Text style={styles.textAlert}>Location is required</Text>
+          <Text style={styles.textAlert}>location is required</Text>
         ) : (
           charAlert.location && (
-            <Text style={styles.textAlert}>Min 4 characters</Text>
+            <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
         <TextInput
@@ -165,11 +173,11 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694fad'}
+          placeholderTextColor={"#3e2465"}
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           onChangeText={(num) =>
             setData((prevData) => {
               return { ...prevData, price: num };
@@ -177,31 +185,33 @@ export default function PostTrade({ navigation }) {
           }
         />
         {alert.price ? (
-          <Text style={styles.textAlert}>Trade value is required</Text>
+          <Text style={styles.textAlert}>trade value is required</Text>
         ) : (
           charAlert.price && (
-            <Text style={styles.textAlert}>Min 4 characters</Text>
+            <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
-
-        {isAvailable ? <TradeCamera /> : null}
-        <View style={styles.space} />
-
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.text}>Submit Trade</Text>
-          </TouchableOpacity>
+          <>
+            <TradeCamera
+              userUID={auth.currentUser.uid}
+              gameTitle={data.title}
+            />
+            <View style={styles.space} />
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.text}>Submit Trade</Text>
+            </TouchableOpacity>
+          </>
         )}
-        <View style={styles.space} />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Trade')}
+          onPress={() => navigation.navigate("Trade")}
         >
-          <Text style={styles.text}>Back to trades</Text>
+          <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

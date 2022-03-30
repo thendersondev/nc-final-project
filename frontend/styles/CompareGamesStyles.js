@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderWidth: 2,
   },
+  Appbar: {
+    backgroundColor: "#694fad",
+  },
 });
 
 export default styles;

@@ -90,6 +90,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 16,
   },
+  Appbar: {
+    backgroundColor: "#694fad",
+  },
 });
 
 export default styles;

@@ -1,10 +1,21 @@
-import { Text, View, Button, TextInput } from 'react-native';
-import styles from '../styles/ReviewStyles';
-import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { db, auth } from '../test/testdataindex';
-import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
-import { changeUser, fetchUser, fetchUsers } from '../models/model_users';
+
+import { Text, View, Button, TextInput } from "react-native";
+import styles from "../styles/ReviewStyles";
+import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { db } from "../test/testdataindex";
+import { auth } from "../firebase";
+import {
+  doc,
+  addDoc,
+  getDoc,
+  collection,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
+import { v4 as uuidv4 } from "uuid";
+
 
 export default function PostTradeMessagePage({
   navigation,
@@ -37,16 +48,22 @@ export default function PostTradeMessagePage({
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userSnap = await fetchUser(
-        /*auth.currentUser.uid*/ '39hJViTortdLPJF48DTYqnuFpyC3'
-      );
-      changeUser(id, {
-        reviews: {
+
+
+      const user = auth.currentUser;
+
+      const userRef = doc(db, "users", "beeMrOx4YsNnenlAJU7Noa3r4Ff1");
+
+      updateDoc(userRef, {
+        reviews: arrayUnion({
           body: data.body,
-          userUID: /*auth.currentUser.uid*/ '39hJViTortdLPJF48DTYqnuFpyC3',
-          User: userSnap['39hJViTortdLPJF48DTYqnuFpyC3'].username,
-        },
+          userUID: user.uid,
+          User: user.displayName,
+          reviewId: uuidv4(),
+        }),
       });
+
+
       setCharAlert({
         body: false,
       });
@@ -56,7 +73,9 @@ export default function PostTradeMessagePage({
       setPostMsg(true);
       setBodyText(null);
       setTimeout(function goBackToUser() {
-        navigation.navigate('Profile', { username });
+
+        navigation.navigate("Profile", { username });
+
       }, 2000);
     }
   };
@@ -71,7 +90,9 @@ export default function PostTradeMessagePage({
               ? styles.inputAlert
               : styles.textInputBox
           }
+
           placeholderTextColor={'#694FAD'}
+
           placeholder="Enter review here..."
           value={bodyText}
           onChangeText={(text) =>
@@ -97,7 +118,9 @@ export default function PostTradeMessagePage({
         )}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Profile', { username })}
+
+          onPress={() => navigation.navigate("Profile", { username })}
+
         >
           <Text style={styles.text}>Back to Profile</Text>
         </TouchableOpacity>

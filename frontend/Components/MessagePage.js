@@ -1,67 +1,40 @@
 import styles from "../styles/MessagePageStyles";
 import { Text, TouchableOpacity, View } from "react-native";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { auth, db } from "../firebase";
 import {
-  doc,
-  setDoc,
   collection,
   query,
   addDoc,
   onSnapshot,
   orderBy,
-  getDocs,
 } from "firebase/firestore";
+import { Appbar, Provider } from "react-native-paper";
 
 export default function MessagePage({
   navigation,
   route: {
-    params: { username },
+    params: { User, userUID },
   },
 }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const collRef = collection(db, "chats");
-    const q = query(collRef, orderBy("createdAt", "desc"));
-    const fetch = async () => {
-      const docs = await getDocs(q);
-      const readValues = [];
-      docs.forEach((doc) => {
-        readValues.push({
-          id: doc.data().id,
-          createdAt: doc.data().createdAt.toDate(),
-          text: doc.data().text,
-          user: doc.data().user,
-        });
-      });
-      setMessages(readValues);
-    };
-    return fetch();
-  }, []);
-
-  useLayoutEffect(() => {
-    const collRef = collection(db, "chats");
+    const collRef = collection(db, `chats/${auth.currentUser.uid}/${userUID}`);
     const q = query(collRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      console.log(snapshot);
       setMessages(
         snapshot.docs.map((doc) => ({
-          id: doc.data().id,
+          _id: doc.data()._id,
           createdAt: doc.data().createdAt.toDate(),
           text: doc.data().text,
           user: doc.data().user,
         }))
       );
     });
-    return unsubscribe();
+    return unsubscribe;
   }, []);
 
   const onSend = useCallback((messages = []) => {
@@ -71,7 +44,14 @@ export default function MessagePage({
 
     const { _id, createdAt, text, user } = messages[0];
 
-    addDoc(collection(db, "chats"), {
+    addDoc(collection(db, `chats/${auth.currentUser.uid}/${userUID}`), {
+      _id,
+      createdAt,
+      text,
+      user,
+    });
+
+    addDoc(collection(db, `chats/${userUID}/${auth.currentUser.uid}`), {
       _id,
       createdAt,
       text,
@@ -80,36 +60,35 @@ export default function MessagePage({
   }, []);
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{username}</Text>
-      </View>
-
+    <Provider>
+      <Appbar.Header style={styles.Appbar}>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title={User} />
+        <Appbar.Action
+          icon="account-box"
+          onPress={() => {
+            navigation.navigate("Profile", { User });
+          }}
+        />
+      </Appbar.Header>
       <View style={styles.messages}>
         <GiftedChat
           messages={messages}
           showAvatarForEveryMessage={true}
           onSend={(messages) => onSend(messages)}
           user={{
-            // _id: auth?.currentUser?.email,
-            // name: auth?.currentUser?.displayName,
-            // avatar: auth?.currentUser?.photoURL,
-            _id: "hi",
-            name: "tom",
-            avatar: "biscuits",
+            _id: auth?.currentUser?.email,
+            name: auth?.currentUser?.displayName,
+            avatar: auth?.currentUser?.photoURL
+              ? auth?.currentUser?.photoURL
+              : "https://i.ebayimg.com/images/g/FuMAAOSwZGJcZOr3/s-l300.jpg",
           }}
         />
       </View>
-      <View style={styles.buttonWrap}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Profile", { username });
-          }}
-        >
-          <Text style={styles.text}>View profile</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Provider>
   );
 }

@@ -88,6 +88,9 @@ const styles = StyleSheet.create({
     color: '#694fad',
     fontWeight: '500',
   },
+  Appbar: {
+    backgroundColor: "#694fad",
+  },
 });
 
 export default styles;
