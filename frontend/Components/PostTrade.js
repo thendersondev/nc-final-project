@@ -1,9 +1,17 @@
-import { Text, View, Button, TextInput } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+} from "react-native";
+
 import styles from "../styles/TradeStyles";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db, auth } from ".././firebase";
-import { doc, addDoc,getDoc, collection } from "firebase/firestore";
+import { doc, addDoc, getDoc, collection } from "firebase/firestore";
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -32,7 +40,7 @@ export default function PostTrade({ navigation }) {
     },
   ]);
 
-  const  handleSubmit  = async () => {
+  const handleSubmit = async () => {
     if (!data.title || !data.platform || !data.location || !data.price) {
       setAlert({
         title: !data.title,
@@ -54,16 +62,16 @@ export default function PostTrade({ navigation }) {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userRef = doc(db, "users", auth.currentUser.uid );
-      const userSnap =  await getDoc(docRef);
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      const userSnap = await getDoc(userRef);
 
       const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
         platform: data.platform,
         location: data.location,
         price: data.price,
-        userUID:auth.currentUser.uid,
-         User: userSnap.data().username,
+        userUID: auth.currentUser.uid,
+        User: userSnap.data().username,
       });
 
       setCharAlert({
@@ -88,9 +96,9 @@ export default function PostTrade({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
-        <Text style={styles.postItemTitle}>What do you want to trade?</Text>
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.form} pointerEvents={postMsg ? "auto" : "auto"}>
+        <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
             alert.title || charAlert.title
@@ -167,7 +175,7 @@ export default function PostTrade({ navigation }) {
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           onChangeText={(num) =>
             setData((prevData) => {
               return { ...prevData, price: num };
@@ -194,6 +202,6 @@ export default function PostTrade({ navigation }) {
           <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

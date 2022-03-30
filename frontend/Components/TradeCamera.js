@@ -8,8 +8,14 @@ import {
   Alert,
   ImageBackground,
   Image,
-} from 'react-native';
-import { Camera } from 'expo-camera';
+} from "react-native";
+import { Camera } from "expo-camera";
+
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase.js";
+
+// initialise app with firebase config
+
 let camera = Camera;
 export default function TradeCamera() {
   const [startCamera, setStartCamera] = React.useState(false);
@@ -28,14 +34,30 @@ export default function TradeCamera() {
       Alert.alert('Camera permissions not granted');
     }
   };
+
   const __takePicture = async () => {
-    const photo = await camera.takePictureAsync();
+    // console.log("taking picture");
+    // convert to base64 so can be stored on firebase storage
+    const photo = await camera.takePictureAsync({ base64: true, quality: 0.1 });
+    // console.log(photo, "data here");
     setPreviewVisible(true);
     //setStartCamera(false)
     setCapturedImage(photo);
+
+    // format of auth.currentUser.uid-trade-title
+    if (!photo.cancelled) {
+      // const storage = getStorage();
+      const imageRef = ref(storage, "image.jpg");
+
+      const img = await fetch(photo.uri);
+      const bytes = await img.blob();
+
+      await uploadBytes(imageRef, bytes);
+    }
   };
 
   const __retakePicture = () => {
+    // console.log("retake");
     setCapturedImage(null);
     setPreviewVisible(false);
     __startCamera();
@@ -212,8 +234,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
-  console.log(photo);
+const CameraPreview = ({ photo, retakePicture }) => {
+  // console.log(photo);
+  // console.log(retakePicture);
   return (
     <View
       style={{
@@ -261,25 +284,6 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
               >
                 Re-take
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={savePhoto}
-              style={{
-                width: 130,
-                height: 40,
-
-                alignItems: 'center',
-                borderRadius: 4,
-              }}
-            >
-              {/* <Text
-                style={{
-                  color: "#fff",
-                  fontSize: 20,
-                }}
-              >
-                Save
-              </Text> */}
             </TouchableOpacity>
           </View>
         </View>

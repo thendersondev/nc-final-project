@@ -46,7 +46,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Message", { username });
+            navigation.navigate("Message", { User, userUID });
           }}
         >
           <Text style={styles.buttonText}>Message</Text>
@@ -54,7 +54,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Profile", { username });
+            navigation.navigate("Profile", { User, userUID });
           }}
         >
           <Text style={styles.buttonText}>View Profile</Text>
@@ -64,32 +64,14 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
       <View style={styles.cardRight}>
         <View style={styles.cardRightTop}>
           <Text style={styles.gameTitle}>
-            {item.title} - ({item.platform})
+            {title} - {platform}
           </Text>
-          <Text style={styles.gameDetails}>User: {item.user}</Text>
-          <Text style={styles.gameDetails}>Price: {item.price}</Text>
-          <Text style={styles.gameDetails}>Location: {item.location}</Text>
+          <Text style={styles.gameDetails}>User: {User}</Text>
+          <Text style={styles.gameDetails}>Price: {price}</Text>
+          <Text style={styles.gameDetails}>Location: {location}</Text>
         </View>
 
-        <View style={styles.cardLeft}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('Message', { username });
-            }}
-          >
-            <Text style={styles.text}>Message</Text>
-          </TouchableOpacity>
-          {deleteOption}
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('Profile', {userUID});
-            }}
-          >
-            <Text style={styles.text}>View Profile</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.cardLeft}>{deleteOption}</View>
       </View>
     </View>
   );
