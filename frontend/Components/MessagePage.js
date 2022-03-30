@@ -89,16 +89,6 @@ export default function MessagePage({
           }}
         />
       </View>
-      {/* <View style={styles.buttonWrap}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Profile", { username });
-          }}
-        >
-          <Text style={styles.text}>View profile</Text>
-        </TouchableOpacity>
-      </View> */}
     </Provider>
   );
 }

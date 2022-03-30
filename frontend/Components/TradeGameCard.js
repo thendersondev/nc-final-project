@@ -61,7 +61,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
             navigation.navigate("Message", { User, userUID });
           }}
         >
-          <Text style={styles.buttonText}>Message</Text>
+          <Text style={styles.buttontext}>Message</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -69,7 +69,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
             navigation.navigate("Profile", { User, userUID });
           }}
         >
-          <Text style={styles.buttonText}>View Profile</Text>
+          <Text style={styles.buttontext}>View Profile</Text>
         </TouchableOpacity>
       </View>
 

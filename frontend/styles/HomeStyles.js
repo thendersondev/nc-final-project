@@ -1,49 +1,49 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
   },
   mainLogo: {
-    height: '100%',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     margin: -120,
-    height: '50%',
-    width: '50%',
+    height: "50%",
+    width: "50%",
   },
   bold: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
     paddingBottom: 7,
-    textAlign: 'center',
+    textAlign: "center",
   },
   textCenter: {
-    textAlign: 'center',
-    color: '#000000',
-    color: '#000000',
+    textAlign: "center",
+    color: "#000000",
+    color: "#000000",
     fontSize: 16,
     padding: 6,
   },
   text: {
-    color: '#000000',
+    color: "#000000",
     fontSize: 16,
     padding: 10,
   },
   wrapper: {
-    backgroundColor: '#CBC3E3',
-    margin: '2%',
+    backgroundColor: "#CBC3E3",
+    margin: "2%",
     borderRadius: 10,
     padding: 10,
   },
   featured: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 30,
     padding: 10,
   },

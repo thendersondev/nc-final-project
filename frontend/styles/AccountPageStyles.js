@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
   signOutText: {
     color: "#694fad",
   },
+  Appbar: {
+    backgroundColor: "#694fad",
+  },
 });
 
 export default styles;
