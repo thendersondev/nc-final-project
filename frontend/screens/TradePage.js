@@ -6,12 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { fetchTrades } from '../models/model_trades';
+import { auth } from '../firebase';
 
 export default function TradePage() {
   const navigation = useNavigation();
   const [trades , setTrades] = useState([])
   const [tradeables, setTradebles] = useState();
   const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
+  const [refresh , setRefresh] = useState(0) 
 
   useEffect(() => {
     fetchTrades()
@@ -25,7 +27,7 @@ export default function TradePage() {
       })
       setTrades(array)
     })
-  }, [TradeGameCard]);
+  }, [ refresh ]);
 
   return (
     <View style={styles.container}>
@@ -40,7 +42,7 @@ export default function TradePage() {
         <FlatList
           data={trades}
           renderItem={(item, index, separators) =>
-            TradeGameCard(item, navigation)
+            TradeGameCard(item, refresh, setRefresh, navigation)
           }
           keyExtractor={uuidv4}
         />
