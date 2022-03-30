@@ -17,7 +17,7 @@ export default function LogInStackNav() {
       <Stack.Screen
         name="Register"
         component={RegisterPage}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Nav"
