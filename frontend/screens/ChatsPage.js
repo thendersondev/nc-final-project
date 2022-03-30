@@ -70,6 +70,10 @@ const styles = StyleSheet.create({
   Appbar: {
     backgroundColor: "#694fad",
   },
+  Mainbox: {
+    flex: 1,
+    alignItems: "center",
+  },
 });
 
 export default ChatsPage;
