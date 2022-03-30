@@ -44,8 +44,6 @@ export default function UserPage({
           <View style={styles.accountInfoGrid}>
             <View style={styles.accountInfoGridTop}>
               <View>
-                <Text style={styles.accountInfoHeadings}>Listings: {none}</Text>
-                <Text style={styles.accountInfoHeadings}>Ratings: {none}</Text>
                 <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
               </View>
             </View>
