@@ -49,22 +49,17 @@ export default function PostTradeMessagePage({
 
       const user = auth.currentUser;
 
-      // changeUser(id, {
-      //   reviews: {
-      //     body: data.body,
-      //     userUID: user.UID,
-      //     User: user,
-      //   },
-      // });
-      let myuuid = uuidv4();
-      console.log(myuuid);
       const userRef = doc(db, "users", "beeMrOx4YsNnenlAJU7Noa3r4Ff1");
+
       updateDoc(userRef, {
-        reviews: arrayUnion(uuidv4()),
+        reviews: arrayUnion({
+          body: data.body,
+          userUID: user.uid,
+          User: user.displayName,
+          reviewId: uuidv4(),
+        }),
       });
-      // body: "data.body",
-      // userUID: "beeMrOx4YsNnenlAJU7Noa3r4Ff1",
-      // User: "lol",
+
       setCharAlert({
         body: false,
       });
