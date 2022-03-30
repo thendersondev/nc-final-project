@@ -44,6 +44,7 @@ export default function TradeCamera() {
     //setStartCamera(false)
     setCapturedImage(photo);
 
+    // format of auth.currentUser.uid-trade-title
     if (!photo.cancelled) {
       // const storage = getStorage();
       const imageRef = ref(storage, "image.jpg");
