@@ -10,7 +10,6 @@ import {
   Image,
 } from "react-native";
 import { Camera } from "expo-camera";
-
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase.js";
 
