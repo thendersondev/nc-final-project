@@ -10,6 +10,7 @@ import {
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
+import { Appbar, Provider } from "react-native-paper";
 
 export default function MessagePage({
   navigation,
@@ -24,7 +25,6 @@ export default function MessagePage({
     const q = query(collRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      console.log(snapshot);
       setMessages(
         snapshot.docs.map((doc) => ({
           _id: doc.data()._id,
@@ -60,11 +60,21 @@ export default function MessagePage({
   }, []);
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{username}</Text>
-      </View>
-
+    <Provider>
+      <Appbar.Header style={styles.Appbar}>
+        <Appbar.BackAction
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+        <Appbar.Content title={username} />
+        <Appbar.Action
+          icon="account-box"
+          onPress={() => {
+            navigation.navigate("Profile", { username });
+          }}
+        />
+      </Appbar.Header>
       <View style={styles.messages}>
         <GiftedChat
           messages={messages}
@@ -73,11 +83,13 @@ export default function MessagePage({
           user={{
             _id: auth?.currentUser?.email,
             name: auth?.currentUser?.displayName,
-            avatar: auth?.currentUser?.photoURL,
+            avatar: auth?.currentUser?.photoURL
+              ? auth?.currentUser?.photoURL
+              : "https://i.ebayimg.com/images/g/FuMAAOSwZGJcZOr3/s-l300.jpg",
           }}
         />
       </View>
-      <View style={styles.buttonWrap}>
+      {/* <View style={styles.buttonWrap}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
@@ -86,7 +98,7 @@ export default function MessagePage({
         >
           <Text style={styles.text}>View profile</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+      </View> */}
+    </Provider>
   );
 }
