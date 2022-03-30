@@ -15,6 +15,9 @@ export default function TradePage() {
 
   useEffect(() => {
     fetchTrades().then((data) => {
+      for (const entry in data) {
+          data[entry].key = entry
+        }
       setTrades(Object.values(data));
     });
   }, [refresh]);

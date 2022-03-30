@@ -44,9 +44,18 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
           );
         }}
       >
-        <Text style={styles.text}>Delete</Text>
+        <Text style={styles.buttontext}>Delete</Text>
       </TouchableOpacity>
-    ) : null;
+    ) : (
+    <TouchableOpacity
+    style={styles.button}
+    onPress={() => {
+      navigation.navigate("Message", { User, userUID });
+    }}
+    >
+      <Text style={styles.buttontext}>Message</Text>
+    </TouchableOpacity>
+    );
 
   return (
     <View style={styles.surroundingView}>
@@ -55,22 +64,7 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
           style={styles.image}
           source={require("../assets/placeholder.png")}
         ></Image>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Message", { User, userUID });
-          }}
-        >
-          <Text style={styles.buttontext}>Message</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Profile", { User, userUID });
-          }}
-        >
-          <Text style={styles.buttontext}>View Profile</Text>
-        </TouchableOpacity>
+        {deleteOption}
       </View>
 
       <View style={styles.cardRight}>
@@ -82,8 +76,6 @@ const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
           <Text style={styles.gameDetails}>Price: {price}</Text>
           <Text style={styles.gameDetails}>Location: {location}</Text>
         </View>
-
-        <View style={styles.cardLeft}>{deleteOption}</View>
       </View>
     </View>
   );
