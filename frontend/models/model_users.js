@@ -22,7 +22,6 @@ async function fetchUsers() {
 }
 
 async function fetchUser(user) {
-  if (user.length !== 28) return { error: "Bad user ID" }
   const userId = doc(db, "users", user);
   const querySnapshot = await getDoc(userId);
   if (!querySnapshot.data()) return { error: "No such user!" }

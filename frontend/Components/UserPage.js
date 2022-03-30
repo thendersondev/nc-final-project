@@ -3,26 +3,25 @@ import { StatusBar } from "expo-status-bar";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 import styles from "../styles/UserPageStyles";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UserPage({
   navigation,
   route: {
-    params: { username },
+    params: { userUID },
   },
 }) {
-  const [comments, setComments] = useState([]);
+  const [comments , setComments] = useState([])
+  const [username, setUsername] = useState("")
+  const none = "<none>"
 
-  const id = "2gHWLG7WkAZgK8iQjvEUjCmGvYG3";
   useEffect(() => {
-    fetchUser(id)
-      .then((userData) => {
-        const newComments = !Object.values(userData[id].reviews)
-          ? []
-          : Object.values(userData[id].reviews);
-        setComments(newComments);
-      })
-      .catch((err) => console.log(err));
+    fetchUser(userUID)
+    .then((userData)=>{
+      const newComments = (!Object.values(userData[userUID].reviews)) ? [] : Object.values(userData[userUID].reviews);
+      setComments(newComments);
+      setUsername(userData[userUID].user);
+    })
   }, []);
 
   return (
@@ -43,9 +42,9 @@ export default function UserPage({
           <View style={styles.accountInfoGrid}>
             <View style={styles.accountInfoGridTop}>
               <View>
-                <Text style={styles.accountInfoHeadings}>Listings:</Text>
-                <Text style={styles.accountInfoHeadings}>Ratings:</Text>
-                <Text style={styles.accountInfoHeadings}>Email:</Text>
+                <Text style={styles.accountInfoHeadings}>Listings: {none}</Text>
+                <Text style={styles.accountInfoHeadings}>Ratings: {none}</Text>
+                <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
               </View>
             </View>
           </View>

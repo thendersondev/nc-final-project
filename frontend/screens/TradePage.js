@@ -5,83 +5,27 @@ import { TradeGameCard } from '../Components/TradeGameCard';
 import { v4 as uuidv4 } from 'uuid';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { fetchTrades } from '../models/model_trades';
 
 export default function TradePage() {
   const navigation = useNavigation();
-  const mockTradeData = [
-    {
-      username: 'MrAmazon247',
-      title: 'Pokemon Shining Pearl',
-      platform: 'Nintendo Switch',
-      location: 'Glasgow',
-      condition: 'pristine',
-      price: '£23.99',
-    },
-    {
-      username: 'RandomUser',
-      title: 'Nintendo Super Smash Bros Ultimate',
-      platform: 'Xbox SeriesX',
-      location: 'Leeds',
-      condition: 'scuffed',
-      price: '£15',
-    },
-    {
-      username: 'MrAmazon247',
-      title: 'Call of Duty 4',
-      platform: 'Nintendo Switch',
-      location: 'Glasgow',
-      condition: 'pristine',
-      price: '£12.99',
-    },
-    {
-      username: 'RandomUser',
-      title: 'Nintendo Super Smash Bros Ultimate',
-      platform: 'PS5',
-      location: 'Leeds',
-      condition: 'scuffed',
-      price: '£15',
-    },
-    {
-      username: 'MrAmazon247',
-      title: 'Pokemon Shining Pearl',
-      platform: 'Nintendo Switch',
-      location: 'Glasgow',
-      condition: 'pristine',
-      price: '£27.99',
-    },
-    {
-      username: 'RandomUser',
-      title: 'Nintendo Super Smash Bros Ultimate',
-      platform: 'Nintendo Switch',
-      location: 'Leeds',
-      condition: 'scuffed',
-      price: '£15',
-    },
-    {
-      username: 'MrAmazon247',
-      title: 'Pokemon Shining Pearl',
-      platform: 'Nintendo Switch',
-      location: 'Glasgow',
-      condition: 'pristine',
-      price: '£4.99',
-    },
-    {
-      username: 'RandomUser',
-      title: 'Nintendo Super Smash Bros Ultimate',
-      platform: 'Nintendo Switch',
-      location: 'Leeds',
-      condition: 'scuffed',
-      price: '£15',
-    },
-  ];
+  const [trades , setTrades] = useState([])
   const [tradeables, setTradebles] = useState();
   const [query, setQuery] = useState('Xbox SeriesX PS5 Nintendo Switch');
 
   useEffect(() => {
-    // fetch trade items
-    // setTradeables
-    // flatList tradeables
-  }, []);
+    fetchTrades()
+    .then((data)=>{
+      const keys = Object.keys(data)
+      const values = Object.values(data)
+      const array = []
+      keys.forEach((key)=>{
+        data[key].key = key
+        array.push(data[key])
+      })
+      setTrades(array)
+    })
+  }, [TradeGameCard]);
 
   return (
     <View style={styles.container}>
@@ -94,7 +38,7 @@ export default function TradePage() {
           <Text style={styles.text}>Post an item</Text>
         </TouchableOpacity>
         <FlatList
-          data={mockTradeData}
+          data={trades}
           renderItem={(item, index, separators) =>
             TradeGameCard(item, navigation)
           }
