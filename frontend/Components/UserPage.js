@@ -54,41 +54,42 @@ export default function UserPage({
           </View>
         </View>
 
-      <View style={styles.accountInfo}>
-        <View>
-          <Text style={styles.accountInfoHeader}>Account Details</Text>
-          <View style={styles.accountInfoGrid}>
-            <View style={styles.accountInfoGridTop}>
-              <View>
-                <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
+        <View style={styles.accountInfo}>
+          <View>
+            <Text style={styles.accountInfoHeader}>Account Details</Text>
+            <View style={styles.accountInfoGrid}>
+              <View style={styles.accountInfoGridTop}>
+                <View>
+                  <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
+                </View>
               </View>
             </View>
           </View>
+          <View style={styles.comments}>
+            <Text style={styles.accountInfoHeader}>Comments:</Text>
+            <FlatList
+              data={comments}
+              renderItem={({ item }) => (
+                <Text
+                  style={styles.accountInfoHeadings}
+                  key={`comm${item.body}key`}
+                >
+                  {item.body}
+                </Text>
+              )}
+              keyExtractor={(item) => comments.indexOf(item)}
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("Review", { User, userUID });
+              }}
+            >
+              <Text style={styles.text}>Review User</Text>
+            </TouchableOpacity>
+          </View>
+          <StatusBar style="auto" />
         </View>
-        <View style={styles.comments}>
-          <Text style={styles.accountInfoHeader}>Comments:</Text>
-          <FlatList
-            data={comments}
-            renderItem={({ item }) => (
-              <Text
-                style={styles.accountInfoHeadings}
-                key={`comm${item.body}key`}
-              >
-                {item.body}
-              </Text>
-            )}
-            keyExtractor={(item) => comments.indexOf(item)}
-          />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("Review", { User, userUID });
-            }}
-          >
-            <Text style={styles.text}>Review User</Text>
-          </TouchableOpacity>
-        </View>
-        <StatusBar style="auto" />
       </View>
     </Provider>
   );
