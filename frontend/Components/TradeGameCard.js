@@ -1,11 +1,12 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import styles from '../styles/TradeGameCardStyles';
 import { removeTrade } from '../models/model_trades';
+import { auth } from '../firebase';
 
-const TradeGameCard = ({ item }, navigation) => {
+const TradeGameCard = ({ item }, refresh, setRefresh, navigation) => {
   const { user, userUID, location, platform, price, title, key } = item;
 
-  const deleteOption = (userUID !== key) ? (
+  const deleteOption = (userUID === auth.currentUser.uid) ? (
     <TouchableOpacity
             style={styles.button_delete}
             onPress={() => {
@@ -17,7 +18,7 @@ const TradeGameCard = ({ item }, navigation) => {
                   text: "OK" ,
                   onPress: () => {
                     removeTrade(key)
-                    navigation.navigate('Trade')
+                    setRefresh(refresh+1);
                   },
                   style: "alert_button"
                 },{
