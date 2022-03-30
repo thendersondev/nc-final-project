@@ -9,6 +9,9 @@ import {
   addDoc,
   onSnapshot,
   orderBy,
+  updateDoc,
+  arrayUnion,
+  doc,
 } from "firebase/firestore";
 import { Appbar, Provider } from "react-native-paper";
 
@@ -56,6 +59,20 @@ export default function MessagePage({
       createdAt,
       text,
       user,
+    });
+
+    const recipientRef = doc(db, "users", userUID);
+    updateDoc(recipientRef, {
+      chats: arrayUnion({
+        userUID: auth.currentUser.uid,
+      }),
+    });
+
+    const senderRef = doc(db, "users", auth.currentUser.uid);
+    updateDoc(senderRef, {
+      chats: arrayUnion({
+        userUID: userUID,
+      }),
     });
   }, []);
 

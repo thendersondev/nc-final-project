@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "white",
     width: "75%",
-    margin: "2%",
+    marginTop: 50,
     borderColor: "#694fad",
   },
 });

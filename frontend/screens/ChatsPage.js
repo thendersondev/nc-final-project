@@ -21,6 +21,8 @@ import { auth, db } from "../firebase";
 const ChatsPage = () => {
   const navigation = useNavigation();
   const [chats, setChats] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const mockChats = [
     {
       User: "test2",
@@ -32,6 +34,7 @@ const ChatsPage = () => {
     },
     { User: "test3", userUID: "yvsEiUH7Sdcc29MX3PLpqKuG4Uw1" },
   ];
+
   useEffect(() => {
     // const collRef = doc(db, "chats", auth.currentUser.uid);
     // getDoc(collRef).then((document) => {
@@ -70,9 +73,9 @@ const styles = StyleSheet.create({
   Appbar: {
     backgroundColor: "#694fad",
   },
-  Mainbox: {
+  mainbox: {
+    marginTop: "10%",
     flex: 1,
-    alignItems: "center",
   },
 });
 
