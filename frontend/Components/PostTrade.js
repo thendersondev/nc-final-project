@@ -189,21 +189,6 @@ export default function PostTrade({ navigation }) {
             <Text style={styles.textAlert}>min 4 characters</Text>
           )
         )}
-        {/* <TouchableOpacity onPress={() => takePicture()}>
-          <MaterialCommunityIcons.Button
-            name="camera"
-            color={'#f0edf6'}
-            size={25}
-            backgroundColor={'#694fad'}
-          >
-            Add Image
-          </MaterialCommunityIcons.Button>
-        </TouchableOpacity> */}
-        {/* {isAvailable ? (
-          <TradeCamera userUID={auth.currentUser.uid} gameTitle={data.title} />
-        ) : null}
-        <View style={styles.space} /> */}
-
         {postMsg ? (
           <Text style={styles.postItem}>TRADE POSTED</Text>
         ) : (
