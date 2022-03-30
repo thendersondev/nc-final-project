@@ -1,21 +1,19 @@
 import styles from "../styles/AccountPageStyles";
 import { Text, View, Image, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { auth, signOut } from "../firebase";
+import { auth, db, signOut } from "../firebase";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import { Provider, Appbar } from "react-native-paper";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import AccountTrades from "../Components/AccountTrades";
 
 export default function Account() {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
   const [loading, setLoading] = useState(true);
-
-  const mockComments = [
-    { comment: "A really good seller ", id: 1 },
-    { comment: "Horrible guy!", id: 2 },
-  ];
+  const [trades, setTrades] = useState([]);
 
   const navigation = useNavigation();
 
@@ -32,12 +30,24 @@ export default function Account() {
 
   useEffect(() => {
     setLoading(true);
+
+    const tradesRef = collection(db, "trades");
+    const q = query(tradesRef, where("userUID", "==", auth.currentUser.uid));
+
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setTrades((prev) => {
+          return [...prev, doc.data()];
+        });
+      });
+    });
+
+    setLoading(true);
     setUsername(auth.currentUser.displayName);
     setAvatar(auth.currentUser.photoURL);
     setLoading(false);
   }, []);
 
-  if (loading) return <View></View>;
   return (
     <Provider>
       <Appbar.Header style={styles.Appbar}>
@@ -76,14 +86,14 @@ export default function Account() {
             </View>
           </View>
           <View style={styles.comments}>
-            <Text style={styles.accountInfoHeader}>Comments:</Text>
-            <FlatList
-              data={mockComments}
-              renderItem={({ item }) => (
-                <Text style={styles.accountInfoHeadings}>{item.comment}</Text>
-              )}
-              keyExtractor={(item) => item.id}
-            />
+            <Text style={styles.accountInfoHeader}>Your listings</Text>
+            {!loading && (
+              <FlatList
+                data={trades}
+                renderItem={({ item }) => <AccountTrades item={item} />}
+                keyExtractor={(item) => item.title}
+              />
+            )}
           </View>
 
           <StatusBar style="auto" />
