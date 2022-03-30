@@ -1,5 +1,5 @@
 const { initializeApp, getApp, getApps } = require("firebase/app");
-import { getStorage } from "firebase/storage";
+const { getStorage } = require("firebase/storage");
 const { getFirestore } = require("firebase/firestore");
 const {
   getAuth,
