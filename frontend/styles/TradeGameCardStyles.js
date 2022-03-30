@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   surroundingView: {
@@ -6,43 +6,52 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
-    flexDirection: "row-reverse",
-    backgroundColor: "white",
-    width: "95%",
-    margin: "2%",
-    borderColor: "#694fad",
+    flexDirection: 'row-reverse',
+    backgroundColor: 'white',
+    width: '95%',
+    margin: '2%',
+    borderColor: '#694fad',
   },
   image: {
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 20,
     marginHorizontal: 10,
-    width: 110,
+    width: 125,
     height: 110,
+    marginTop: 5,
   },
   cardLeft: {
-    flexDirection: "column",
-    alignItems: "flex-start",
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   cardRight: {
     padding: 10,
-    flexDirection: "column",
+    flexDirection: 'column',
     flexShrink: 1,
   },
   cardRightBottom: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   button: {
     marginTop: 5,
-    width: 110,
-    backgroundColor: "#694fad",
+    width: 125,
+    backgroundColor: '#694fad',
     borderRadius: 10,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
-    justifyContent: "center",
+    justifyContent: 'center',
     marginHorizontal: 10,
     height: 50,
     padding: 10,
+    marginBottom: 3,
   },
+
+  buttonText: {
+    color: '#F0EDF6',
+    fontWeight: '500',
+    fontSize: 15,
+    textAlign: 'center',
+
   button_delete: {
     backgroundColor: "#AA0000",
     borderRadius: 10,
@@ -54,27 +63,25 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 1,
   },
-  buttontext: {
-    color: "#F0EDF6",
-    fontWeight: "500",
-    fontSize: 16,
-    textAlign: "center",
+
   },
   gameTitle: {
     width: 235,
     paddingTop: 10,
-    color: "#694FAD",
-    fontWeight: "700",
-    fontSize: 26,
+    color: '#694FAD',
+    fontWeight: '700',
+    fontSize: 22,
     paddingBottom: 10,
     flexShrink: 1,
+    lineHeight: 25,
   },
   gameDetails: {
-    color: "#694FAD",
-    fontWeight: "700",
+    color: '#694FAD',
+    fontWeight: '700',
     fontSize: 14,
     paddingBottom: 10,
     flexShrink: 1,
+    lineHeight: 14,
   },
   alert_button: {
     flex: 1,
