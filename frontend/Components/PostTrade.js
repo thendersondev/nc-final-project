@@ -1,11 +1,11 @@
-import { Text, View, TextInput, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TextInput, KeyboardAvoidingView } from "react-native";
 
-import styles from '../styles/TradeStyles';
-import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { db, auth } from '.././firebase';
-import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
-import TradeCamera from './TradeCamera';
+import styles from "../styles/TradeStyles";
+import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { db, auth } from ".././firebase";
+import { doc, addDoc, getDoc, collection } from "firebase/firestore";
+import TradeCamera from "./TradeCamera";
 
 export default function PostTrade({ navigation }) {
   const [titleText, setTitleText] = React.useState(null);
@@ -27,10 +27,10 @@ export default function PostTrade({ navigation }) {
   const [postMsg, setPostMsg] = React.useState(false);
   const [data, setData] = React.useState([
     {
-      title: '',
-      platform: '',
-      location: '',
-      price: '',
+      title: "",
+      platform: "",
+      location: "",
+      price: "",
     },
   ]);
 
@@ -56,16 +56,17 @@ export default function PostTrade({ navigation }) {
       });
     } else {
       // POST TRADE TO FIREBASE HERE
-      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userRef = doc(db, "users", auth.currentUser.uid);
       const userSnap = await getDoc(userRef);
 
-      const docRef = addDoc(collection(db, 'trades'), {
+      const docRef = addDoc(collection(db, "trades"), {
         title: data.title,
         platform: data.platform,
         location: data.location,
         price: data.price,
         userUID: auth.currentUser.uid,
         User: userSnap.data().username,
+        createdAt: new Date(),
       });
 
       setCharAlert({
@@ -86,14 +87,14 @@ export default function PostTrade({ navigation }) {
       setLocationText(null);
       setPriceText(null);
       setTimeout(function goBackTrades() {
-        navigation.navigate('Trade');
+        navigation.navigate("Trade");
       }, 2000);
     }
   };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? 'auto' : 'auto'}>
+      <View style={styles.form} pointerEvents={postMsg ? "auto" : "auto"}>
         <Text style={styles.postItemTitle}>What would you like to trade?</Text>
         <TextInput
           style={
@@ -101,7 +102,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694FAD'}
+          placeholderTextColor={"#694FAD"}
           placeholder="Game title..."
           value={titleText}
           onChangeText={(text) =>
@@ -123,7 +124,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694FAD'}
+          placeholderTextColor={"#694FAD"}
           placeholder="Platform..."
           value={platformText}
           onChangeText={(text) =>
@@ -145,7 +146,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694FAD'}
+          placeholderTextColor={"#694FAD"}
           placeholder="Location..."
           value={locationText}
           onChangeText={(text) =>
@@ -167,7 +168,7 @@ export default function PostTrade({ navigation }) {
               ? styles.inputAlert
               : styles.textInputBox
           }
-          placeholderTextColor={'#694FAD'}
+          placeholderTextColor={"#694FAD"}
           placeholder="Price..."
           value={priceText}
           selectTextOnFocus={!postMsg}
@@ -201,7 +202,7 @@ export default function PostTrade({ navigation }) {
         )}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Trade')}
+          onPress={() => navigation.navigate("Trade")}
         >
           <Text style={styles.text}>Go back to trades</Text>
         </TouchableOpacity>
