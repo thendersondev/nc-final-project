@@ -37,7 +37,6 @@ export default function UserPage({
       snapshot.docs.map((doc) => setComments(doc.data().reviews));
     });
     setLoading(false);
-    console.log(comments);
     return unsubscribe;
   }, []);
 
@@ -67,21 +66,12 @@ export default function UserPage({
         </View>
 
         <View style={styles.accountInfo}>
-          <View></View>
+          <Text style={styles.accountInfoHeader}>Comments:</Text>
           <View style={styles.comments}>
-            <Text style={styles.accountInfoHeader}>Comments:</Text>
             {!loading && (
               <FlatList
                 data={comments}
-                renderItem={({ item }) => (
-                  <UserCommentCard item={item} />
-                  // <Text
-                  //   style={styles.accountInfoHeadings}
-                  //   key={`comm${item.body}key`}
-                  // >
-                  //   {item.body}
-                  // </Text>
-                )}
+                renderItem={({ item }) => <UserCommentCard item={item} />}
                 keyExtractor={(item) => comments.indexOf(item)}
               />
             )}
