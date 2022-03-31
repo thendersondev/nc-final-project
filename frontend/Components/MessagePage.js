@@ -93,7 +93,7 @@ export default function MessagePage({
         <Appbar.Action
           icon="account-box"
           onPress={() => {
-            navigation.navigate("Profile", { User });
+            navigation.navigate("Profile", { User, userUID });
           }}
         />
       </Appbar.Header>

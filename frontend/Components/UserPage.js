@@ -14,16 +14,16 @@ export default function UserPage({
 }) {
   const [comments, setComments] = useState([]);
   const [username, setUsername] = useState("");
-  const none = "<none>";
+  const [uri, setUri] = useState(null);
 
   useEffect(() => {
     fetchUser(userUID).then((userData) => {
-      console.log(userData);
       const newComments = !Object.values(userData[userUID].reviews)
         ? []
         : Object.values(userData[userUID].reviews);
       setComments(newComments);
       setUsername(userData[userUID].username);
+      setUri(userData[userUID].avatarUrl);
     });
   }, []);
 
@@ -46,27 +46,15 @@ export default function UserPage({
       <View style={styles.pageContainer}>
         <View style={styles.header}>
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={require("../assets/shrek.webp")}
-            ></Image>
-            <Text style={styles.username}>{username}</Text>
+            {uri && <Image style={styles.image} source={uri}></Image>}
           </View>
         </View>
 
         <View style={styles.accountInfo}>
           <View>
-            <Text style={styles.accountInfoHeader}>Account Details</Text>
-            <View style={styles.accountInfoGrid}>
-              <View style={styles.accountInfoGridTop}>
-                <View>
-                  <Text style={styles.accountInfoHeadings}>Email: {none}</Text>
-                </View>
-              </View>
-            </View>
+            <Text style={styles.accountInfoHeader}>Comments:</Text>
           </View>
           <View style={styles.comments}>
-            <Text style={styles.accountInfoHeader}>Comments:</Text>
             <FlatList
               data={comments}
               renderItem={({ item }) => (

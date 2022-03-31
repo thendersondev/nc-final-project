@@ -1,4 +1,3 @@
-
 import { Text, View, Button, TextInput } from "react-native";
 import styles from "../styles/ReviewStyles";
 import React from "react";
@@ -16,7 +15,6 @@ import {
 import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 import { v4 as uuidv4 } from "uuid";
 
-
 export default function PostTradeMessagePage({
   navigation,
   route: {
@@ -33,7 +31,7 @@ export default function PostTradeMessagePage({
   const [postMsg, setPostMsg] = React.useState(false);
   const [data, setData] = React.useState([
     {
-      body: '',
+      body: "",
     },
   ]);
 
@@ -49,7 +47,6 @@ export default function PostTradeMessagePage({
     } else {
       // POST TRADE TO FIREBASE HERE
 
-
       const user = auth.currentUser;
 
       const userRef = doc(db, "users", "beeMrOx4YsNnenlAJU7Noa3r4Ff1");
@@ -60,9 +57,9 @@ export default function PostTradeMessagePage({
           userUID: user.uid,
           User: user.displayName,
           reviewId: uuidv4(),
+          createdAt: new Date(),
         }),
       });
-
 
       setCharAlert({
         body: false,
@@ -73,16 +70,14 @@ export default function PostTradeMessagePage({
       setPostMsg(true);
       setBodyText(null);
       setTimeout(function goBackToUser() {
-
         navigation.navigate("Profile", { username });
-
       }, 2000);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.form} pointerEvents={postMsg ? 'none' : 'auto'}>
+      <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
         <Text style={styles.postItemBody}>Leave a review for {username}</Text>
         <TextInput
           style={
@@ -90,9 +85,7 @@ export default function PostTradeMessagePage({
               ? styles.inputAlert
               : styles.textInputBox
           }
-
-          placeholderTextColor={'#694FAD'}
-
+          placeholderTextColor={"#694FAD"}
           placeholder="Enter review here..."
           value={bodyText}
           onChangeText={(text) =>
@@ -118,9 +111,7 @@ export default function PostTradeMessagePage({
         )}
         <TouchableOpacity
           style={styles.button}
-
           onPress={() => navigation.navigate("Profile", { username })}
-
         >
           <Text style={styles.text}>Back to Profile</Text>
         </TouchableOpacity>

@@ -7,20 +7,54 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { fetchTrades } from "../models/model_trades";
 import { Appbar, Provider } from "react-native-paper";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
 
 export default function TradePage() {
   const navigation = useNavigation();
   const [trades, setTrades] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [urls, setUrls] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchTrades().then((data) => {
       for (const entry in data) {
-          data[entry].key = entry
-        }
+        data[entry].key = entry;
+      }
+
       setTrades(Object.values(data));
+
+      const photoUrls = Object.values(data).map((entry) => {
+        return ref(
+          storage,
+          `/${entry.userUID}-${entry.title.replaceAll(" ", "-")}`
+        );
+      });
+
+      // this seems better practice with the next then block
+      // return Promise.all(
+      //   photoUrls.map((url) => {
+      //     return getDownloadURL(url);
+      //   })
+      // );
+
+      // but this is faster
+      photoUrls.forEach((url) => {
+        getDownloadURL(url).then((img) => {
+          setUrls((prev) => {
+            return [...prev, img];
+          });
+        });
+      });
+
+      setLoading(false);
     });
-  }, [refresh]);
+    // .then((images) => {
+    //   setUrls(images);
+    //   setLoading(false);
+    // });
+  }, []);
 
   return (
     <Provider>
@@ -42,13 +76,22 @@ export default function TradePage() {
           >
             <Text style={styles.text}>Post an item</Text>
           </TouchableOpacity>
-          <FlatList
-            data={trades}
-            renderItem={(item, index, separators) =>
-              TradeGameCard(item, refresh, setRefresh, navigation)
-            }
-            keyExtractor={uuidv4}
-          />
+          {!loading && (
+            <FlatList
+              data={trades}
+              renderItem={(item, index, separators) =>
+                TradeGameCard(
+                  item,
+                  refresh,
+                  setRefresh,
+                  navigation,
+                  urls,
+                  index
+                )
+              }
+              keyExtractor={uuidv4}
+            />
+          )}
           <StatusBar style="auto" />
         </View>
       </View>
