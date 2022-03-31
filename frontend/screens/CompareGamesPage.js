@@ -1,4 +1,3 @@
-
 import styles from "../styles/CompareGamesStyles";
 import { Text, View, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
@@ -10,11 +9,10 @@ import { fetchItems } from "../models/model_items";
 import { TextInput } from "react-native-gesture-handler";
 import { Appbar, Provider } from "react-native-paper";
 
-
 export default function CompareGamesPage() {
-  const [query, setQuery] = useState('PS5');
+  const [query, setQuery] = useState("PS5");
   const [data, setData] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchItems(query).then((items) => {
@@ -23,16 +21,14 @@ export default function CompareGamesPage() {
   }, [query]);
 
   return (
-
     <Provider>
       <Appbar.Header style={styles.Appbar}>
         <Appbar.Content title="Compare" />
       </Appbar.Header>
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>Compare game prices here!</Text>
         <View>
           <TextInput
-            placeholderTextColor={'#694fad'}
+            placeholderTextColor={"#694fad"}
             placeholder="Search Here..."
             value={search}
             style={styles.searchBar}
@@ -41,7 +37,6 @@ export default function CompareGamesPage() {
               setQuery("");
             }}
           ></TextInput>
-
         </View>
         <View style={styles.catagoriesContainer}>
           <Text style={styles.sortBy}>Sort By:</Text>

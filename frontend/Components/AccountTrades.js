@@ -1,11 +1,10 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Alert, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
 import { Appbar, Provider } from "react-native-paper";
+import { removeTrade } from "../models/model_trades";
 
 const AccountTrades = ({ item }) => {
-  const { title, userUID, price, platform } = item;
-  console.log(title);
+  const { title, platform, key, price } = item;
   const [hide, setHide] = useState(false);
 
   return (
@@ -13,7 +12,10 @@ const AccountTrades = ({ item }) => {
       <View style={styles.surroundingView}>
         {!hide && (
           <Appbar.Header style={styles.Appbar}>
-            <Appbar.Content title={title} subtitle={platform} />
+            <Appbar.Content
+              title={title}
+              subtitle={`${platform} - £${price}`}
+            />
             <Appbar.Action
               color="red"
               icon="delete-outline"
@@ -26,7 +28,7 @@ const AccountTrades = ({ item }) => {
                     {
                       text: "OK",
                       onPress: () => {
-                        removeTrade(key);
+                        // removeTrade(key);
                         setHide(true);
                       },
                       style: "alert_button",

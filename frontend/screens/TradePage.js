@@ -67,33 +67,24 @@ export default function TradePage() {
           }}
         />
       </Appbar.Header>
+
       <View style={styles.container}>
-        <Text style={styles.pageTitle}>Trade games here!</Text>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Post")}
-          >
-            <Text style={styles.text}>Post an item</Text>
-          </TouchableOpacity>
-          {!loading && (
-            <FlatList
-              data={trades}
-              renderItem={(item, index, separators) =>
-                TradeGameCard(
-                  item,
-                  refresh,
-                  setRefresh,
-                  navigation,
-                  urls,
-                  index
-                )
-              }
-              keyExtractor={uuidv4}
-            />
-          )}
-          <StatusBar style="auto" />
-        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Post")}
+        >
+          <Text style={styles.text}>Post an item</Text>
+        </TouchableOpacity>
+        {!loading && (
+          <FlatList
+            data={trades}
+            renderItem={(item, index, separators) =>
+              TradeGameCard(item, refresh, setRefresh, navigation, urls, index)
+            }
+            keyExtractor={uuidv4}
+          />
+        )}
+        <StatusBar style="auto" />
       </View>
     </Provider>
   );
