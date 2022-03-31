@@ -8,7 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import { fetchTrades } from "../models/model_trades";
 import { Appbar, Provider } from "react-native-paper";
 import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
+import { db, storage } from "../firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 export default function TradePage() {
   const navigation = useNavigation();
@@ -18,28 +19,31 @@ export default function TradePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTrades().then((data) => {
-      for (const entry in data) {
-        data[entry].key = entry;
-      }
+    setLoading(true);
 
-      setTrades(Object.values(data));
+    const collRef = collection(db, "trades");
+    const q = query(collRef, orderBy("createdAt", "desc"));
 
-      const photoUrls = Object.values(data).map((entry) => {
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setTrades(
+        snapshot.docs.map((doc) => ({
+          User: doc.data().User,
+          location: doc.data().location,
+          platform: doc.data().platform,
+          price: doc.data().price,
+          title: doc.data().title,
+          userUID: doc.data().userUID,
+          createdAt: doc.data().createdAt.toDate(),
+        }))
+      );
+
+      const photoUrls = snapshot.docs.map((doc) => {
         return ref(
           storage,
-          `/${entry.userUID}-${entry.title.replaceAll(" ", "-")}`
+          `/${doc.data().userUID}-${doc.data().title.replaceAll(" ", "-")}`
         );
       });
 
-      // this seems better practice with the next then block
-      // return Promise.all(
-      //   photoUrls.map((url) => {
-      //     return getDownloadURL(url);
-      //   })
-      // );
-
-      // but this is faster
       photoUrls.forEach((url) => {
         getDownloadURL(url).then((img) => {
           setUrls((prev) => {
@@ -47,13 +51,9 @@ export default function TradePage() {
           });
         });
       });
-
-      setLoading(false);
     });
-    // .then((images) => {
-    //   setUrls(images);
-    //   setLoading(false);
-    // });
+    setLoading(false);
+    return unsubscribe;
   }, []);
 
   return (

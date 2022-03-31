@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function PostTradeMessagePage({
   navigation,
   route: {
-    params: { username, id },
+    params: { username, userUID },
   },
 }) {
   const [bodyText, setBodyText] = React.useState(null);
@@ -49,7 +49,7 @@ export default function PostTradeMessagePage({
 
       const user = auth.currentUser;
 
-      const userRef = doc(db, "users", "beeMrOx4YsNnenlAJU7Noa3r4Ff1");
+      const userRef = doc(db, "users", userUID);
 
       updateDoc(userRef, {
         reviews: arrayUnion({
