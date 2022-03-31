@@ -5,6 +5,9 @@ import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
 import styles from "../styles/UserPageStyles";
 import { useEffect, useState } from "react";
 import { Appbar, Provider } from "react-native-paper";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../firebase";
+import UserCommentCard from "./UserComments";
 
 export default function UserPage({
   navigation,
@@ -13,18 +16,29 @@ export default function UserPage({
   },
 }) {
   const [comments, setComments] = useState([]);
-  const [username, setUsername] = useState("");
   const [uri, setUri] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetchUser(userUID).then((userData) => {
+      setUri(userData[userUID].avatarUrl);
       const newComments = !Object.values(userData[userUID].reviews)
         ? []
         : Object.values(userData[userUID].reviews);
       setComments(newComments);
-      setUsername(userData[userUID].username);
-      setUri(userData[userUID].avatarUrl);
+      console.log(Object.values(userData[userUID].reviews));
     });
+
+    const collRef = collection(db, "users");
+    const q = query(collRef, where("username", "==", User));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      snapshot.docs.map((doc) => setComments(doc.data().reviews));
+    });
+    setLoading(false);
+    console.log(comments);
+    return unsubscribe;
   }, []);
 
   return (
@@ -45,28 +59,32 @@ export default function UserPage({
       </Appbar.Header>
       <View style={styles.pageContainer}>
         <View style={styles.header}>
-          <View style={styles.imageContainer}>
-            {uri && <Image style={styles.image} source={uri}></Image>}
-          </View>
+          {!loading && (
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri }}></Image>
+            </View>
+          )}
         </View>
 
         <View style={styles.accountInfo}>
-          <View>
-            <Text style={styles.accountInfoHeader}>Comments:</Text>
-          </View>
+          <View></View>
           <View style={styles.comments}>
-            <FlatList
-              data={comments}
-              renderItem={({ item }) => (
-                <Text
-                  style={styles.accountInfoHeadings}
-                  key={`comm${item.body}key`}
-                >
-                  {item.body}
-                </Text>
-              )}
-              keyExtractor={(item) => comments.indexOf(item)}
-            />
+            <Text style={styles.accountInfoHeader}>Comments:</Text>
+            {!loading && (
+              <FlatList
+                data={comments}
+                renderItem={({ item }) => (
+                  <UserCommentCard item={item} />
+                  // <Text
+                  //   style={styles.accountInfoHeadings}
+                  //   key={`comm${item.body}key`}
+                  // >
+                  //   {item.body}
+                  // </Text>
+                )}
+                keyExtractor={(item) => comments.indexOf(item)}
+              />
+            )}
             <TouchableOpacity
               style={styles.button}
               onPress={() => {

@@ -4,21 +4,13 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../test/testdataindex";
 import { auth } from "../firebase";
-import {
-  doc,
-  addDoc,
-  getDoc,
-  collection,
-  updateDoc,
-  arrayUnion,
-} from "firebase/firestore";
-import { changeUser, fetchUser, fetchUsers } from "../models/model_users";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
 export default function PostTradeMessagePage({
   navigation,
   route: {
-    params: { username, userUID },
+    params: { User, userUID },
   },
 }) {
   const [bodyText, setBodyText] = React.useState(null);
@@ -70,7 +62,7 @@ export default function PostTradeMessagePage({
       setPostMsg(true);
       setBodyText(null);
       setTimeout(function goBackToUser() {
-        navigation.navigate("Profile", { username });
+        navigation.navigate("Profile", { User });
       }, 2000);
     }
   };
@@ -78,7 +70,8 @@ export default function PostTradeMessagePage({
   return (
     <View style={styles.container}>
       <View style={styles.form} pointerEvents={postMsg ? "none" : "auto"}>
-        <Text style={styles.postItemBody}>Leave a review for {username}</Text>
+        <Text style={styles.postItemBody}>Leave a review for</Text>
+        <Text style={styles.postItemBody}>{User}</Text>
         <TextInput
           style={
             alert.body || charAlert.body

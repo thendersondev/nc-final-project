@@ -68,11 +68,19 @@ const TradeGameCard = (
       </TouchableOpacity>
     );
 
+  if (userUID === auth.currentUser.uid) return null;
   return (
     <View style={styles.surroundingView}>
       <View style={styles.cardLeft}>
         <Image style={styles.image} source={{ uri }}></Image>
-        {deleteOption}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("Message", { User, userUID });
+          }}
+        >
+          <Text style={styles.buttontext}>Message</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.cardRight}>

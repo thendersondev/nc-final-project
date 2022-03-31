@@ -1,17 +1,17 @@
-import styles from '../styles/AccountPageStyles';
-import { Text, View, Image, FlatList } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { auth, db, signOut } from '../firebase';
-import { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/core';
-import { Provider, Appbar } from 'react-native-paper';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import AccountTrades from '../Components/AccountTrades';
+import styles from "../styles/AccountPageStyles";
+import { Text, View, Image, FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { auth, db, signOut } from "../firebase";
+import { useEffect, useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
+import { Provider, Appbar } from "react-native-paper";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import AccountTrades from "../Components/AccountTrades";
 
 export default function Account() {
-  const [username, setUsername] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [loading, setLoading] = useState(true);
   const [trades, setTrades] = useState([]);
 
@@ -20,8 +20,8 @@ export default function Account() {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        alert('You have been signed out');
-        navigation.navigate('Login');
+        alert("You have been signed out");
+        navigation.navigate("Login");
       })
       .catch((err) => {
         alert(`Oops, something went wrong: ${err}`);
@@ -31,8 +31,8 @@ export default function Account() {
   useEffect(() => {
     setLoading(true);
 
-    const tradesRef = collection(db, 'trades');
-    const q = query(tradesRef, where('userUID', '==', auth.currentUser.uid));
+    const tradesRef = collection(db, "trades");
+    const q = query(tradesRef, where("userUID", "==", auth.currentUser.uid));
 
     getDocs(q).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -42,7 +42,6 @@ export default function Account() {
       });
     });
 
-    setLoading(true);
     setUsername(auth.currentUser.displayName);
     setAvatar(auth.currentUser.photoURL);
     setLoading(false);
@@ -61,7 +60,7 @@ export default function Account() {
               source={{
                 uri: avatar
                   ? avatar
-                  : 'https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg',
+                  : "https://pbs.twimg.com/profile_images/786636123317628928/6T0mBdck_400x400.jpg",
               }}
             ></Image>
             <Text style={styles.username}>{username} </Text>
