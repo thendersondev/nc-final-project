@@ -5,3 +5,17 @@ Gamepare is an app designed to find you the best prices currently available on g
 It was built in 8 days as part of a final group project for a Northcoders Bootcamp. 
 
 [![Watch the video](https://www.youtube.com/watch?v=xIQ08tZ0RVk)
+
+## Our Tech Stack
+
+### Front-End: ###
+
+• [React](https://reactjs.org/)  
+• [Expo](https://expo.dev/)  
+
+### Back-End: ###
+
+• [Cheerio](https://cheerio.js.org/)  
+• [Firebase](https://firebase.google.com/)  
+• [Mocha](https://mochajs.org/)  
+• [Chai](https://www.chaijs.com/)  
